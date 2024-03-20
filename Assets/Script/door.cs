@@ -2,9 +2,11 @@ using UnityEngine;
 public class door : MonoBehaviour
 {
     [SerializeField] PlayerController PC;
+    [SerializeField] HitEfect HE;
     [SerializeField] Sprite targetObjSprite;
     [SerializeField] Sprite hitObjSprite;
     [SerializeField] BoxCollider2D boxCol;
+    [SerializeField] GameObject generationEfect;
     private SpriteRenderer hitObjSpriteRenderer;
     private bool OpenFlag = false;
     public Vector3 targetPos;
@@ -27,6 +29,7 @@ public class door : MonoBehaviour
 
             if(targetObjSprite == hitObjSprite && !OpenFlag)
             {
+                GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(0f, 0f, 0f));
                 Destroy(collision.gameObject);
                 boxCol.enabled = false;
                 OpenFlag = true;
