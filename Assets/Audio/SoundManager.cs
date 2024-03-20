@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip SynthesizeSE;
     [SerializeField] AudioClip AcquisitionSE;
     [SerializeField] AudioClip PutonSE;
+    [SerializeField] AudioClip ThrowSE;
 
     AudioSource bgm1AudioSource;
     AudioSource SelectSeAudioSource;
@@ -66,5 +67,9 @@ public class SoundManager : MonoBehaviour
     public void SettingPlaySE4()
     {
         SelectSeAudioSource.PlayOneShot(PutonSE);
+    }
+    public void SettingPlaySE5()
+    {
+        SelectSeAudioSource.PlayOneShot(ThrowSE);
     }
 }

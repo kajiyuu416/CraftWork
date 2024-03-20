@@ -136,6 +136,8 @@ public class PlayerController : MonoBehaviour
           NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
           NowHoldobj = null;
           NowHoldItem = false;
+          SoundManager SM = SoundManager.Instance;
+          SM.SettingPlaySE5();
         }
         else if(ThrowInput && NowHoldItem && !originSR.flipX)
         {
@@ -149,6 +151,8 @@ public class PlayerController : MonoBehaviour
           NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
           NowHoldobj = null;
           NowHoldItem = false;
+          SoundManager SM = SoundManager.Instance;
+          SM.SettingPlaySE5();
         }
         else if(ThrowUpInput && NowHoldItem)
         {
@@ -162,6 +166,8 @@ public class PlayerController : MonoBehaviour
             NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
             NowHoldobj = null;
             NowHoldItem = false;
+            SoundManager SM = SoundManager.Instance;
+            SM.SettingPlaySE5();
         }
         else if(ThrowDownInput && NowHoldItem)
         {
@@ -175,8 +181,9 @@ public class PlayerController : MonoBehaviour
             NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
             NowHoldobj = null;
             NowHoldItem = false;
+            SoundManager SM = SoundManager.Instance;
+            SM.SettingPlaySE5();
         }
-
         HoldObj = PE.HoldtoObj;
     }
 
