@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    
     [SerializeField] Transform target;
     [SerializeField] Physics2DExtentsion PE;
     public SpriteRenderer originSR;
@@ -33,7 +32,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        holdItem = transform.position;
         holdItemScale = new Vector2(0.4f, 0.4f);
     }
 
@@ -110,6 +108,7 @@ public class PlayerController : MonoBehaviour
 
         if(NowHoldItem)
         {
+            holdItem = transform.position;
             holdItem.x = target.position.x;
             holdItem.y = target.position.y;
             NowHoldobj.transform.position = holdItem;

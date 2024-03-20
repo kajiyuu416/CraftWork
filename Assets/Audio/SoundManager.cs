@@ -9,6 +9,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip AcquisitionSE;
     [SerializeField] AudioClip PutonSE;
     [SerializeField] AudioClip ThrowSE;
+    [SerializeField] AudioClip UnlockingSE;
+    [SerializeField] AudioClip CorrectSE;
 
     AudioSource bgm1AudioSource;
     AudioSource SelectSeAudioSource;
@@ -44,6 +46,17 @@ public class SoundManager : MonoBehaviour
     {
         bgm1AudioSource.Stop();
     }
+    // ã»ÇÃàÍéûí‚é~
+    public void SoundPause()
+    {
+        bgm1AudioSource.Pause();
+    }
+
+    // ã»ÇÃçƒäJ
+    public void SoundUnPause()
+    {
+        bgm1AudioSource.UnPause();
+    }
     public void StopSE()
     {
         SelectSeAudioSource.Stop();
@@ -72,4 +85,13 @@ public class SoundManager : MonoBehaviour
     {
         SelectSeAudioSource.PlayOneShot(ThrowSE);
     }
+    public void SettingPlaySE6()
+    {
+        SelectSeAudioSource.PlayOneShot(UnlockingSE);
+    }
+    public void SettingPlaySE7()
+    {
+        SelectSeAudioSource.PlayOneShot(CorrectSE);
+    }
+
 }
