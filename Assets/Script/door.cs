@@ -43,7 +43,7 @@ public class door : MonoBehaviour
                 SM.SoundPause();
                 SM.SettingPlaySE6();
                 SM.SettingPlaySE7();
-                Invoke("SoundUnpause", 6.0f);
+                Invoke("SoundUnpause", 5.0f);
                 Debug.Log("‘ÎÛ‚ÌItem‚ÆÚG‚µ‚Ü‚µ‚½");
             }
         }

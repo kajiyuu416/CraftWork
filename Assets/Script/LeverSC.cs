@@ -3,7 +3,6 @@ using UnityEngine.Assertions.Must;
 
 public class LeverSC : MonoBehaviour
 {
-
     [SerializeField] GameObject targetObj;
     public bool LeverOn = false;
     public bool LeverOff = true;
@@ -36,6 +35,7 @@ public class LeverSC : MonoBehaviour
             SM.SettingPlaySE8();
             SM.SettingPlaySE9();
         }
+
     }
     private void Update()
     {
