@@ -9,8 +9,10 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip AcquisitionSE;
     [SerializeField] AudioClip PutonSE;
     [SerializeField] AudioClip ThrowSE;
-    [SerializeField] AudioClip UnlockingSE;
+    [SerializeField] AudioClip Unlocking1SE;
+    [SerializeField] AudioClip Unlocking2SE;
     [SerializeField] AudioClip CorrectSE;
+    [SerializeField] AudioClip SwitchSE;
 
     AudioSource bgm1AudioSource;
     AudioSource SelectSeAudioSource;
@@ -87,11 +89,18 @@ public class SoundManager : MonoBehaviour
     }
     public void SettingPlaySE6()
     {
-        SelectSeAudioSource.PlayOneShot(UnlockingSE);
+        SelectSeAudioSource.PlayOneShot(Unlocking1SE);
     }
     public void SettingPlaySE7()
     {
         SelectSeAudioSource.PlayOneShot(CorrectSE);
     }
-
+    public void SettingPlaySE8()
+    {
+        SelectSeAudioSource.PlayOneShot(SwitchSE);
+    }
+    public void SettingPlaySE9()
+    {
+        SelectSeAudioSource.PlayOneShot(Unlocking2SE);
+    }
 }

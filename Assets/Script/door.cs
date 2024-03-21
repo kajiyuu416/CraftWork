@@ -11,6 +11,10 @@ public class door : MonoBehaviour
     private bool OpenFlag = false;
     public Vector3 targetPos;
 
+    private void Awake()
+    {
+        boxCol = GetComponent<BoxCollider2D>();
+    }
     void Update()
     {
         if(OpenFlag)
