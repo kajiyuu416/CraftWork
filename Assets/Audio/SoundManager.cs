@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip Unlocking2SE;
     [SerializeField] AudioClip CorrectSE;
     [SerializeField] AudioClip SwitchSE;
+    [SerializeField] AudioClip TeleporSE;
 
     AudioSource bgm1AudioSource;
     AudioSource SelectSeAudioSource;
@@ -103,4 +104,9 @@ public class SoundManager : MonoBehaviour
     {
         SelectSeAudioSource.PlayOneShot(Unlocking2SE);
     }
+    public void SettingPlaySE10()
+    {
+        SelectSeAudioSource.PlayOneShot(TeleporSE);
+    }
+
 }
