@@ -13,8 +13,15 @@ public class TeleportSC : MonoBehaviour
             targetPos = collision.gameObject.GetComponent<Transform>();
             targetPos.transform.position = TeleportPos.position;
             hitFlag = true;
+            Invoke("UNhitFlag", 2.0f);
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE10();
+
         }
+    }
+
+    public void UNhitFlag()
+    {
+        hitFlag = false;
     }
 }
