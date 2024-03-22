@@ -12,11 +12,11 @@ public class PlayerController : MonoBehaviour
     public GameObject HoldObj;
     public bool NowHoldItem = false;
     public bool NowMoove;
-    public float ThrowPower = 10f;
     public float move_accel = 1f;
     public float move_deccel = 1f;
     public float move_max = 1f;
     public Vector2 moveInputVal;
+    public Vector2 CameraInputVal;
 
     private bool HoldInput;
     private bool ThrowInput;
@@ -189,6 +189,10 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputValue var)
     {
         moveInputVal = var.Get<Vector2>();
+    }
+    public void OnCameraMove(InputValue var)
+    {
+        CameraInputVal = var.Get<Vector2>();
     }
 
     public void OnHold(InputValue var)
