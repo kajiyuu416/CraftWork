@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] PlayerController PC;
     public GameObject target;
-    public Vector3 target_offset;
     public float camera_speed = 5f;
+    private Vector3 target_offset = Vector3.zero;
+    private Vector2 RightInput;
 
     private Camera cam;
     private Vector3 cur_pos;
@@ -23,6 +25,32 @@ public class CameraController : MonoBehaviour
     {
         _instance = this;
         cam = GetComponent<Camera>();
+
+    }
+    private void Update()
+    {
+        RightInput = PC.CameraInputVal;
+
+        if(RightInput.x > 0.9f)
+        {
+            target_offset = new Vector3(7, -3.5f, -7.5f);
+        }
+        else if(RightInput.x < -0.9f)
+        {
+            target_offset = new Vector3(-7, -3.5f, -7.5f);
+        }
+        else if(RightInput.y > 0.9f)
+        {
+            target_offset = new Vector3(0, 0.5f, -7.5f);
+        }
+        else if(RightInput.y < -0.9f)
+        {
+            target_offset = new Vector3(0, -7, -7.5f);
+        }
+        else
+        {
+            target_offset = new Vector3(0, -3.5f, -7.5f);
+        }
     }
     void LateUpdate()
     {

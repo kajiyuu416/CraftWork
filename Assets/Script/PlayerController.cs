@@ -104,8 +104,8 @@ public class PlayerController : MonoBehaviour
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE4();
         }
-
-
+        //Itemをつかんだ時にフラグはTrueになっているが実際にオブジェクトが登録されていないからエラーが出ている
+        //Todo; errorが出た時の処理またはエラーが出ない方法を探す
         if(NowHoldItem)
         {
             holdItem = transform.position;
@@ -122,6 +122,8 @@ public class PlayerController : MonoBehaviour
                 NowHoldobj.GetComponent<SpriteRenderer>().flipX = false;
             }
         }
+
+  
 
         if(ThrowInput && NowHoldItem&& originSR.flipX)
         { 

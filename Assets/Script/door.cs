@@ -5,16 +5,11 @@ public class door : MonoBehaviour
     [SerializeField] HitEfect HE;
     [SerializeField] Sprite targetObjSprite;
     [SerializeField] Sprite hitObjSprite;
-    [SerializeField] BoxCollider2D boxCol;
     [SerializeField] GameObject generationEfect;
     private SpriteRenderer hitObjSpriteRenderer;
     private bool OpenFlag = false;
     public Vector3 targetPos;
 
-    private void Awake()
-    {
-        boxCol = GetComponent<BoxCollider2D>();
-    }
     void Update()
     {
         if(OpenFlag)
@@ -35,7 +30,6 @@ public class door : MonoBehaviour
             {
                 GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(0f, 0f, 0f));
                 Destroy(collision.gameObject);
-                boxCol.enabled = false;
                 OpenFlag = true;
                 PC.NowHoldobj = null;
                 PC.NowHoldItem = false; 
