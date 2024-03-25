@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     private bool ThrowInput;
     private bool ThrowUpInput;
     private bool ThrowDownInput;
-    private Rigidbody2D rigid;
     private float side = 1f;
+    private Rigidbody2D rigid;
     private Vector2 lookat = Vector2.zero;
     private Vector2 holdItem = Vector2.zero;
     private Vector2 holdItemScale = Vector2.zero;
@@ -99,8 +99,7 @@ public class PlayerController : MonoBehaviour
             PE.boxCol.enabled = true;
             NowHoldobj.transform.position = transform.position;
             NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-            NowHoldobj = null;
-            NowHoldItem = false;
+            ItemLost();
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE4();
         }
@@ -128,66 +127,60 @@ public class PlayerController : MonoBehaviour
         if(ThrowInput && NowHoldItem&& originSR.flipX)
         { 
           Debug.Log("ItemÇç∂ë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
-          PE.boxCol.enabled = true;
-          PE.HoldtoObj = null;
-          PE.holdFlag = false;
+          PE.ItemLost();
           Vector2 force = new Vector2(10.0f, 0);
           Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
           HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
           NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-          NowHoldobj = null;
-          NowHoldItem = false;
+          ItemLost();
           SoundManager SM = SoundManager.Instance;
           SM.SettingPlaySE5();
         }
         else if(ThrowInput && NowHoldItem && !originSR.flipX)
         {
           Debug.Log("ItemÇâEë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
-          PE.boxCol.enabled = true;
-          PE.HoldtoObj = null;
-          PE.holdFlag = false;
+          PE.ItemLost();
           Vector2 force = new Vector2(10.0f, 0);
           Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
           HoldItemRB.AddForce(force, ForceMode2D.Impulse);
           NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-          NowHoldobj = null;
-          NowHoldItem = false;
+          ItemLost();
           SoundManager SM = SoundManager.Instance;
           SM.SettingPlaySE5();
         }
         else if(ThrowUpInput && NowHoldItem)
         {
             Debug.Log("ItemÇè„ë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
-            PE.boxCol.enabled = true;
-            PE.HoldtoObj = null;
-            PE.holdFlag = false;
+            PE.ItemLost();
             Vector2 force = new Vector2(0, 10.0f);
             Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
             HoldItemRB.AddForce(force, ForceMode2D.Impulse);
             NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-            NowHoldobj = null;
-            NowHoldItem = false;
+            ItemLost();
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE5();
         }
         else if(ThrowDownInput && NowHoldItem)
         {
             Debug.Log("ItemÇâ∫ë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
-            PE.boxCol.enabled = true;
-            PE.HoldtoObj = null;
-            PE.holdFlag = false;
+            PE.ItemLost();
             Vector2 force = new Vector2(0, 10.0f);
             Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
             HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
             NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-            NowHoldobj = null;
-            NowHoldItem = false;
+            ItemLost();
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE5();
         }
         HoldObj = PE.HoldtoObj;
     }
 
+    public void ItemLost()
+    {
+        NowHoldobj = null;
+        HoldObj = null;
+        NowHoldItem = false;
+    }
     public void OnMove(InputValue var)
     {
         moveInputVal = var.Get<Vector2>();

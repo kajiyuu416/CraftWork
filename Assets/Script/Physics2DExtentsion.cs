@@ -57,7 +57,13 @@ public class Physics2DExtentsion : MonoBehaviour
                 Debug.Log("ПEВ§ItemВ™СґНЁВµВ№ВєВс");
             }
         }
-    
-
     }
+
+    public void ItemLost()
+    {
+        boxCol.enabled = true;
+        holdFlag = false;
+        HoldtoObj = null;
+    }
+
 }

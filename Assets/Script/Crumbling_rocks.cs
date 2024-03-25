@@ -1,27 +1,18 @@
 using UnityEngine;
-public class door : MonoBehaviour
+
+public class Crumbling_rocks : MonoBehaviour
 {
     [SerializeField] PlayerController PC;
     [SerializeField] HitEfect HE;
+    [SerializeField] pickaxeSC pickaxeSC;
     [SerializeField] Sprite targetObjSprite;
     [SerializeField] Sprite hitObjSprite;
     [SerializeField] GameObject generationEfect;
     private SpriteRenderer hitObjSpriteRenderer;
     private bool HitFlag = false;
-    public Vector3 targetPos;
-
-    void Update()
-    {
-        if(HitFlag)
-        {
-            float speed = 0.5f; // 移動の速度を指定
-            Transform objectTransform = gameObject.GetComponent<Transform>(); // ゲームオブジェクトのTransformコンポーネントを取得
-            objectTransform.position = Vector3.Lerp(objectTransform.position, targetPos, speed * Time.deltaTime); // 目的の位置に移動
-        }
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Item"))
+        if(collision.CompareTag("Ice_axe"))
         {
             hitObjSpriteRenderer = collision.gameObject.GetComponent<SpriteRenderer>();
             hitObjSprite = hitObjSpriteRenderer.sprite;
@@ -29,18 +20,17 @@ public class door : MonoBehaviour
             if(targetObjSprite == hitObjSprite && !HitFlag)
             {
                 GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(0f, 0f, 0f));
-                Destroy(collision.gameObject);
+                //Destroy(collision.gameObject);
+                //pickaxeSC.Use_Pickaxe_Count++;
+                this.gameObject.SetActive(false);
                 HitFlag = true;
-                PC.NowHoldobj = null;
-                PC.NowHoldItem = false; 
+                PC.ItemLost();
                 SoundManager SM = SoundManager.Instance;
                 SM.SoundPause();
-                SM.SettingPlaySE6();
+                SM.SettingPlaySE11();
                 SM.SettingPlaySE7();
-                Invoke("SoundUnpause", 5.0f);
-                Debug.Log("対象のItemと接触しました");
+                Invoke("SoundUnpause", 4.0f);
             }
-
         }
     }
     public void SoundUnpause()

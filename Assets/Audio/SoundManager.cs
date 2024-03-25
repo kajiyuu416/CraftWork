@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip CorrectSE;
     [SerializeField] AudioClip SwitchSE;
     [SerializeField] AudioClip TeleporSE;
+    [SerializeField] AudioClip CrumblingSE;
 
     AudioSource bgm1AudioSource;
     AudioSource SelectSeAudioSource;
@@ -108,5 +109,9 @@ public class SoundManager : MonoBehaviour
     {
         SelectSeAudioSource.PlayOneShot(TeleporSE);
     }
-
+    public void SettingPlaySE11()
+    {
+        SelectSeAudioSource.PlayOneShot(CrumblingSE);
+    }
+    
 }

@@ -7,6 +7,9 @@ TagManager:
   - Ladder
   - Platform
   - Item
+  - FxTemporaire
+  - Ice_axe
+  - Crumbling_rock
   layers:
   - Default
   - TransparentFX
