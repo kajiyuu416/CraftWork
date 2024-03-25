@@ -1,13 +1,6 @@
 using UnityEngine;
-public class door : MonoBehaviour
+public class door : Charade
 {
-    [SerializeField] PlayerController PC;
-    [SerializeField] HitEfect HE;
-    [SerializeField] Sprite targetObjSprite;
-    [SerializeField] Sprite hitObjSprite;
-    [SerializeField] GameObject generationEfect;
-    private SpriteRenderer hitObjSpriteRenderer;
-    private bool HitFlag = false;
     public Vector3 targetPos;
 
     void Update()

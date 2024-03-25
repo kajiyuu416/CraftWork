@@ -28,9 +28,20 @@ public class PlayerController : MonoBehaviour
     private Vector2 holdItem = Vector2.zero;
     private Vector2 holdItemScale = Vector2.zero;
     private Vector2 move;
- 
+
+    public static PlayerController Instance
+    {
+        get; private set;
+    }
     private void Awake()
     {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
         rigid = GetComponent<Rigidbody2D>();
         holdItemScale = new Vector2(0.4f, 0.4f);
     }
