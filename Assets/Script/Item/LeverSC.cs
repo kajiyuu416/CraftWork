@@ -25,7 +25,7 @@ public class LeverSC : MonoBehaviour
             originSprite.flipX = true;
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE8();
-            SM.SettingPlaySE9();
+           // SM.SettingPlaySE9();
         }
         else if(collision.CompareTag("Player")&& LeverOn)
         {
@@ -34,7 +34,7 @@ public class LeverSC : MonoBehaviour
             originSprite.flipX = false;
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE8();
-            SM.SettingPlaySE9();
+            //SM.SettingPlaySE9();
         }
 
     }
