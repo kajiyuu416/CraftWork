@@ -10,6 +10,7 @@ public class LeverSC : MonoBehaviour
     public Vector3 On_Pos;
     public Vector3 Off_Pos;
 
+
     private void Awake()
     {
         originSprite = GetComponent<SpriteRenderer>();

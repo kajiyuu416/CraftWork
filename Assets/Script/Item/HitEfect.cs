@@ -16,8 +16,8 @@ public class HitEfect : MonoBehaviour
     }
     void Update()
     {
-        generationPosition.x = transform.localPosition.x;
-        generationPosition.y = transform.localPosition.y;
+        generationPosition.x = transform.position.x;
+        generationPosition.y = transform.position.y;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
