@@ -1,9 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class pickaxeSC : MonoBehaviour
 {
-    
-    public float Use_Pickaxe_Count;
+    public int Use_Pickaxe_Count = 5;
     private BoxCollider2D BoxCollider2D;
     Rigidbody2D rigidbody2D;
     public static pickaxeSC Instance
@@ -19,13 +19,20 @@ public class pickaxeSC : MonoBehaviour
       return;
      }
      Instance = this;
-     Use_Pickaxe_Count = 0;
+     Use_Pickaxe_Count = 5;
      BoxCollider2D = GetComponent<BoxCollider2D>();
      rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
+        if(Use_Pickaxe_Count == 0)
+        {
+            PlayerController Pc = PlayerController.Instance;
+            Destroy(gameObject);
+            Pc.ItemLost();
+            Debug.Log(Use_Pickaxe_Count);
+        }
         if(Use_Pickaxe_Count == 1)
         {
             rigidbody2D.constraints = RigidbodyConstraints2D.None;
@@ -48,14 +55,11 @@ public class pickaxeSC : MonoBehaviour
         }
         if(Use_Pickaxe_Count == 5)
         {
-            PlayerController Pc = PlayerController.Instance;
-            Destroy(gameObject);
-            Pc.ItemLost();
             Debug.Log(Use_Pickaxe_Count);
         }
-        else if(Use_Pickaxe_Count > 5)
+        else if(Use_Pickaxe_Count < 0)
         {
-            Use_Pickaxe_Count = 5;
+            Use_Pickaxe_Count = 0;
             PlayerController Pc = PlayerController.Instance;
             Destroy(gameObject);
             Pc.ItemLost();
@@ -72,6 +76,6 @@ public class pickaxeSC : MonoBehaviour
     }
     public void addCount()
     {
-        Use_Pickaxe_Count++;
+        Use_Pickaxe_Count--;
     }
 }

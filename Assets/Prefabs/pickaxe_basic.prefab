@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed6b1e2411c3294aa3a61ba7a12cdd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Use_Pickaxe_Count: 0
+  Use_Pickaxe_Count: 5
 --- !u!108 &6134382886406661203
 Light:
   m_ObjectHideFlags: 0

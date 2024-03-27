@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
             NowMoove = false;
         }
 
+
     }
     private void FixedUpdate()
     {
@@ -132,7 +133,6 @@ public class PlayerController : MonoBehaviour
                 NowHoldobj.GetComponent<SpriteRenderer>().flipX = false;
             }
         }
-
   
 
         if(ThrowInput && NowHoldItem&& originSR.flipX)
@@ -185,7 +185,6 @@ public class PlayerController : MonoBehaviour
         }
         HoldObj = PE.HoldtoObj;
     }
-
     public void ItemLost()
     {
         NowHoldobj = null;

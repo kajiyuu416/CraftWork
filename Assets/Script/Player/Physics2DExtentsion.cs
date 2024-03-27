@@ -4,13 +4,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 public class Physics2DExtentsion : MonoBehaviour
 {
-    [SerializeField] float distance;
     [SerializeField] PlayerController PC;
+    [SerializeField] float distance;
+    [SerializeField] Sprite PickaxeSprite;
     public GameObject HoldtoObj;
     public GameObject objctacleRayObject;
-    public LayerMask layerMask;
     public BoxCollider2D boxCol;
+    public LayerMask layerMask;
     public bool holdFlag;
+    public bool targetSpriteFlag;
+
+    private SpriteRenderer Sprite;
+    private Sprite ItemSprite;
     private float CharacterDirection;
     private Vector2 MI;
 
@@ -47,15 +52,27 @@ public class Physics2DExtentsion : MonoBehaviour
                 holdFlag = true;
                 HoldtoObj = hitObstacle.collider.gameObject;
                 boxCol = hitObstacle.collider.GetComponent<BoxCollider2D>();
+                Sprite = hitObstacle.collider.GetComponent<SpriteRenderer>();
+                ItemSprite = Sprite.sprite;
                 Debug.DrawRay(objctacleRayObject.transform.position, Vector2.right * hitObstacle.distance * new Vector2(CharacterDirection, 0f), Color.red);
                 Debug.Log("ItemÇèEÇ§Ç±Ç∆Ç™Ç≈Ç´Ç‹Ç∑");
             }
             else
             {
                 holdFlag = false;
+                boxCol = null;
+                ItemSprite = null;
                 Debug.DrawRay(objctacleRayObject.transform.position, Vector2.right * hitObstacle.distance * new Vector2(CharacterDirection, 0f), Color.green);
                 Debug.Log("èEÇ§ItemÇ™ë∂ç›ÇµÇ‹ÇπÇÒ");
             }
+        }
+        if(ItemSprite == PickaxeSprite && !targetSpriteFlag)
+        {
+            targetSpriteFlag = true;
+        }
+        else if(ItemSprite != PickaxeSprite && targetSpriteFlag)
+        {
+            targetSpriteFlag = false;
         }
     }
 
@@ -64,6 +81,7 @@ public class Physics2DExtentsion : MonoBehaviour
         boxCol.enabled = true;
         holdFlag = false;
         HoldtoObj = null;
+        ItemSprite = null;
     }
 
 }
