@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] Slider SeSlinder;
 
     AudioSource bgm1AudioSource;
+    AudioSource bgm2AudioSource;
     AudioSource SelectSeAudioSource;
 
     GameObject bgmObj;
@@ -45,14 +46,14 @@ public class SoundManager : MonoBehaviour
         bgmObj = transform.GetChild(0).gameObject;
         SeObj = transform.GetChild(1).gameObject;
         bgm1AudioSource = bgmObj.transform.GetChild(0).gameObject.GetComponent<AudioSource>();
+        bgm2AudioSource = bgmObj.transform.GetChild(1).gameObject.GetComponent<AudioSource>();
         SelectSeAudioSource = SeObj.transform.GetChild(0).gameObject.GetComponent<AudioSource>();
 
         SetBGMVolume(BgmSlinder.value);
         SetSEVolume(SeSlinder.value);
         BgmSlinder.onValueChanged.AddListener(SetBGMVolume);
         SeSlinder.onValueChanged.AddListener(SetSEVolume);
-
-        Startbgm1();
+        Startbgm2();
     }
     public void SetBGMVolume(float volume)
     {
@@ -65,17 +66,20 @@ public class SoundManager : MonoBehaviour
     public void StopBGM()
     {
         bgm1AudioSource.Stop();
+        bgm2AudioSource.Stop();
     }
     // ã»ÇÃàÍéûí‚é~
     public void SoundPause()
     {
-        bgm1AudioSource.Pause();
+        bgm1AudioSource.Pause(); 
+        bgm2AudioSource.Pause();
     }
 
     // ã»ÇÃçƒäJ
     public void SoundUnPause()
     {
         bgm1AudioSource.UnPause();
+        bgm2AudioSource.UnPause();
     }
     public void StopSE()
     {
@@ -84,6 +88,10 @@ public class SoundManager : MonoBehaviour
     public void Startbgm1()
     {
         bgm1AudioSource.Play();
+    }
+    public void Startbgm2()
+    {
+        bgm2AudioSource.Play();
     }
     public void SettingPlaySE()
     {

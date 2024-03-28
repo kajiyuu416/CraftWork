@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 move;
     private static Vector3 CP = new Vector3();
 
+
     public static PlayerController Instance
     {
         get; private set;
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         PlayerMove();
+
         if(moveInputVal.x < 0 || moveInputVal.y < 0)
         {
             NowMoove = true;
@@ -80,13 +82,42 @@ public class PlayerController : MonoBehaviour
         {
             SettingFlag = true;
         }
+       
+        if(ReSetFlag || SettingFlag)
+        {
+            rigid.constraints = RigidbodyConstraints2D.FreezePosition;
+        }
+        if(!ReSetFlag && !SettingFlag)
+        {
+            rigid.constraints = RigidbodyConstraints2D.None;
+            rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+        //Itemをつかんだ時にフラグはTrueになっているが実際にオブジェクトが登録されていないからエラーが出ている
+        //Todo; errorが出た時の処理またはエラーが出ない方法を探す
+        //オブジェクトの参照をFixedUpdateからUpdateに切り替えて発生回数が減ったと思われる
+        if(NowHoldItem)
+        {
+            holdItem = transform.position;
+            holdItem.x = target.position.x;
+            holdItem.y = target.position.y;
+            NowHoldobj.transform.position = holdItem;
+            NowHoldobj.transform.localScale = holdItemScale;
+            if(originSR.flipX)
+            {
+                NowHoldobj.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else if(!originSR.flipX)
+            {
+                NowHoldobj.GetComponent<SpriteRenderer>().flipX = false;
+            }
+        }
         HoldObj = PE.HoldtoObj;
     }
     private void FixedUpdate()
     {
         PlayerHoldItem();
 
-        if(!ReSetFlag&&!SettingFlag)
+        if(!ReSetFlag && !SettingFlag)
         {
             float desiredSpeedX = Mathf.Abs(moveInputVal.x) > 0.1f ? moveInputVal.x * move_max : 0f;
             float accelerationX = Mathf.Abs(moveInputVal.x) > 0.1f ? move_accel : move_deccel;
@@ -118,7 +149,7 @@ public class PlayerController : MonoBehaviour
     }
     private void PlayerHoldItem()
     {
-        if(!ReSetFlag&&!SettingFlag)
+        if(!ReSetFlag && !SettingFlag)
         {
             if(PE.holdFlag && HoldInput && !NowHoldItem)
             {
@@ -140,26 +171,7 @@ public class PlayerController : MonoBehaviour
                 SM.SettingPlaySE4();
             }
 
-        }
-        //Itemをつかんだ時にフラグはTrueになっているが実際にオブジェクトが登録されていないからエラーが出ている
-        //Todo; errorが出た時の処理またはエラーが出ない方法を探す
-        //オブジェクトの参照をFixedUpdateからUpdateに切り替えて発生回数が減ったと思われる
-        if(NowHoldItem)
-        {
-            holdItem = transform.position;
-            holdItem.x = target.position.x;
-            holdItem.y = target.position.y;
-            NowHoldobj.transform.position = holdItem;
-            NowHoldobj.transform.localScale = holdItemScale;
-            if(originSR.flipX)
-            {
-                NowHoldobj.GetComponent<SpriteRenderer>().flipX = true;
-            }
-            else if(!originSR.flipX)
-            {
-                NowHoldobj.GetComponent<SpriteRenderer>().flipX = false;
-            }
-        }
+       }
 
         if(!ReSetFlag && !SettingFlag)
         {
