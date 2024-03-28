@@ -23,7 +23,9 @@ public class PlayerController : MonoBehaviour
     private bool ThrowUpInput;
     private bool ThrowDownInput;
     private bool ReSetInput;
+    private bool SettingInput;
     public  static bool ReSetFlag;
+    public static bool SettingFlag;
     private float side = 1f;
     private Rigidbody2D rigid;
     private Vector2 lookat = Vector2.zero;
@@ -57,7 +59,6 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         PlayerMove();
-
         if(moveInputVal.x < 0 || moveInputVal.y < 0)
         {
             NowMoove = true;
@@ -74,12 +75,18 @@ public class PlayerController : MonoBehaviour
         {
             ReSetFlag = true;
         }
+
+        if(SettingInput &&!SettingFlag)
+        {
+            SettingFlag = true;
+        }
         HoldObj = PE.HoldtoObj;
     }
     private void FixedUpdate()
     {
         PlayerHoldItem();
-        if(!ReSetFlag)
+
+        if(!ReSetFlag&&!SettingFlag)
         {
             float desiredSpeedX = Mathf.Abs(moveInputVal.x) > 0.1f ? moveInputVal.x * move_max : 0f;
             float accelerationX = Mathf.Abs(moveInputVal.x) > 0.1f ? move_accel : move_deccel;
@@ -94,6 +101,7 @@ public class PlayerController : MonoBehaviour
         ThrowUpInput = false;
         ThrowDownInput = false;
         ReSetInput = false;
+        SettingInput = false;
         rigid.velocity = move;
     }
     private void PlayerMove()
@@ -110,7 +118,7 @@ public class PlayerController : MonoBehaviour
     }
     private void PlayerHoldItem()
     {
-        if(!ReSetFlag)
+        if(!ReSetFlag&&!SettingFlag)
         {
             if(PE.holdFlag && HoldInput && !NowHoldItem)
             {
@@ -153,7 +161,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(!ReSetFlag)
+        if(!ReSetFlag && !SettingFlag)
         {
             if(ThrowInput && NowHoldItem && originSR.flipX)
             {
@@ -249,6 +257,10 @@ public class PlayerController : MonoBehaviour
     public void OnReSet(InputValue var)
     {
         ReSetInput = var.isPressed;
+    }
+    public void OnSetting(InputValue var)
+    {
+        SettingInput = var.isPressed;
     }
 
     public Vector2 GetMove()

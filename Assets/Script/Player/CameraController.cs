@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
     }
     private void Update()
     {
-        if(!PlayerController.ReSetFlag)
+        if(!PlayerController.ReSetFlag &&!PlayerController.SettingFlag)
         {
             CameraControl();
         }

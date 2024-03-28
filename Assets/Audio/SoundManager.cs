@@ -3,7 +3,6 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] AudioMixer mixer;
     [SerializeField] AudioClip HitSe;
     [SerializeField] AudioClip SynthesizeSE;
     [SerializeField] AudioClip AcquisitionSE;
@@ -15,6 +14,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip SwitchSE;
     [SerializeField] AudioClip TeleporSE;
     [SerializeField] AudioClip CrumblingSE;
+    [SerializeField] AudioMixer audioMixer;
+    [SerializeField] Slider BgmSlinder;
+    [SerializeField] Slider SeSlinder;
 
     AudioSource bgm1AudioSource;
     AudioSource SelectSeAudioSource;
@@ -44,7 +46,21 @@ public class SoundManager : MonoBehaviour
         SeObj = transform.GetChild(1).gameObject;
         bgm1AudioSource = bgmObj.transform.GetChild(0).gameObject.GetComponent<AudioSource>();
         SelectSeAudioSource = SeObj.transform.GetChild(0).gameObject.GetComponent<AudioSource>();
+
+        SetBGMVolume(BgmSlinder.value);
+        SetSEVolume(SeSlinder.value);
+        BgmSlinder.onValueChanged.AddListener(SetBGMVolume);
+        SeSlinder.onValueChanged.AddListener(SetSEVolume);
+
         Startbgm1();
+    }
+    public void SetBGMVolume(float volume)
+    {
+        audioMixer.SetFloat("BGM", Mathf.Clamp(Mathf.Log10(volume) * 20f, -80f, 0f));
+    }
+    public void SetSEVolume(float volume)
+    {
+        audioMixer.SetFloat("SE", Mathf.Clamp(Mathf.Log10(volume) * 20f, -80f, 0f));
     }
     public void StopBGM()
     {

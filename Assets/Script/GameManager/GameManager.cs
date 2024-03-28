@@ -6,7 +6,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject ReSetButton;
     [SerializeField] Canvas ReSetUI;
-    private bool UIexpression ;
+    [SerializeField] GameObject SettingButton;
+    [SerializeField] Canvas SettingUI;
+    [SerializeField] GameObject BGMSlider;
+    [SerializeField] Canvas AudioUI;
+    private bool ReSetUIexpression;
+    private bool SettingUIexpression;
 
     public static GameManager instance
     {
@@ -20,21 +25,34 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
-        UIexpression = true;
+        ReSetUIexpression = true;
+        SettingUIexpression = true;
     }
     void Update()
     {
-        if(PlayerController.ReSetFlag && UIexpression)
+        if(PlayerController.ReSetFlag && ReSetUIexpression&&!PlayerController.SettingFlag)
         {
             ReSetUI.enabled = true;
-            UIexpression = false;
+            ReSetUIexpression = false;
             EventSystem.current.SetSelectedGameObject(ReSetButton);
         }
-        else if(!PlayerController.ReSetFlag &&!UIexpression)
-             {
-                UIexpression = true;
-                ReSetUI.enabled = false;
-             }
+        else if(!PlayerController.ReSetFlag &&!ReSetUIexpression)
+        {
+         ReSetUIexpression = true;
+         ReSetUI.enabled = false;
+        }
+
+        if(PlayerController.SettingFlag && SettingUIexpression&&!PlayerController.ReSetFlag)
+        {
+            SettingUI.enabled = true;
+            SettingUIexpression = false;
+            EventSystem.current.SetSelectedGameObject(SettingButton);
+        }
+        else if(!PlayerController.SettingFlag && !SettingUIexpression)
+        {
+            SettingUI.enabled = false;
+            SettingUIexpression = true;
+        }
 
     }
     public static void GameReset()
@@ -43,6 +61,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(loadScene.name);
         instance.SelectCl();
     }
+    public static void SettingAudio()
+    {
+        instance.SelectAudio();
+    }
+
     public static void SelectCancel()
     {
         instance.SelectCl();
@@ -50,7 +73,18 @@ public class GameManager : MonoBehaviour
     public void SelectCl()
     {
         PlayerController.ReSetFlag = false;
-        UIexpression = true;
+        PlayerController.SettingFlag = false;
+        ReSetUIexpression = true;
+        SettingUIexpression = true;
         ReSetUI.enabled = false;
+        SettingUI.enabled = false;
+        AudioUI.enabled = false;
+    }
+    public void SelectAudio()
+    {
+        AudioUI.enabled = true;
+        EventSystem.current.SetSelectedGameObject(BGMSlider);
+        ReSetUI.enabled = false;
+        SettingUI.enabled = false;
     }
 }
