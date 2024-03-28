@@ -60,7 +60,6 @@ public class Physics2DExtentsion : MonoBehaviour
             else
             {
                 holdFlag = false;
-                boxCol = null;
                 ItemSprite = null;
                 Debug.DrawRay(objctacleRayObject.transform.position, Vector2.right * hitObstacle.distance * new Vector2(CharacterDirection, 0f), Color.green);
                 Debug.Log("èEÇ§ItemÇ™ë∂ç›ÇµÇ‹ÇπÇÒ");

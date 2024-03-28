@@ -29,27 +29,9 @@ public class CameraController : MonoBehaviour
     }
     private void Update()
     {
-        RightInput = PC.CameraInputVal;
-
-        if(RightInput.x > 0.9f)
+        if(!PlayerController.ReSetFlag)
         {
-            target_offset = new Vector3(7, -3.5f, -7.5f);
-        }
-        else if(RightInput.x < -0.9f)
-        {
-            target_offset = new Vector3(-7, -3.5f, -7.5f);
-        }
-        else if(RightInput.y > 0.9f)
-        {
-            target_offset = new Vector3(0, 0.5f, -7.5f);
-        }
-        else if(RightInput.y < -0.9f)
-        {
-            target_offset = new Vector3(0, -7, -7.5f);
-        }
-        else
-        {
-            target_offset = new Vector3(0, -3.5f, -7.5f);
+            CameraControl();
         }
     }
     void LateUpdate()
@@ -121,4 +103,31 @@ public class CameraController : MonoBehaviour
             return _instance.cam;
         return null;
     }
+
+    public void CameraControl()
+    {
+        RightInput = PC.CameraInputVal;
+
+        if(RightInput.x > 0.9f)
+        {
+            target_offset = new Vector3(7, -3.5f, -7.5f);
+        }
+        else if(RightInput.x < -0.9f)
+        {
+            target_offset = new Vector3(-7, -3.5f, -7.5f);
+        }
+        else if(RightInput.y > 0.9f)
+        {
+            target_offset = new Vector3(0, 0.5f, -7.5f);
+        }
+        else if(RightInput.y < -0.9f)
+        {
+            target_offset = new Vector3(0, -7, -7.5f);
+        }
+        else
+        {
+            target_offset = new Vector3(0, -3.5f, -7.5f);
+        }
+    }
+
 }

@@ -10,6 +10,8 @@ TagManager:
   - FxTemporaire
   - Ice_axe
   - Crumbling_rock
+  - TPRunic
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

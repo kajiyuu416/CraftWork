@@ -80,6 +80,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ReSet"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4eb675e-1b51-4b34-bb08-72e5461662e7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -289,6 +298,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""CameraMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ded4f4b6-4e8d-49bf-9b38-eac35e6490a4"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ReSet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -882,6 +902,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player_ThrowUp = m_Player.FindAction("ThrowUp", throwIfNotFound: true);
         m_Player_ThrowDown = m_Player.FindAction("Throw Down", throwIfNotFound: true);
         m_Player_CameraMove = m_Player.FindAction("CameraMove", throwIfNotFound: true);
+        m_Player_ReSet = m_Player.FindAction("ReSet", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -961,6 +982,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ThrowUp;
     private readonly InputAction m_Player_ThrowDown;
     private readonly InputAction m_Player_CameraMove;
+    private readonly InputAction m_Player_ReSet;
     public struct PlayerActions
     {
         private @GameInput m_Wrapper;
@@ -971,6 +993,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @ThrowUp => m_Wrapper.m_Player_ThrowUp;
         public InputAction @ThrowDown => m_Wrapper.m_Player_ThrowDown;
         public InputAction @CameraMove => m_Wrapper.m_Player_CameraMove;
+        public InputAction @ReSet => m_Wrapper.m_Player_ReSet;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -998,6 +1021,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @CameraMove.started += instance.OnCameraMove;
             @CameraMove.performed += instance.OnCameraMove;
             @CameraMove.canceled += instance.OnCameraMove;
+            @ReSet.started += instance.OnReSet;
+            @ReSet.performed += instance.OnReSet;
+            @ReSet.canceled += instance.OnReSet;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1020,6 +1046,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @CameraMove.started -= instance.OnCameraMove;
             @CameraMove.performed -= instance.OnCameraMove;
             @CameraMove.canceled -= instance.OnCameraMove;
+            @ReSet.started -= instance.OnReSet;
+            @ReSet.performed -= instance.OnReSet;
+            @ReSet.canceled -= instance.OnReSet;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1208,6 +1237,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnThrowUp(InputAction.CallbackContext context);
         void OnThrowDown(InputAction.CallbackContext context);
         void OnCameraMove(InputAction.CallbackContext context);
+        void OnReSet(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
