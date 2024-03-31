@@ -14,6 +14,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip SwitchSE;
     [SerializeField] AudioClip TeleporSE;
     [SerializeField] AudioClip CrumblingSE;
+    [SerializeField] AudioClip SelectSE;
+    [SerializeField] AudioClip UISelectSE;
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Slider BgmSlinder;
     [SerializeField] Slider SeSlinder;
@@ -137,5 +139,12 @@ public class SoundManager : MonoBehaviour
     {
         SelectSeAudioSource.PlayOneShot(CrumblingSE);
     }
-    
+    public void SettingPlaySE12()
+    {
+        SelectSeAudioSource.PlayOneShot(SelectSE);
+    }
+    public void SettingPlaySE13()
+    {
+        SelectSeAudioSource.PlayOneShot(UISelectSE);
+    }
 }

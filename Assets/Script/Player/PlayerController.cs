@@ -94,28 +94,33 @@ public class PlayerController : MonoBehaviour
         }
         //Itemをつかんだ時にフラグはTrueになっているが実際にオブジェクトが登録されていないからエラーが出ている
         //Todo; errorが出た時の処理またはエラーが出ない方法を探す
-        //オブジェクトの参照をFixedUpdateからUpdateに切り替えて発生回数が減ったと思われる
-        if(NowHoldItem)
+        if(HoldObj == PE.HoldtoObj)
         {
-            holdItem = transform.position;
-            holdItem.x = target.position.x;
-            holdItem.y = target.position.y;
-            NowHoldobj.transform.position = holdItem;
-            NowHoldobj.transform.localScale = holdItemScale;
-            if(originSR.flipX)
+            if(NowHoldItem)
             {
-                NowHoldobj.GetComponent<SpriteRenderer>().flipX = true;
-            }
-            else if(!originSR.flipX)
-            {
-                NowHoldobj.GetComponent<SpriteRenderer>().flipX = false;
+                NowHoldobj = HoldObj;
+                holdItem = transform.position;
+                holdItem.x = target.position.x;
+                holdItem.y = target.position.y;
+                NowHoldobj.transform.position = holdItem;
+                NowHoldobj.transform.localScale = holdItemScale;
+                if(originSR.flipX)
+                {
+                    NowHoldobj.GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else if(!originSR.flipX)
+                {
+                    NowHoldobj.GetComponent<SpriteRenderer>().flipX = false;
+                }
             }
         }
+
         HoldObj = PE.HoldtoObj;
     }
     private void FixedUpdate()
     {
         PlayerHoldItem();
+        Inputfalse();
 
         if(!ReSetFlag && !SettingFlag)
         {
@@ -127,12 +132,6 @@ public class PlayerController : MonoBehaviour
             move.y = Mathf.MoveTowards(move.y, desiredSpeedY, accelerationY * Time.fixedDeltaTime);
         }
 
-        HoldInput = false;
-        ThrowInput = false;
-        ThrowUpInput = false;
-        ThrowDownInput = false;
-        ReSetInput = false;
-        SettingInput = false;
         rigid.velocity = move;
     }
     private void PlayerMove()
@@ -160,7 +159,7 @@ public class PlayerController : MonoBehaviour
                 SM.SettingPlaySE3();
                 Debug.Log("Itemを持ち上げました");
             }
-            else if(HoldInput && NowHoldItem)
+            else if(PE.holdFlag && HoldInput && NowHoldItem)
             {
                 Debug.Log("Itemを置きました");
                 PE.boxCol.enabled = true;
@@ -171,10 +170,6 @@ public class PlayerController : MonoBehaviour
                 SM.SettingPlaySE4();
             }
 
-       }
-
-        if(!ReSetFlag && !SettingFlag)
-        {
             if(ThrowInput && NowHoldItem && originSR.flipX)
             {
                 Debug.Log("Itemを左側に投げました");
@@ -224,7 +219,6 @@ public class PlayerController : MonoBehaviour
                 SM.SettingPlaySE5();
             }
         }
-        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -239,6 +233,15 @@ public class PlayerController : MonoBehaviour
         NowHoldobj = null;
         HoldObj = null;
         NowHoldItem = false;
+    }
+    public void Inputfalse()
+    {
+        HoldInput = false;
+        ThrowInput = false;
+        ThrowUpInput = false;
+        ThrowDownInput = false;
+        ReSetInput = false;
+        SettingInput = false;
     }
     public void OnMove(InputValue var)
     {

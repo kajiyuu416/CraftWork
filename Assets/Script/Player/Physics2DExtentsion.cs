@@ -7,8 +7,8 @@ public class Physics2DExtentsion : MonoBehaviour
     [SerializeField] PlayerController PC;
     [SerializeField] float distance;
     [SerializeField] Sprite PickaxeSprite;
-    public GameObject HoldtoObj;
     public GameObject objctacleRayObject;
+    public GameObject HoldtoObj;
     public BoxCollider2D boxCol;
     public LayerMask layerMask;
     public bool holdFlag;

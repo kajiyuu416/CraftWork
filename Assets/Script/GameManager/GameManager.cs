@@ -85,19 +85,27 @@ public class GameManager : MonoBehaviour
     public static void SettingAudio()
     {
         instance.SelectAudio();
+        SoundManager SM = SoundManager.Instance;
+        SM.SettingPlaySE13();
     }
 
     public static void SelectCancel()
     {
         instance.SelectCl();
+        SoundManager SM = SoundManager.Instance;
+        SM.SettingPlaySE13();
     }
     public static void GameStart()
     {
         instance.StartCoroutine(instance.LoadScene("MainScene"));
+        SoundManager SM = SoundManager.Instance;
+        SM.SettingPlaySE12();
     }
-    static public void EndGame()
+    public static void EndGame()
     {
         Application.Quit();
+        SoundManager SM = SoundManager.Instance;
+        SM.SettingPlaySE12();
     }
     //Todo;;タイトルに戻るとエラーが発生するため、一時使用不可
     public static void BacktoTitle()
