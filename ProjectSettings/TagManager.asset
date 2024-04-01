@@ -12,6 +12,7 @@ TagManager:
   - Crumbling_rock
   - TPRunic
   - CheckPoint
+  - supplyArea
   layers:
   - Default
   - TransparentFX

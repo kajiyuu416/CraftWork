@@ -16,9 +16,9 @@ public class PlayerDistance : MonoBehaviour
     void Update()
     {
         Vector3 posi = this.transform.localPosition;
-        Debug.Log(posi);
+       // Debug.Log(posi);
 
-        if(posi.y < 150 && !ChangeMusic1)
+        if(posi.y < 300 && !ChangeMusic1)
         {
             ChangeMusic1 = true;
             ChangeMusic2 = false;

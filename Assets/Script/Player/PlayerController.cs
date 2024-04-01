@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("ItemÇç∂ë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
                 PE.ItemLost();
-                Vector2 force = new Vector2(10.0f, 0);
+                Vector3 force = new Vector2(10.0f, 0);
                 Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                 HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
                 NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);

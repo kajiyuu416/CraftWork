@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 416895231285346464}
   - component: {fileID: 416895231285346467}
   - component: {fileID: 416895231285346470}
+  - component: {fileID: 1120969604}
   m_Layer: 3
   m_Name: Torch
   m_TagString: Item
@@ -112,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2.5}
   m_EdgeRadius: 0
 --- !u!61 &416895231285346464
 BoxCollider2D:
@@ -138,7 +139,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2.5}
   m_EdgeRadius: 0
 --- !u!50 &416895231285346467
 Rigidbody2D:
@@ -173,8 +174,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.5480194, b: 0.0141509175, a: 1}
-  m_Intensity: 1
-  m_Range: 30
+  m_Intensity: 3
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -223,3 +224,18 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1120969604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416895231285346476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb859c72acbb404c96ef1b026cdea99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countdownSecond: 30
+  torch_On_Sprite: {fileID: 21300000, guid: 574a4985b31d65c45bfd94065e1b21cf, type: 3}
+  torch_Off_Sprite: {fileID: 21300000, guid: 1c42ea3f07d97574db4790b31c7c76bd, type: 3}
