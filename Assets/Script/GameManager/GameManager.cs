@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Canvas AudioUI;
     [SerializeField] GameObject AudioUIobj;
     [SerializeField] GameObject ResetUIobj;
+
+
     private bool ReSetUIexpression;
     private bool SettingUIexpression;
     private string beforeScene;
@@ -44,7 +46,6 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-
         if(PlayerController.ReSetFlag && ReSetUIexpression&&!PlayerController.SettingFlag)
         {
             ResetUIobj.SetActive(true);
@@ -163,7 +164,6 @@ public class GameManager : MonoBehaviour
         {
             SoundManager SM = SoundManager.Instance;
             SM.StopBGM();
-            SM.Startbgm1();
             StartCoroutine(FadeIn());
         }
         if(beforeScene == "MainScene" && nextScene.name == "title")
@@ -176,7 +176,6 @@ public class GameManager : MonoBehaviour
         {
             SoundManager SM = SoundManager.Instance;
             SM.StopBGM();
-            SM.Startbgm1();
             StartCoroutine(FadeIn());
         }
 
