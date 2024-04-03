@@ -12,7 +12,7 @@ public class HitEfect : MonoBehaviour
 
     private void Awake()
     {
-        generationPosition.z = -1.5f;
+        //generationPosition.z = -1.5f;
     }
     void Update()
     {

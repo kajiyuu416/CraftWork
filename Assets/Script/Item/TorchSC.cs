@@ -5,51 +5,74 @@ using UnityEngine.UI;
 
 public class TorchSC : MonoBehaviour
 {
-    [SerializeField] float countdownSecond = 30;
+    [SerializeField] float countdownSecond = 0;
     [SerializeField] Sprite torch_On_Sprite;
     [SerializeField] Sprite torch_Off_Sprite;
     //private Text timeText;
     private SpriteRenderer Origin_Sprite;
-    private bool torch_little_off;
     private bool torch_off;
+    private bool burnFlag;
     private Light TorchLight;
     // Start is called before the first frame update
     private void Awake()
     {
         TorchLight = GetComponent<Light>();
         Origin_Sprite = GetComponent<SpriteRenderer>();
+        Origin_Sprite.sprite = torch_Off_Sprite;
     }
     void FixedUpdate()
     {
         countdownSecond -= Time.deltaTime;
         var span = new TimeSpan(0, 0, (int) countdownSecond);
-        //timeText.text = span.ToString(@"mm\:ss");
 
-        if(countdownSecond <= 10.0f &&!torch_little_off)
-        {  // 10•b‚É‚È‚Á‚½‚Æ‚«‚Ìˆ—
-            torch_little_off = true;
-            TorchLight.range = 5;
-            Debug.Log("‰Î‚ª‚ ‚Æ­‚µ‚ÅÁ‚¦‚Ü‚·");
-        }
-        if(countdownSecond <= 0 && !torch_off)
-        {  // 0•b‚É‚È‚Á‚½‚Æ‚«‚Ìˆ—
+        if(countdownSecond <= 20.0f &&!torch_off)
+        { 
             torch_off = true;
-            TorchLight.range = 0;
-            Origin_Sprite.sprite = torch_Off_Sprite;
-            Debug.Log("‰Î‚ªŠ®‘S‚ÉÁ‚¦‚Ü‚µ‚½");
+            burnFlag = false;
+            StartCoroutine(Torch_light_lose());
         }
 
         if(countdownSecond <= 0)
         {
             countdownSecond = 0;
         }
+       
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("supplyArea"))
         {
+            TorchLight.range = 20;
             countdownSecond = 30;
-            Debug.Log("aaa");
+            torch_off = false;
+            burnFlag = true;
+            Origin_Sprite.sprite = torch_On_Sprite;
+            SoundManager SM = SoundManager.Instance;
+            SM.SettingPlaySE14();
+        }
+    }
+
+    public IEnumerator Torch_light_lose()
+    {
+        var min_range = 0;
+        var max_range = 20.0f;
+
+        yield return new WaitForSeconds(1f);
+        while(TorchLight.range >= min_range)
+        {
+            TorchLight.range -= 0.02f;
+            if(TorchLight.range == min_range)
+            {
+                Origin_Sprite.sprite = torch_Off_Sprite;
+                yield break;
+            }
+
+            if(burnFlag)
+            {
+                TorchLight.range = max_range;
+                yield break;
+            }
+            yield return null;
         }
     }
 }

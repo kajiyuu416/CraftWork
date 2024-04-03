@@ -16,6 +16,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip CrumblingSE;
     [SerializeField] AudioClip SelectSE;
     [SerializeField] AudioClip UISelectSE;
+    [SerializeField] AudioClip IgniteSE;
+    [SerializeField] AudioClip extinguish_the_fireSE;
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Slider BgmSlinder;
     [SerializeField] Slider SeSlinder;
@@ -73,15 +75,12 @@ public class SoundManager : MonoBehaviour
         bgm2AudioSource.Stop();
         bgm3AudioSource.Stop();
     }
-    // ã»ÇÃàÍéûí‚é~
     public void SoundPause()
     {
         bgm1AudioSource.Pause(); 
         bgm2AudioSource.Pause();
         bgm3AudioSource.Pause();
     }
-
-    // ã»ÇÃçƒäJ
     public void SoundUnPause()
     {
         bgm1AudioSource.UnPause();
@@ -155,5 +154,13 @@ public class SoundManager : MonoBehaviour
     public void SettingPlaySE13()
     {
         SelectSeAudioSource.PlayOneShot(UISelectSE);
+    }
+    public void SettingPlaySE14()
+    {
+        SelectSeAudioSource.PlayOneShot(IgniteSE);
+    }
+    public void SettingPlaySE15()
+    {
+        SelectSeAudioSource.PlayOneShot(extinguish_the_fireSE);
     }
 }
