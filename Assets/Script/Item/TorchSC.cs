@@ -1,21 +1,31 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class TorchSC : MonoBehaviour
 {
     [SerializeField] float countdownSecond = 0;
     [SerializeField] Sprite torch_On_Sprite;
     [SerializeField] Sprite torch_Off_Sprite;
-    //private Text timeText;
     private SpriteRenderer Origin_Sprite;
     private bool torch_off;
     private bool burnFlag;
-    private Light TorchLight;
+    public Light TorchLight;
+    public static TorchSC Instance
+    {
+        get; private set;
+    }
     // Start is called before the first frame update
     private void Awake()
     {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
         TorchLight = GetComponent<Light>();
         Origin_Sprite = GetComponent<SpriteRenderer>();
         Origin_Sprite.sprite = torch_Off_Sprite;

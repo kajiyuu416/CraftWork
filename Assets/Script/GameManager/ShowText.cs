@@ -14,7 +14,7 @@ public class ShowText : MonoBehaviour
     [SerializeField] Physics2DExtentsion PE;
     [SerializeField] PlayerController PC;
 
-
+    private bool callOne;
     // Update is called once per frame
     void Update()
     {
@@ -49,17 +49,34 @@ public class ShowText : MonoBehaviour
             text4.text = "";
         }
 
-        if(PE.targetSpriteFlag)
+        if(PE.Pickaxe_Hold_Flag)
         {
             pickaxeSC picSC = pickaxeSC.Instance;
             text6.text = picSC.Use_Pickaxe_Count.ToString();
             text5.text = "ピッケルの耐久値・・・";
-        }else if(!PE.targetSpriteFlag)
+        }
+        else if(!PE.Pickaxe_Hold_Flag)
         {
             text5.text = "";
             text6.text = "";
         }
+        if(PE.Torch_Hold_Flag)
+        {
+            TorchSC torchSC = TorchSC.Instance;
+            if(torchSC.TorchLight.range < 10.0f)
+            {
+                text6.text = "トーチの火が消えそうだ";
+            }
 
+            if(torchSC.TorchLight.range == 0)
+            {
+                text6.text = "";
+            }
+        }
+        else if(!PE.Torch_Hold_Flag)
+        {
+            text6.text = "";
+        }
 
     }
 }

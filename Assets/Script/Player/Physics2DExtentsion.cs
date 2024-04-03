@@ -7,13 +7,14 @@ public class Physics2DExtentsion : MonoBehaviour
     [SerializeField] PlayerController PC;
     [SerializeField] float distance;
     [SerializeField] Sprite PickaxeSprite;
+    [SerializeField] Sprite TorchSprite;
     public GameObject objctacleRayObject;
     public GameObject HoldtoObj;
     public BoxCollider2D boxCol;
     public LayerMask layerMask;
     public bool holdFlag;
-    public bool targetSpriteFlag;
-
+    public bool Pickaxe_Hold_Flag;
+    public bool Torch_Hold_Flag;
     private SpriteRenderer Sprite;
     private Sprite ItemSprite;
     private float CharacterDirection;
@@ -65,13 +66,23 @@ public class Physics2DExtentsion : MonoBehaviour
                 Debug.Log("èEÇ§ItemÇ™ë∂ç›ÇµÇ‹ÇπÇÒ");
             }
         }
-        if(ItemSprite == PickaxeSprite && !targetSpriteFlag)
+
+        if(ItemSprite == PickaxeSprite && !Pickaxe_Hold_Flag)
         {
-            targetSpriteFlag = true;
+            Pickaxe_Hold_Flag = true;
         }
-        else if(ItemSprite != PickaxeSprite && targetSpriteFlag)
+        else if(ItemSprite != PickaxeSprite && Pickaxe_Hold_Flag)
         {
-            targetSpriteFlag = false;
+            Pickaxe_Hold_Flag = false;
+        }
+
+        if(ItemSprite == TorchSprite && !Torch_Hold_Flag)
+        {
+            Torch_Hold_Flag = true;
+        }
+        else if(ItemSprite != TorchSprite && Torch_Hold_Flag)
+        {
+            Torch_Hold_Flag = false;
         }
     }
 
