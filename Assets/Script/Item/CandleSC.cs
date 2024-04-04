@@ -3,10 +3,6 @@ using UnityEngine;
 public class CandleSC : Charade
 {
     [SerializeField] GameObject targetObject;
-    private void Awake()
-    {
-        Debug.Log("bbb");
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Item"))
@@ -26,8 +22,5 @@ public class CandleSC : Charade
     {
         targetObject.tag = newTag;
     }
-    private void Update()
-    {
 
-    }
 }

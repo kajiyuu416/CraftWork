@@ -1617,7 +1617,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -2634,6 +2634,7 @@ GameObject:
   m_Component:
   - component: {fileID: 110719908}
   - component: {fileID: 110719907}
+  - component: {fileID: 110719909}
   m_Layer: 0
   m_Name: CheckPoint (2)
   m_TagString: CheckPoint
@@ -2682,6 +2683,20 @@ Transform:
   m_Father: {fileID: 114550073}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &110719909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110719906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f241c8da6140914784bc806e39aa7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CheckPoint: 0
+  CP: {fileID: 110719906}
 --- !u!4 &114340434 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7765704675689879267, guid: 0303e12e8d887974ea558034f6bb5b4c,
@@ -2723,7 +2738,7 @@ Transform:
   - {fileID: 1140825108}
   - {fileID: 291795829}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &114750990
 PrefabInstance:
@@ -6537,7 +6552,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -8588,6 +8603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 291795829}
   - component: {fileID: 291795830}
+  - component: {fileID: 291795831}
   m_Layer: 0
   m_Name: CheckPoint (5)
   m_TagString: CheckPoint
@@ -8636,6 +8652,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.343587, y: 0.67049146}
   m_EdgeRadius: 0
+--- !u!114 &291795831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291795828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f241c8da6140914784bc806e39aa7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CheckPoint: 0
+  CP: {fileID: 291795828}
 --- !u!1 &291916051
 GameObject:
   m_ObjectHideFlags: 0
@@ -9456,7 +9486,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -11486,6 +11516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 384889285}
   - component: {fileID: 384889284}
+  - component: {fileID: 384889286}
   m_Layer: 0
   m_Name: CheckPoint (3)
   m_TagString: CheckPoint
@@ -11534,6 +11565,20 @@ Transform:
   m_Father: {fileID: 114550073}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &384889286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384889283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f241c8da6140914784bc806e39aa7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CheckPoint: 0
+  CP: {fileID: 384889283}
 --- !u!1001 &388762081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14660,12 +14705,12 @@ PrefabInstance:
     - target: {fileID: 61021098567241040, guid: 4ca610ae8c246e14d91870c3818200f5,
         type: 3}
       propertyPath: m_Size.x
-      value: 2.67
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 61021098567241040, guid: 4ca610ae8c246e14d91870c3818200f5,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.65
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 61021098567241040, guid: 4ca610ae8c246e14d91870c3818200f5,
         type: 3}
@@ -17560,7 +17605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4646699046536852, guid: 4ca610ae8c246e14d91870c3818200f5, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4646699046536852, guid: 4ca610ae8c246e14d91870c3818200f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17617,12 +17662,12 @@ PrefabInstance:
     - target: {fileID: 61021098567241040, guid: 4ca610ae8c246e14d91870c3818200f5,
         type: 3}
       propertyPath: m_Size.x
-      value: 2.67
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 61021098567241040, guid: 4ca610ae8c246e14d91870c3818200f5,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.65
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 61021098567241040, guid: 4ca610ae8c246e14d91870c3818200f5,
         type: 3}
@@ -19200,7 +19245,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -19998,7 +20043,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -22993,7 +23038,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -29459,6 +29504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1140825108}
   - component: {fileID: 1140825109}
+  - component: {fileID: 1140825110}
   m_Layer: 0
   m_Name: CheckPoint (4)
   m_TagString: CheckPoint
@@ -29507,6 +29553,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1140825110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140825107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f241c8da6140914784bc806e39aa7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CheckPoint: 0
+  CP: {fileID: 1140825107}
 --- !u!1001 &1141668289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32992,7 +33052,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -35092,6 +35152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1408317321}
   - component: {fileID: 1408317320}
+  - component: {fileID: 1408317322}
   m_Layer: 0
   m_Name: CheckPoint (1)
   m_TagString: CheckPoint
@@ -35140,6 +35201,20 @@ Transform:
   m_Father: {fileID: 114550073}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1408317322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408317319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f241c8da6140914784bc806e39aa7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CheckPoint: 0
+  CP: {fileID: 1408317319}
 --- !u!1 &1410375050
 GameObject:
   m_ObjectHideFlags: 0
@@ -38990,7 +39065,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -44721,12 +44796,12 @@ PrefabInstance:
     - target: {fileID: 3253198503354806412, guid: d0284775b5b280b499af7dd4b023027f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1079.52
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 3253198503354806412, guid: d0284775b5b280b499af7dd4b023027f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 680.82
+      value: 680
       objectReference: {fileID: 0}
     - target: {fileID: 3253198503354806412, guid: d0284775b5b280b499af7dd4b023027f,
         type: 3}
@@ -46135,7 +46210,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -51481,6 +51556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2041039673}
   - component: {fileID: 2041039672}
+  - component: {fileID: 2041039674}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: CheckPoint
@@ -51501,7 +51577,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.66426945, y: -0.7381563}
+  m_Offset: {x: -2.7770882, y: -3.0039387}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -51512,7 +51588,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.478216, y: 1.9469509}
+  m_Size: {x: 1.0879784, y: 1.6982212}
   m_EdgeRadius: 0
 --- !u!4 &2041039673
 Transform:
@@ -51529,6 +51605,20 @@ Transform:
   m_Father: {fileID: 114550073}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2041039674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041039671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f241c8da6140914784bc806e39aa7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CheckPoint: 0
+  CP: {fileID: 2041039671}
 --- !u!1001 &2042435108
 PrefabInstance:
   m_ObjectHideFlags: 0

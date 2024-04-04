@@ -12,11 +12,15 @@ public class PlayerController : MonoBehaviour
     public GameObject HoldObj;
     public bool NowHoldItem = false;
     public bool NowMoove;
+    public static bool SelectReSet;
+    public static bool ReSetFlag;
+    public static bool SettingFlag;
     public float move_accel = 1f;
     public float move_deccel = 1f;
     public float move_max = 1f;
     public Vector2 moveInputVal;
     public Vector2 CameraInputVal;
+    public static Vector3 CP = new Vector3();
 
     private bool HoldInput;
     private bool ThrowInput;
@@ -24,17 +28,12 @@ public class PlayerController : MonoBehaviour
     private bool ThrowDownInput;
     private bool ReSetInput;
     private bool SettingInput;
-    public  static bool ReSetFlag;
-    public static bool SelectReSet;
-    public static bool SettingFlag;
     private float side = 1f;
     private Rigidbody2D rigid;
     private Vector2 lookat = Vector2.zero;
     private Vector2 holdItem = Vector2.zero;
-    private Vector2 holdItemScale = Vector2.zero;
+    private Vector2 holdItemScale = new Vector2(0.4f, 0.4f);
     private Vector2 move;
-    public static Vector3 CP = new Vector3();
-
     public static PlayerController Instance
     {
         get; private set;
@@ -47,31 +46,15 @@ public class PlayerController : MonoBehaviour
             return;
         }
         Instance = this;
-
         if(CP != Vector3.zero)
         {
             transform.position = CP;
-            
         }
-
         rigid = GetComponent<Rigidbody2D>();
-        holdItemScale = new Vector2(0.4f, 0.4f);
     }
     public void Update()
     {
         PlayerMove();
-
-        if(moveInputVal.x < 0 || moveInputVal.y < 0)
-        {
-            NowMoove = true;
-        }
-        else if(moveInputVal.x > 0 || moveInputVal.y > 0)
-        {
-            NowMoove = true;
-        }else
-        {
-            NowMoove = false;
-        }
 
         if(ReSetInput&&!ReSetFlag)
         {
@@ -135,7 +118,19 @@ public class PlayerController : MonoBehaviour
     }
     private void PlayerMove()
     {
-        //Update lookat side
+        if(moveInputVal.x < 0 || moveInputVal.y < 0)
+        {
+            NowMoove = true;
+        }
+        else if(moveInputVal.x > 0 || moveInputVal.y > 0)
+        {
+            NowMoove = true;
+        }
+        else
+        {
+            NowMoove = false;
+        }
+
         if(move.magnitude > 0.1f)
             lookat = move.normalized;
         if(Mathf.Abs(lookat.x) > 0.02)

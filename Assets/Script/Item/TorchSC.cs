@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-
-
 public class TorchSC : MonoBehaviour
 {
     [SerializeField] float countdownSecond = 0;
@@ -12,7 +10,6 @@ public class TorchSC : MonoBehaviour
     private bool torch_off;
     private bool burnFlag;
     public Light TorchLight;
-    public bool transformFlag;
     public static TorchSC Instance
     {
         get; private set;
