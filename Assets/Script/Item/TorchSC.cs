@@ -12,6 +12,7 @@ public class TorchSC : MonoBehaviour
     private bool torch_off;
     private bool burnFlag;
     public Light TorchLight;
+    public bool transformFlag;
     public static TorchSC Instance
     {
         get; private set;
@@ -26,10 +27,12 @@ public class TorchSC : MonoBehaviour
         }
         Instance = this;
 
+        DontDestroyOnLoad(gameObject);
         TorchLight = GetComponent<Light>();
         Origin_Sprite = GetComponent<SpriteRenderer>();
         Origin_Sprite.sprite = torch_Off_Sprite;
     }
+
     void FixedUpdate()
     {
         countdownSecond -= Time.deltaTime;
@@ -47,6 +50,13 @@ public class TorchSC : MonoBehaviour
             countdownSecond = 0;
         }
        
+    }
+    private void Update()
+    {
+        if(PlayerController.SelectReSet)
+        {
+            transform.position = PlayerController.CP;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

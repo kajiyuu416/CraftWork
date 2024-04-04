@@ -66,6 +66,10 @@ public class Physics2DExtentsion : MonoBehaviour
                 Debug.Log("èEÇ§ItemÇ™ë∂ç›ÇµÇ‹ÇπÇÒ");
             }
         }
+        if(holdFlag)
+        {
+            PlayerController.SelectReSet = false;
+        }
 
         if(ItemSprite == PickaxeSprite && !Pickaxe_Hold_Flag)
         {

@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private bool ReSetInput;
     private bool SettingInput;
     public  static bool ReSetFlag;
+    public static bool SelectReSet;
     public static bool SettingFlag;
     private float side = 1f;
     private Rigidbody2D rigid;
@@ -32,8 +33,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 holdItem = Vector2.zero;
     private Vector2 holdItemScale = Vector2.zero;
     private Vector2 move;
-    private static Vector3 CP = new Vector3();
-
+    public static Vector3 CP = new Vector3();
 
     public static PlayerController Instance
     {
@@ -51,12 +51,12 @@ public class PlayerController : MonoBehaviour
         if(CP != Vector3.zero)
         {
             transform.position = CP;
+            
         }
 
         rigid = GetComponent<Rigidbody2D>();
         holdItemScale = new Vector2(0.4f, 0.4f);
     }
-
     public void Update()
     {
         PlayerMove();
@@ -114,7 +114,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
         HoldObj = PE.HoldtoObj;
     }
     private void FixedUpdate()
@@ -174,7 +173,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("ItemÇç∂ë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
                 PE.ItemLost();
-                Vector3 force = new Vector2(10.0f, 0);
+                Vector3 force = new Vector2(5.0f, 0);
                 Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                 HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
                 NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
@@ -186,7 +185,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("ItemÇâEë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
                 PE.ItemLost();
-                Vector2 force = new Vector2(10.0f, 0);
+                Vector2 force = new Vector2(5.0f, 0);
                 Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                 HoldItemRB.AddForce(force, ForceMode2D.Impulse);
                 NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
@@ -198,7 +197,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("ItemÇè„ë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
                 PE.ItemLost();
-                Vector2 force = new Vector2(0, 10.0f);
+                Vector2 force = new Vector2(0, 5.0f);
                 Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                 HoldItemRB.AddForce(force, ForceMode2D.Impulse);
                 NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
@@ -210,7 +209,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("ItemÇâ∫ë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
                 PE.ItemLost();
-                Vector2 force = new Vector2(0, 10.0f);
+                Vector2 force = new Vector2(0, 5.0f);
                 Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                 HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
                 NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);

@@ -5,7 +5,7 @@ public class pickaxeSC : MonoBehaviour
 {
     public int Use_Pickaxe_Count = 5;
     private BoxCollider2D BoxCollider2D;
-    Rigidbody2D rigidbody2D;
+    new Rigidbody2D rigidbody2D;
     public static pickaxeSC Instance
     {
         get; private set;

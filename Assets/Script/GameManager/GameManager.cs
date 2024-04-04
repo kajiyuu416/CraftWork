@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
     {
         Scene loadScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(loadScene.name);
+        PlayerController.SelectReSet = true;
         instance.SelectCl();
     }
     public static void SettingAudio()

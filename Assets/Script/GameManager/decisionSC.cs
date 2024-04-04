@@ -9,6 +9,5 @@ public class decisionSC : MonoBehaviour
         decisionButton.onClick.AddListener(() => {
             GameManager.GameReset();
         });
-        Debug.Log("Reset");
     }
 }
