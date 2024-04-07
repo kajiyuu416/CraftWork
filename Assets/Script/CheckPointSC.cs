@@ -5,10 +5,6 @@ public class CheckPointSC : MonoBehaviour
     public bool CheckPoint = false;
     public GameObject CP;
     // Update is called once per frame
-    public static CheckPointSC Instance
-    {
-        get; private set;
-    }
     void Update()
     {
         if(CheckPoint)
