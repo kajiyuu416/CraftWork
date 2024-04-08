@@ -239,4 +239,8 @@ MonoBehaviour:
   countdownSecond: 0
   torch_On_Sprite: {fileID: 21300000, guid: 574a4985b31d65c45bfd94065e1b21cf, type: 3}
   torch_Off_Sprite: {fileID: 21300000, guid: 1c42ea3f07d97574db4790b31c7c76bd, type: 3}
+  material_objct1: {fileID: 5514022631201975296, guid: 1d35469ef11939446b6bb266cdd76431,
+    type: 3}
+  material_objct2: {fileID: 1920073869176546889, guid: c3c88c2e454cf904aa04769a60d385f3,
+    type: 3}
   TorchLight: {fileID: 0}

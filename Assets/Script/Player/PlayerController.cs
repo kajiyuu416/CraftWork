@@ -1,4 +1,4 @@
- using Unity.VisualScripting;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("ItemÇç∂ë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
                 PE.ItemLost();
-                Vector3 force = new Vector2(5.0f, 0);
+                Vector3 force = new Vector2(10.0f, 0);
                 Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                 HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
                 NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("ItemÇâEë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
                 PE.ItemLost();
-                Vector2 force = new Vector2(5.0f, 0);
+                Vector2 force = new Vector2(10.0f, 0);
                 Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                 HoldItemRB.AddForce(force, ForceMode2D.Impulse);
                 NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
@@ -192,7 +192,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("ItemÇè„ë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
                 PE.ItemLost();
-                Vector2 force = new Vector2(0, 5.0f);
+                Vector2 force = new Vector2(0, 10.0f);
                 Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                 HoldItemRB.AddForce(force, ForceMode2D.Impulse);
                 NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("ItemÇâ∫ë§Ç…ìäÇ∞Ç‹ÇµÇΩ");
                 PE.ItemLost();
-                Vector2 force = new Vector2(0, 5.0f);
+                Vector2 force = new Vector2(0, 10.0f);
                 Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                 HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
                 NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);

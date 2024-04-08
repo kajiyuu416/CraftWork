@@ -23,7 +23,6 @@ public class TorchSC : MonoBehaviour
             return;
         }
         Instance = this;
-
         DontDestroyOnLoad(gameObject);
         TorchLight = GetComponent<Light>();
         Origin_Sprite = GetComponent<SpriteRenderer>();

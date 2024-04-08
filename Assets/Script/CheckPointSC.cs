@@ -10,7 +10,7 @@ public class CheckPointSC : MonoBehaviour
         if(CheckPoint)
         {
             Destroy(CP);
-            Debug.Log("aaa");
+            Debug.Log("チェックポイントの更新を行いました");
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
