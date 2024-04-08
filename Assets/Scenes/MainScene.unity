@@ -22935,6 +22935,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle2 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
       propertyPath: m_RootOrder
@@ -26059,6 +26069,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle2 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
       propertyPath: m_RootOrder
@@ -27050,6 +27070,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle2 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
       propertyPath: m_RootOrder
@@ -27632,6 +27662,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candle2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
@@ -28703,6 +28743,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candle2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
@@ -31137,6 +31187,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle2 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
       propertyPath: m_RootOrder
@@ -33398,6 +33458,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candle2 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
@@ -42908,6 +42978,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
       propertyPath: m_RootOrder
@@ -44876,6 +44956,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candle2 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
@@ -47783,6 +47873,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candle2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
@@ -57618,6 +57718,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle2 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
       propertyPath: m_RootOrder
@@ -62429,6 +62539,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candle2 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240598711596512276, guid: 9f143f0ab2119cb4fb9cec3685708518,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6240598711596512278, guid: 9f143f0ab2119cb4fb9cec3685708518,
         type: 3}
