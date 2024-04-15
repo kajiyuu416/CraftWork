@@ -11,6 +11,7 @@ public class ShowText : MonoBehaviour
     [SerializeField] TextMeshProUGUI text4;
     [SerializeField] TextMeshProUGUI text5;
     [SerializeField] TextMeshProUGUI text6;
+    [SerializeField] TextMeshProUGUI text7;
     [SerializeField] Physics2DExtentsion PE;
     [SerializeField] PlayerController PC;
 
@@ -54,6 +55,7 @@ public class ShowText : MonoBehaviour
             pickaxeSC picSC = pickaxeSC.Instance;
             text6.text = picSC.Use_Pickaxe_Count.ToString();
             text5.text = "ピッケルの耐久値・・・";
+            Debug.Log("AAA");
         }
         else if(!PE.Pickaxe_Hold_Flag)
         {
@@ -65,17 +67,17 @@ public class ShowText : MonoBehaviour
             TorchSC torchSC = TorchSC.Instance;
             if(torchSC.TorchLight.range < 10.0f)
             {
-                text6.text = "トーチの火が消えそうだ";
+                text7.text = "トーチの火が消えそうだ";
             }
 
             if(torchSC.TorchLight.range == 0)
             {
-                text6.text = "";
+                text7.text = "";
             }
         }
         else if(!PE.Torch_Hold_Flag)
         {
-            text6.text = "";
+            text7.text = "";
         }
 
     }
