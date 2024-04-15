@@ -56,16 +56,17 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
 
-        if(ReSetInput&&!ReSetFlag)
+        if(ReSetInput && !ReSetFlag)
         {
             ReSetFlag = true;
+
         }
 
-        if(SettingInput &&!SettingFlag)
+        if(SettingInput && !SettingFlag)
         {
             SettingFlag = true;
         }
-       
+
         if(ReSetFlag || SettingFlag)
         {
             rigid.constraints = RigidbodyConstraints2D.FreezePosition;
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
             rigid.constraints = RigidbodyConstraints2D.None;
             rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
+
         //Itemをつかんだ時にフラグはTrueになっているが実際にオブジェクトが登録されていないからエラーが出ている
         //Todo; errorが出た時の処理またはエラーが出ない方法を探す
         if(HoldObj == PE.HoldtoObj)
