@@ -36,25 +36,31 @@ public class pickaxeSC : MonoBehaviour
         if(Use_Pickaxe_Count == 1)
         {
             rigidbody2D.constraints = RigidbodyConstraints2D.None;
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
             Debug.Log(Use_Pickaxe_Count);
         }
         if(Use_Pickaxe_Count == 2)
         {
             rigidbody2D.constraints = RigidbodyConstraints2D.None;
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
             Debug.Log(Use_Pickaxe_Count);
         }
         if(Use_Pickaxe_Count == 3)
         {
             rigidbody2D.constraints = RigidbodyConstraints2D.None;
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
             Debug.Log(Use_Pickaxe_Count);
         }
         if(Use_Pickaxe_Count == 4)
         {
             rigidbody2D.constraints = RigidbodyConstraints2D.None;
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+
             Debug.Log(Use_Pickaxe_Count);
         }
         if(Use_Pickaxe_Count == 5)
         {
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
             Debug.Log(Use_Pickaxe_Count);
         }
         else if(Use_Pickaxe_Count < 0)
@@ -71,7 +77,7 @@ public class pickaxeSC : MonoBehaviour
     {
         if(collision.CompareTag("Crumbling_rock"))
         {
-            rigidbody2D.constraints = RigidbodyConstraints2D.FreezePosition;     
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
         }
     }
     public void addCount()
