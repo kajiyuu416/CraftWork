@@ -55,7 +55,6 @@ public class ShowText : MonoBehaviour
             pickaxeSC picSC = pickaxeSC.Instance;
             text6.text = picSC.Use_Pickaxe_Count.ToString();
             text5.text = "ピッケルの耐久値・・・";
-            Debug.Log("AAA");
         }
         else if(!PE.Pickaxe_Hold_Flag)
         {
@@ -74,6 +73,13 @@ public class ShowText : MonoBehaviour
             {
                 text7.text = "";
             }
+
+            if(torchSC.burnFlag)
+            {
+                text7.text = "";
+            }
+
+
         }
         else if(!PE.Torch_Hold_Flag)
         {

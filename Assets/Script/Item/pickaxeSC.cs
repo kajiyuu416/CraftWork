@@ -15,8 +15,8 @@ public class pickaxeSC : MonoBehaviour
     {
     if(Instance != null)
      {
-      Destroy(gameObject);
-      return;
+            Destroy(gameObject);
+            return;
      }
      Instance = this;
      Use_Pickaxe_Count = 5;

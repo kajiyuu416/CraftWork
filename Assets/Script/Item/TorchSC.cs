@@ -8,7 +8,7 @@ public class TorchSC : MonoBehaviour
     [SerializeField] Sprite torch_Off_Sprite;
     private SpriteRenderer Origin_Sprite;
     private bool torch_off;
-    private bool burnFlag;
+    public bool burnFlag;
     public Light TorchLight;
     public static TorchSC Instance
     {

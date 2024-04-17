@@ -10,7 +10,6 @@ public class LeverSC : MonoBehaviour
     public Vector3 On_Pos;
     public Vector3 Off_Pos;
 
-
     private void Awake()
     {
         originSprite = GetComponent<SpriteRenderer>();
@@ -25,7 +24,6 @@ public class LeverSC : MonoBehaviour
             originSprite.flipX = true;
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE8();
-           // SM.SettingPlaySE9();
         }
         else if(collision.CompareTag("Player")&& LeverOn)
         {
@@ -34,7 +32,6 @@ public class LeverSC : MonoBehaviour
             originSprite.flipX = false;
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE8();
-            //SM.SettingPlaySE9();
         }
 
     }
