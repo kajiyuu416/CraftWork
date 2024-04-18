@@ -42,7 +42,6 @@ public class LeverSC : MonoBehaviour
             float speed = 1.0f; // ˆÚ“®‚Ì‘¬“x‚ðŽw’è
             Transform objectTransform = targetObj.gameObject.GetComponent<Transform>(); 
             objectTransform.position = Vector3.Lerp(objectTransform.position, On_Pos, speed * Time.deltaTime);
-
         }
         if(LeverOff)
         {
