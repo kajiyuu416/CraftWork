@@ -24,8 +24,8 @@ public class Synthesize : MonoBehaviour
             GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(0f, 0f, 0f));
             Destroy(OrijinObj);
             Destroy(TargetObj);
-            PC.NowHoldobj = null;
-            PC.NowHoldItem = false;
+            PlayerController pc = PlayerController.Instance;
+            pc.ItemLost();
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE2();
             Debug.Log("対象のアイテムと当たりました　+　合成します");

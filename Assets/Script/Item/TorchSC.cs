@@ -8,8 +8,10 @@ public class TorchSC : MonoBehaviour
     [SerializeField] Sprite torch_Off_Sprite;
     private SpriteRenderer Origin_Sprite;
     private bool torch_off;
+    public float Destroy_value;
     public bool burnFlag;
     public Light TorchLight;
+    private bool DestroyFlag;
     public static TorchSC Instance
     {
         get; private set;
@@ -52,6 +54,16 @@ public class TorchSC : MonoBehaviour
         if(PlayerController.SelectReSet)
         {
             transform.position = PlayerController.CP;
+        }
+        Vector3 posi = this.transform.localPosition;
+
+        if(posi.y < Destroy_value &&!DestroyFlag)
+        {
+            DestroyFlag = true;
+            PlayerController Pc = PlayerController.Instance;
+            Pc.ItemLost();
+            Debug.Log("torch_Destroy");
+            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
