@@ -8,7 +8,6 @@ public class SwitchGimmick : MonoBehaviour
     [SerializeField] BoxCollider2D targetBoxCol2;
     [SerializeField] BoxCollider2D targetBoxCol3;
     public bool SGFlag;
-    // Update is called once per frame
 
     private void Awake()
     {
