@@ -7,13 +7,7 @@ public class HitEfect : MonoBehaviour
 {
     public GameObject hitEfect;
     public Vector3 generationPosition = Vector3.zero;
-
     private bool hitFlag = false;
-
-    private void Awake()
-    {
-        //generationPosition.z = -1.5f;
-    }
     void Update()
     {
         generationPosition.x = transform.position.x;
@@ -28,7 +22,6 @@ public class HitEfect : MonoBehaviour
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE();
             Debug.Log("ëŒè€äOÇÃItemÇ…ìñÇΩÇËÇ‹ÇµÇΩ");
-
         }
 
     }

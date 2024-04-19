@@ -24,8 +24,8 @@ public class door : Charade
                 GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(0f, 0f, 0f));
                 Destroy(collision.gameObject);
                 HitFlag = true;
-                PC.NowHoldobj = null;
-                PC.NowHoldItem = false; 
+                PlayerController pc = PlayerController.Instance;
+                pc.ItemLost();
                 SoundManager SM = SoundManager.Instance;
                 SM.SoundPause();
                 SM.SettingPlaySE6();

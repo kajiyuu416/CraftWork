@@ -54,6 +54,7 @@ public class TorchSC : MonoBehaviour
         if(PlayerController.SelectReSet)
         {
             transform.position = PlayerController.CP;
+            ignition();
         }
         Vector3 posi = this.transform.localPosition;
 
@@ -65,18 +66,13 @@ public class TorchSC : MonoBehaviour
             Debug.Log("torch_Destroy");
             Destroy(gameObject);
         }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("supplyArea"))
         {
-            TorchLight.range = 20;
-            countdownSecond = 30;
-            torch_off = false;
-            burnFlag = true;
-            Origin_Sprite.sprite = torch_On_Sprite;
-            SoundManager SM = SoundManager.Instance;
-            SM.SettingPlaySE14();
+            ignition();
         }
     }
 
@@ -102,5 +98,15 @@ public class TorchSC : MonoBehaviour
             }
             yield return null;
         }
+    }
+    private void ignition()
+    {
+        TorchLight.range = 20;
+        countdownSecond = 30;
+        torch_off = false;
+        burnFlag = true;
+        Origin_Sprite.sprite = torch_On_Sprite;
+        SoundManager SM = SoundManager.Instance;
+        SM.SettingPlaySE14();
     }
 }

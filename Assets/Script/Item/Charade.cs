@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Charade : MonoBehaviour
 {
-    public PlayerController PC;
     public HitEfect HE;
     public Sprite targetObjSprite;
     public Sprite hitObjSprite;

@@ -106,7 +106,7 @@ public class CameraController : MonoBehaviour
 
     public void CameraControl()
     {
-        RightInput = PC.CameraInputVal;
+        RightInput = PlayerController.CameraInputVal;
 
         if(RightInput.x > 0.9f)
         {

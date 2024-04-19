@@ -19,9 +19,12 @@ public class PlayerController : MonoBehaviour
     public float move_deccel = 1f;
     public float move_max = 1f;
     public Vector2 moveInputVal;
-    public Vector2 CameraInputVal;
+    public static Vector2 CameraInputVal;
     public static Vector3 CP = new Vector3();
-
+    public static PlayerController Instance
+    {
+        get; private set;
+    }
     private bool HoldInput;
     private bool ThrowInput;
     private bool ThrowUpInput;
@@ -34,10 +37,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 holdItem = Vector2.zero;
     private Vector2 holdItemScale = new Vector2(0.4f, 0.4f);
     private Vector2 move;
-    public static PlayerController Instance
-    {
-        get; private set;
-    }
+
     private void Awake()
     {
         if(Instance != null)
@@ -56,29 +56,6 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
 
-        if(ReSetInput && !ReSetFlag)
-        {
-            ReSetFlag = true;
-
-        }
-
-        if(SettingInput && !SettingFlag)
-        {
-            SettingFlag = true;
-        }
-
-        if(ReSetFlag || SettingFlag)
-        {
-            rigid.constraints = RigidbodyConstraints2D.FreezePosition;
-        }
-        if(!ReSetFlag && !SettingFlag)
-        {
-            rigid.constraints = RigidbodyConstraints2D.None;
-            rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
-
-        //Itemをつかんだ時にフラグはTrueになっているが実際にオブジェクトが登録されていないからエラーが出ている
-        //Todo; errorが出た時の処理またはエラーが出ない方法を探す
         if(HoldObj == PE.HoldtoObj)
         {
             if(NowHoldItem)
@@ -115,7 +92,6 @@ public class PlayerController : MonoBehaviour
             float accelerationY = Mathf.Abs(moveInputVal.y) > 0.1f ? move_accel : move_deccel;
             move.y = Mathf.MoveTowards(move.y, desiredSpeedY, accelerationY * Time.fixedDeltaTime);
         }
-
         rigid.velocity = move;
     }
     private void PlayerMove()
@@ -133,11 +109,31 @@ public class PlayerController : MonoBehaviour
             NowMoove = false;
         }
 
+        if(ReSetInput && !ReSetFlag)
+        {
+            ReSetFlag = true;
+        }
+
+        if(SettingInput && !SettingFlag)
+        {
+            SettingFlag = true;
+        }
+
+        if(ReSetFlag || SettingFlag)
+        {
+            rigid.constraints = RigidbodyConstraints2D.FreezePosition;
+        }
+        if(!ReSetFlag && !SettingFlag)
+        {
+            rigid.constraints = RigidbodyConstraints2D.None;
+            rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
         if(move.magnitude > 0.1f)
             lookat = move.normalized;
         if(Mathf.Abs(lookat.x) > 0.02)
             side = Mathf.Sign(lookat.x);
-        // ゲームパッド（デバイス取得）
+
         var gamepad = Gamepad.current;
         if(gamepad == null)
             return;
