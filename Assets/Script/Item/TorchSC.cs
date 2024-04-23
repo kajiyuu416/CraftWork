@@ -54,11 +54,10 @@ public class TorchSC : MonoBehaviour
         if(PlayerController.SelectReSet)
         {
             transform.position = PlayerController.CP;
-            ignition();
         }
         Vector3 posi = this.transform.localPosition;
 
-        if(posi.y < Destroy_value &&!DestroyFlag)
+        if(posi.x > Destroy_value &&!DestroyFlag)
         {
             DestroyFlag = true;
             PlayerController Pc = PlayerController.Instance;
@@ -73,6 +72,7 @@ public class TorchSC : MonoBehaviour
         if(collision.CompareTag("supplyArea"))
         {
             ignition();
+         
         }
     }
 
@@ -108,5 +108,6 @@ public class TorchSC : MonoBehaviour
         Origin_Sprite.sprite = torch_On_Sprite;
         SoundManager SM = SoundManager.Instance;
         SM.SettingPlaySE14();
+
     }
 }

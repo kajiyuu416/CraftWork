@@ -239,6 +239,6 @@ MonoBehaviour:
   countdownSecond: 0
   torch_On_Sprite: {fileID: 21300000, guid: 574a4985b31d65c45bfd94065e1b21cf, type: 3}
   torch_Off_Sprite: {fileID: 21300000, guid: 1c42ea3f07d97574db4790b31c7c76bd, type: 3}
-  Destroy_value: 600
+  Destroy_value: 1400
   burnFlag: 0
   TorchLight: {fileID: 0}
