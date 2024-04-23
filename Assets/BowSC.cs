@@ -17,6 +17,8 @@ public class BowSC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if(origin_Sprite.flipX)
         {
            
