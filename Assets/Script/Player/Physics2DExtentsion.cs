@@ -8,6 +8,7 @@ public class Physics2DExtentsion : MonoBehaviour
     [SerializeField] float distance;
     [SerializeField] Sprite PickaxeSprite;
     [SerializeField] Sprite TorchSprite;
+    [SerializeField] Sprite BowSprite;
     public GameObject objctacleRayObject;
     public GameObject HoldtoObj;
     public BoxCollider2D boxCol;
@@ -15,11 +16,11 @@ public class Physics2DExtentsion : MonoBehaviour
     public bool holdFlag;
     public bool Pickaxe_Hold_Flag;
     public bool Torch_Hold_Flag;
+    public bool Bow_Hold_Flag;
     private SpriteRenderer Sprite;
     private Sprite ItemSprite;
     private float CharacterDirection;
     private Vector2 MI;
-
 
     private void Awake()
     {
@@ -29,8 +30,53 @@ public class Physics2DExtentsion : MonoBehaviour
     {
         CharacterDirection = 0f;
     }
-
      void Update()
+    {
+        ItemHold();
+        Flying_ray();
+    }
+    public void ItemLost()
+    {
+        boxCol.enabled = true;
+        holdFlag = false;
+        HoldtoObj = null;
+        ItemSprite = null;
+    }
+    private void ItemHold()
+    {
+        if(holdFlag)
+        {
+            PlayerController.SelectReSet = false;
+        }
+
+        if(ItemSprite == PickaxeSprite && !Pickaxe_Hold_Flag)
+        {
+            Pickaxe_Hold_Flag = true;
+        }
+        else if(ItemSprite != PickaxeSprite && Pickaxe_Hold_Flag)
+        {
+            Pickaxe_Hold_Flag = false;
+        }
+
+        if(ItemSprite == TorchSprite && !Torch_Hold_Flag)
+        {
+            Torch_Hold_Flag = true;
+        }
+        else if(ItemSprite != TorchSprite && Torch_Hold_Flag)
+        {
+            Torch_Hold_Flag = false;
+        }
+
+        if(ItemSprite == BowSprite && !Bow_Hold_Flag)
+        {
+            Bow_Hold_Flag = true;
+        }
+        else if(ItemSprite != BowSprite && Bow_Hold_Flag)
+        {
+            Bow_Hold_Flag = false;
+        }
+    }
+    private void Flying_ray()
     {
         if(MI.x < 0)
         {
@@ -66,36 +112,6 @@ public class Physics2DExtentsion : MonoBehaviour
                 Debug.Log("E‚¤Item‚ª‘¶Ý‚µ‚Ü‚¹‚ñ");
             }
         }
-        if(holdFlag)
-        {
-            PlayerController.SelectReSet = false;
-        }
-
-        if(ItemSprite == PickaxeSprite && !Pickaxe_Hold_Flag)
-        {
-            Pickaxe_Hold_Flag = true;
-        }
-        else if(ItemSprite != PickaxeSprite && Pickaxe_Hold_Flag)
-        {
-            Pickaxe_Hold_Flag = false;
-        }
-
-        if(ItemSprite == TorchSprite && !Torch_Hold_Flag)
-        {
-            Torch_Hold_Flag = true;
-        }
-        else if(ItemSprite != TorchSprite && Torch_Hold_Flag)
-        {
-            Torch_Hold_Flag = false;
-        }
-    }
-
-    public void ItemLost()
-    {
-        boxCol.enabled = true;
-        holdFlag = false;
-        HoldtoObj = null;
-        ItemSprite = null;
     }
 
 }

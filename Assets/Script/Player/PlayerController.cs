@@ -25,12 +25,14 @@ public class PlayerController : MonoBehaviour
     {
         get; private set;
     }
+
     private bool HoldInput;
     private bool ThrowInput;
     private bool ThrowUpInput;
     private bool ThrowDownInput;
     private bool ReSetInput;
     private bool SettingInput;
+    private bool connect;
     private float side = 1f;
     private Rigidbody2D rigid;
     private Vector2 lookat = Vector2.zero;
@@ -55,28 +57,7 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         PlayerMove();
-
-        if(HoldObj == PE.HoldtoObj)
-        {
-            if(NowHoldItem)
-            {
-                NowHoldobj = HoldObj;
-                holdItem = transform.position;
-                holdItem.x = target.position.x;
-                holdItem.y = target.position.y;
-                NowHoldobj.transform.position = holdItem;
-                NowHoldobj.transform.localScale = holdItemScale;
-                if(originSR.flipX)
-                {
-                    NowHoldobj.GetComponent<SpriteRenderer>().flipX = true;
-                }
-                else if(!originSR.flipX)
-                {
-                    NowHoldobj.GetComponent<SpriteRenderer>().flipX = false;
-                }
-            }
-        }
-        HoldObj = PE.HoldtoObj;
+        GamePad_connection_Check();
     }
     private void FixedUpdate()
     {
@@ -129,14 +110,33 @@ public class PlayerController : MonoBehaviour
             rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        if(move.magnitude > 0.1f)
-            lookat = move.normalized;
-        if(Mathf.Abs(lookat.x) > 0.02)
-            side = Mathf.Sign(lookat.x);
 
-        var gamepad = Gamepad.current;
-        if(gamepad == null)
-            return;
+            if(move.magnitude > 0.1f)
+                lookat = move.normalized;
+            if(Mathf.Abs(lookat.x) > 0.02)
+                side = Mathf.Sign(lookat.x);
+
+        if(HoldObj == PE.HoldtoObj)
+        {
+            if(NowHoldItem)
+            {
+                NowHoldobj = HoldObj;
+                holdItem = transform.position;
+                holdItem.x = target.position.x;
+                holdItem.y = target.position.y;
+                NowHoldobj.transform.position = holdItem;
+                NowHoldobj.transform.localScale = holdItemScale;
+                if(originSR.flipX)
+                {
+                    NowHoldobj.GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else if(!originSR.flipX)
+                {
+                    NowHoldobj.GetComponent<SpriteRenderer>().flipX = false;
+                }
+            }
+        }
+        HoldObj = PE.HoldtoObj;
     }
     private void PlayerHoldItem()
     {
@@ -234,6 +234,38 @@ public class PlayerController : MonoBehaviour
         ThrowDownInput = false;
         ReSetInput = false;
         SettingInput = false;
+    }
+    private void GamePad_connection_Check()
+    {
+        var controllerNames = Input.GetJoystickNames();
+
+        if(controllerNames[0] == "")
+        {
+            connect = false;
+            Debug.Log("コントローラーが接続されていません");
+        }
+        else
+        {
+            connect = true;
+            Debug.Log("コントローラーが接続されています");
+        }
+
+        if(connect)
+        {
+            var current_GP = Gamepad.current;
+            var shot = current_GP.rightShoulder;
+
+            if(PE.Bow_Hold_Flag && shot.wasPressedThisFrame)
+            {
+                BowSC bowSC = BowSC.instance;
+                bowSC.shot();
+            }
+        }
+        var gamepad = Gamepad.current;
+        if(gamepad == null)
+            return;
+
+
     }
     public void OnMove(InputValue var)
     {

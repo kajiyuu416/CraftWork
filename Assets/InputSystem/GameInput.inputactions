@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "shot",
+                    "type": "Button",
+                    "id": "51cde582-6d0b-4cfb-ade2-c20c752679c0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -318,6 +327,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Setting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e0101ee-c84b-45d4-a663-b2d41c3474c6",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "shot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

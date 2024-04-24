@@ -5,24 +5,42 @@ using UnityEngine.UIElements;
 
 public class BowSC : MonoBehaviour
 {
+    [SerializeField] GameObject arrow;
     private SpriteRenderer origin_Sprite;
-    private Vector3 origin_Rotate = new Vector3(0, 0, -40);
-    public Transform origin_Transform;
-
+    public static BowSC instance
+    {
+        get; private set;
+    }
     private void Awake()
     {
         origin_Sprite = GetComponent<SpriteRenderer>();
-        origin_Transform = GetComponent<Transform>();
     }
     // Update is called once per frame
     void Update()
     {
-        
+        rotationChange();
+    }
 
+    private void rotationChange()
+    {
+        Transform origin_transform = this.transform;
         if(origin_Sprite.flipX)
         {
-           
-            Debug.Log("å¸Ç´ïœçX");
+            Vector3 localAngle = origin_transform.localEulerAngles;
+            localAngle.z = 40.0f;
+            origin_transform.localEulerAngles = localAngle;
+        }
+        else
+        {
+            Vector3 localAngle = origin_transform.localEulerAngles;
+            localAngle.z = -40.0f;
+            origin_transform.localEulerAngles = localAngle;
         }
     }
+    public void shot()
+    {
+        Debug.Log("shot1");
+        GameObject geneObj = Instantiate(arrow, transform.position, Quaternion.Euler(0f, 0f, 0f));
+    }
+
 }

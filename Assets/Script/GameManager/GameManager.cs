@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject AudioUIobj;
     [SerializeField] GameObject ResetUIobj;
 
-
     private bool ReSetUIexpression;
     private bool SettingUIexpression;
     private string beforeScene;
@@ -46,32 +45,36 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if(PlayerController.ReSetFlag && ReSetUIexpression&&!PlayerController.SettingFlag)
+        SettingGame();
+    }
+    private void SettingGame()
+    {
+        if(PlayerController.ReSetFlag && ReSetUIexpression && !PlayerController.SettingFlag)
         {
             ResetUIobj.SetActive(true);
             ReSetUI.enabled = true;
             ReSetUIexpression = false;
             EventSystem.current.SetSelectedGameObject(ReSetButton);
         }
-        
-        if(!PlayerController.ReSetFlag &&ReSetUIexpression)
+
+        if(!PlayerController.ReSetFlag && ReSetUIexpression)
         {
-         ReSetUIexpression = true;
-         ReSetUI.enabled = false;
-         ResetUIobj.SetActive(false);
+            ReSetUIexpression = true;
+            ReSetUI.enabled = false;
+            ResetUIobj.SetActive(false);
         }
 
-        if(PlayerController.SettingFlag && SettingUIexpression&&!PlayerController.ReSetFlag)
+        if(PlayerController.SettingFlag && SettingUIexpression && !PlayerController.ReSetFlag)
         {
             AudioUIobj.SetActive(true);
             SettingUI.enabled = true;
             SettingUIexpression = false;
             EventSystem.current.SetSelectedGameObject(SettingButton);
         }
-        
+
         if(!PlayerController.SettingFlag && SettingUIexpression)
         {
-           
+
             SettingUI.enabled = false;
             SettingUIexpression = true;
             AudioUIobj.SetActive(false);
