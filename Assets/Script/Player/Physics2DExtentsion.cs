@@ -9,6 +9,7 @@ public class Physics2DExtentsion : MonoBehaviour
     [SerializeField] Sprite PickaxeSprite;
     [SerializeField] Sprite TorchSprite;
     [SerializeField] Sprite BowSprite;
+    public BowSC bowSC;
     public GameObject objctacleRayObject;
     public GameObject HoldtoObj;
     public BoxCollider2D boxCol;
@@ -90,7 +91,7 @@ public class Physics2DExtentsion : MonoBehaviour
         {
             CharacterDirection = 0;
         }
-        if(PC.NowMoove)
+        if(PC.NowMove)
         {
             RaycastHit2D hitObstacle = Physics2D.Raycast(objctacleRayObject.transform.position, Vector2.right * new Vector2(CharacterDirection, 0f), distance, layerMask);
 
@@ -103,6 +104,13 @@ public class Physics2DExtentsion : MonoBehaviour
                 ItemSprite = Sprite.sprite;
                 Debug.DrawRay(objctacleRayObject.transform.position, Vector2.right * hitObstacle.distance * new Vector2(CharacterDirection, 0f), Color.red);
                 Debug.Log("ItemÇèEÇ§Ç±Ç∆Ç™Ç≈Ç´Ç‹Ç∑");
+                if(Bow_Hold_Flag)
+                {
+                    bowSC = hitObstacle.collider.GetComponent<BowSC>();
+                }else
+                {
+                    bowSC = null;
+                }
             }
             else
             {

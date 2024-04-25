@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject AudioUIobj;
     [SerializeField] GameObject ResetUIobj;
 
+    GameObject []tagObjcts;
+
     private bool ReSetUIexpression;
     private bool SettingUIexpression;
     private string beforeScene;
@@ -79,6 +81,12 @@ public class GameManager : MonoBehaviour
             SettingUIexpression = true;
             AudioUIobj.SetActive(false);
         }
+    }
+    public void Check(string tagname)
+    {
+        tagObjcts = GameObject.FindGameObjectsWithTag(tagname);
+        Debug.Log("åªç›ÇÃÉtÉçÉAÇ…Ç†ÇÈñÓÇÃñ{êî:"+tagObjcts.Length);
+
     }
     public static void GameReset()
     {

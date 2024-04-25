@@ -13,6 +13,7 @@ TagManager:
   - TPRunic
   - CheckPoint
   - supplyArea
+  - arrow
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public GameObject NowHoldobj;
     public GameObject HoldObj;
     public bool NowHoldItem = false;
-    public bool NowMoove;
+    public bool NowMove;
     public static bool SelectReSet;
     public static bool ReSetFlag;
     public static bool SettingFlag;
@@ -58,6 +58,30 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
         GamePad_connection_Check();
+        if(connect)
+        {
+            var current_GP = Gamepad.current;
+            var shot = current_GP.rightShoulder;
+
+            if(PE.Bow_Hold_Flag && shot.wasPressedThisFrame && NowHoldItem)
+            {
+                GameManager GM = GameManager.instance;
+                if(originSR.flipX)
+                {
+                    PE.bowSC.LeftShot();
+                    GM.Check("arrow");
+                }
+                else if(!originSR.flipX)
+                {
+                    PE.bowSC.RighitShot();
+                    GM.Check("arrow");
+                }
+
+
+            }
+            if(current_GP == null)
+                return;
+        }
     }
     private void FixedUpdate()
     {
@@ -79,15 +103,15 @@ public class PlayerController : MonoBehaviour
     {
         if(moveInputVal.x < 0 || moveInputVal.y < 0)
         {
-            NowMoove = true;
+            NowMove = true;
         }
         else if(moveInputVal.x > 0 || moveInputVal.y > 0)
         {
-            NowMoove = true;
+            NowMove = true;
         }
         else
         {
-            NowMoove = false;
+            NowMove = false;
         }
 
         if(ReSetInput && !ReSetFlag)
@@ -109,12 +133,11 @@ public class PlayerController : MonoBehaviour
             rigid.constraints = RigidbodyConstraints2D.None;
             rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-
-
-            if(move.magnitude > 0.1f)
-                lookat = move.normalized;
-            if(Mathf.Abs(lookat.x) > 0.02)
-                side = Mathf.Sign(lookat.x);
+        if(move.magnitude > 0.1f)
+           lookat = move.normalized;
+           if(Mathf.Abs(lookat.x) > 0.02)
+           side = Mathf.Sign(lookat.x);
+           side = Mathf.Sign(lookat.x);
 
         if(HoldObj == PE.HoldtoObj)
         {
@@ -242,28 +265,12 @@ public class PlayerController : MonoBehaviour
         if(controllerNames[0] == "")
         {
             connect = false;
-            Debug.Log("コントローラーが接続されていません");
         }
         else
         {
             connect = true;
-            Debug.Log("コントローラーが接続されています");
         }
 
-        if(connect)
-        {
-            var current_GP = Gamepad.current;
-            var shot = current_GP.rightShoulder;
-
-            if(PE.Bow_Hold_Flag && shot.wasPressedThisFrame)
-            {
-                BowSC bowSC = BowSC.instance;
-                bowSC.shot();
-            }
-        }
-        var gamepad = Gamepad.current;
-        if(gamepad == null)
-            return;
 
 
     }
