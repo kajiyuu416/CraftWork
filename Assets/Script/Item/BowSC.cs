@@ -1,13 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class BowSC : MonoBehaviour
 {
     [SerializeField] GameObject arrow;
-    Rigidbody2D rigid2d;
+    [SerializeField] Physics2DExtentsion PE;
+    public Image image;
+    public int aroow_Remaining;
 
     private SpriteRenderer origin_Sprite;
     public static BowSC Instance
@@ -16,13 +15,18 @@ public class BowSC : MonoBehaviour
     }
     private void Awake()
     {
+        aroow_Remaining = 30;
         origin_Sprite = GetComponent<SpriteRenderer>();
-        rigid2d = arrow.GetComponent<Rigidbody2D>();
     }
-    // Update is called once per frame
     void Update()
     {
         rotationChange();
+        if(aroow_Remaining < 0)
+        {
+            aroow_Remaining = 0;
+        }
+        if(PE.Bow_Hold_Flag)
+        image.fillAmount = aroow_Remaining / 30.0f;
     }
 
     private void rotationChange()
@@ -43,18 +47,34 @@ public class BowSC : MonoBehaviour
     }
     public void RighitShot()
     {
-        GameObject geneObj = Instantiate(arrow, transform.position, Quaternion.Euler(0f, 0f, -45f));
-        Rigidbody2D geneObjRB = geneObj.GetComponent<Rigidbody2D>();
-        Vector2 force = new Vector2(15.0f, 0);
-        geneObjRB.AddForce(force, ForceMode2D.Impulse);
- 
+        if(aroow_Remaining > 0)
+        {
+            GameObject geneObj = Instantiate(arrow, transform.position, Quaternion.Euler(0f, 0f, -45f));
+            Rigidbody2D geneObjRB = geneObj.GetComponent<Rigidbody2D>();
+            Vector2 force = new Vector2(15.0f, 0);
+            geneObjRB.AddForce(force, ForceMode2D.Impulse);
+            aroow_Remaining--;
+        }
+        else if(aroow_Remaining == 0)
+        {
+            Debug.Log("残数がないため、発射できません");
+        }
     }
     public void LeftShot()
     {
-        GameObject geneObj = Instantiate(arrow, transform.position, Quaternion.Euler(0f, 0f, 140.0f));
-        Rigidbody2D geneObjRB = geneObj.GetComponent<Rigidbody2D>();
-        Vector2 force = new Vector2(15.0f, 0);
-        geneObjRB.AddForce(-force, ForceMode2D.Impulse);
+        if(aroow_Remaining > 0)
+        {
+            GameObject geneObj = Instantiate(arrow, transform.position, Quaternion.Euler(0f, 0f, 140.0f));
+            Rigidbody2D geneObjRB = geneObj.GetComponent<Rigidbody2D>();
+            Vector2 force = new Vector2(15.0f, 0);
+            geneObjRB.AddForce(-force, ForceMode2D.Impulse);
+            aroow_Remaining--;
+        }
+        else if(aroow_Remaining == 0)
+        {
+            Debug.Log("残数がないため、発射できません");
+        }
+
     }
 
 }

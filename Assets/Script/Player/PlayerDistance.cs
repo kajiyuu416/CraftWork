@@ -24,7 +24,7 @@ public class PlayerDistance : MonoBehaviour
     {
         Vector3 posi = this.transform.localPosition;
         // Debug.Log(posi);
-        if(posi.x < 250&& !ChangeMusic1)
+        if(posi.x < 250&& posi.x < 500 && !ChangeMusic1)
         {
             ChangeMusic1 = true;
             SoundManager SM = SoundManager.Instance;
@@ -32,10 +32,10 @@ public class PlayerDistance : MonoBehaviour
             SM.Startbgm1();
             Debug.Log("music1");
         }
-        else if(posi.x > 500 && !ChangeMusic2)
+        else if(posi.x > 500 && posi.x < 1400 && !ChangeMusic2)
         {
-            ChangeMusic2 = true;
             SoundManager SM = SoundManager.Instance;
+            ChangeMusic2 = true;
             SM.StopBGM();
             SM.Startbgm3();
             Debug.Log("music2");
