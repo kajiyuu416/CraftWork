@@ -108,7 +108,6 @@ public class Physics2DExtentsion : MonoBehaviour
                 if(Bow_Hold_Flag)
                 {
                     bowSC = hitObstacle.collider.GetComponent<BowSC>();
-                    bowSC.image.enabled = true;
                 }
                 else if(!Bow_Hold_Flag)
                 {
