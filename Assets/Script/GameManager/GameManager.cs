@@ -85,7 +85,12 @@ public class GameManager : MonoBehaviour
     public void Check(string tagname)
     {
         tagObjcts = GameObject.FindGameObjectsWithTag(tagname);
-        Debug.Log("現在のフロアにある矢の本数:"+tagObjcts.Length);
+        //Debug.Log("現在のフロアにある矢の本数:"+tagObjcts.Length);
+        if(tagObjcts.Length >10)
+        {
+            //Debug.Log("フロアにある本数が10本以上の為、削除します");
+            Destroy(tagObjcts[0]);
+        }
 
     }
     public static void GameReset()
@@ -120,7 +125,6 @@ public class GameManager : MonoBehaviour
         SoundManager SM = SoundManager.Instance;
         SM.SettingPlaySE12();
     }
-    //Todo;;タイトルに戻るとエラーが発生するため、一時使用不可
     public static void BacktoTitle()
     {
         instance.StartCoroutine(instance.LoadScene("title"));

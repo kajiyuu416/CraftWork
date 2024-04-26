@@ -25,13 +25,6 @@ public class PlayerController : MonoBehaviour
     {
         get; private set;
     }
-
-    private bool HoldInput;
-    private bool ThrowInput;
-    private bool ThrowUpInput;
-    private bool ThrowDownInput;
-    private bool ReSetInput;
-    private bool SettingInput;
     private bool connect;
     private float side = 1f;
     private Rigidbody2D rigid;
@@ -58,46 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
         GamePad_connection_Check();
-        if(connect)
-        {
-            var current_GP = Gamepad.current;
-            var shot = current_GP.rightShoulder;
-
-            if(PE.Bow_Hold_Flag && shot.wasPressedThisFrame && NowHoldItem)
-            {
-                GameManager GM = GameManager.instance;
-                if(originSR.flipX)
-                {
-                    PE.bowSC.LeftShot();
-                    GM.Check("arrow");
-                }
-                else if(!originSR.flipX)
-                {
-                    PE.bowSC.RighitShot();
-                    GM.Check("arrow");
-                }
-
-
-            }
-            if(current_GP == null)
-                return;
-        }
-    }
-    private void FixedUpdate()
-    {
         PlayerHoldItem();
-        Inputfalse();
-
-        if(!ReSetFlag && !SettingFlag)
-        {
-            float desiredSpeedX = Mathf.Abs(moveInputVal.x) > 0.1f ? moveInputVal.x * move_max : 0f;
-            float accelerationX = Mathf.Abs(moveInputVal.x) > 0.1f ? move_accel : move_deccel;
-            move.x = Mathf.MoveTowards(move.x, desiredSpeedX, accelerationX * Time.fixedDeltaTime);
-            float desiredSpeedY = Mathf.Abs(moveInputVal.y) > 0.1f ? moveInputVal.y * move_max : 0f;
-            float accelerationY = Mathf.Abs(moveInputVal.y) > 0.1f ? move_accel : move_deccel;
-            move.y = Mathf.MoveTowards(move.y, desiredSpeedY, accelerationY * Time.fixedDeltaTime);
-        }
-        rigid.velocity = move;
     }
     private void PlayerMove()
     {
@@ -114,25 +68,24 @@ public class PlayerController : MonoBehaviour
             NowMove = false;
         }
 
-        if(ReSetInput && !ReSetFlag)
-        {
-            ReSetFlag = true;
-        }
-
-        if(SettingInput && !SettingFlag)
-        {
-            SettingFlag = true;
-        }
-
         if(ReSetFlag || SettingFlag)
         {
             rigid.constraints = RigidbodyConstraints2D.FreezePosition;
         }
         if(!ReSetFlag && !SettingFlag)
         {
+            float desiredSpeedX = Mathf.Abs(moveInputVal.x) > 0.1f ? moveInputVal.x * move_max : 0f;
+            float accelerationX = Mathf.Abs(moveInputVal.x) > 0.1f ? move_accel : move_deccel;
+            move.x = Mathf.MoveTowards(move.x, desiredSpeedX, accelerationX * Time.fixedDeltaTime);
+            float desiredSpeedY = Mathf.Abs(moveInputVal.y) > 0.1f ? moveInputVal.y * move_max : 0f;
+            float accelerationY = Mathf.Abs(moveInputVal.y) > 0.1f ? move_accel : move_deccel;
+            move.y = Mathf.MoveTowards(move.y, desiredSpeedY, accelerationY * Time.fixedDeltaTime);
+
             rigid.constraints = RigidbodyConstraints2D.None;
             rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
+        rigid.velocity = move;
+
         if(move.magnitude > 0.1f)
            lookat = move.normalized;
            if(Mathf.Abs(lookat.x) > 0.02)
@@ -165,73 +118,113 @@ public class PlayerController : MonoBehaviour
     {
         if(!ReSetFlag && !SettingFlag)
         {
-            if(PE.holdFlag && HoldInput && !NowHoldItem)
+            if(connect)
             {
-                NowHoldItem = true;
-                NowHoldobj = HoldObj;
-                PE.boxCol.enabled = false;
-                SoundManager SM = SoundManager.Instance;
-                SM.SettingPlaySE3();
-                Debug.Log("Itemを持ち上げました");
-            }
-            else if(PE.holdFlag && HoldInput && NowHoldItem)
-            {
-                Debug.Log("Itemを置きました");
-                PE.boxCol.enabled = true;
-                NowHoldobj.transform.position = transform.position;
-                NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-                ItemLost();
-                SoundManager SM = SoundManager.Instance;
-                SM.SettingPlaySE4();
-            }
+                var current_GP = Gamepad.current;
+                var shot = current_GP.rightShoulder;
+                var hold = current_GP.buttonEast;
+                var Throw_left_right = current_GP.buttonWest;
+                var Throw_up = current_GP.buttonNorth;
+                var Throw_Down = current_GP.buttonSouth;
+                var ReSet = current_GP.selectButton;
+                var Setting = current_GP.startButton;
 
-            if(ThrowInput && NowHoldItem && originSR.flipX)
-            {
-                Debug.Log("Itemを左側に投げました");
-                PE.ItemLost();
-                Vector3 force = new Vector2(10.0f, 0);
-                Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
-                HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
-                NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-                ItemLost();
-                SoundManager SM = SoundManager.Instance;
-                SM.SettingPlaySE5();
-            }
-            else if(ThrowInput && NowHoldItem && !originSR.flipX)
-            {
-                Debug.Log("Itemを右側に投げました");
-                PE.ItemLost();
-                Vector2 force = new Vector2(10.0f, 0);
-                Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
-                HoldItemRB.AddForce(force, ForceMode2D.Impulse);
-                NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-                ItemLost();
-                SoundManager SM = SoundManager.Instance;
-                SM.SettingPlaySE5();
-            }
-            else if(ThrowUpInput && NowHoldItem)
-            {
-                Debug.Log("Itemを上側に投げました");
-                PE.ItemLost();
-                Vector2 force = new Vector2(0, 10.0f);
-                Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
-                HoldItemRB.AddForce(force, ForceMode2D.Impulse);
-                NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-                ItemLost();
-                SoundManager SM = SoundManager.Instance;
-                SM.SettingPlaySE5();
-            }
-            else if(ThrowDownInput && NowHoldItem)
-            {
-                Debug.Log("Itemを下側に投げました");
-                PE.ItemLost();
-                Vector2 force = new Vector2(0, 10.0f);
-                Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
-                HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
-                NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-                ItemLost();
-                SoundManager SM = SoundManager.Instance;
-                SM.SettingPlaySE5();
+                if(PE.holdFlag && hold.wasPressedThisFrame && !NowHoldItem)
+                {
+                    Debug.Log("Itemを持ち上げました");
+                    NowHoldItem = true;
+                    NowHoldobj = HoldObj;
+                    PE.boxCol.enabled = false;
+                    SoundManager SM = SoundManager.Instance;
+                    SM.SettingPlaySE3();
+                }
+                else if(PE.holdFlag && hold.wasPressedThisFrame && NowHoldItem)
+                {
+                    Debug.Log("Itemを置きました");
+                    PE.boxCol.enabled = true;
+                    NowHoldobj.transform.position = transform.position;
+                    NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
+                    ItemLost();
+                    SoundManager SM = SoundManager.Instance;
+                    SM.SettingPlaySE4();
+                }
+
+                if(Throw_left_right.wasPressedThisFrame && NowHoldItem && originSR.flipX)
+                {
+                    Debug.Log("Itemを左側に投げました");
+                    Vector3 force = new Vector2(10.0f, 0);
+                    Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
+                    HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
+                    NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
+                    PE.ItemLost();
+                    ItemLost();
+                    SoundManager SM = SoundManager.Instance;
+                    SM.SettingPlaySE5();
+                }
+                else if(Throw_left_right.wasPressedThisFrame && NowHoldItem && !originSR.flipX)
+                {
+                    Debug.Log("Itemを右側に投げました");
+                    Vector2 force = new Vector2(10.0f, 0);
+                    Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
+                    HoldItemRB.AddForce(force, ForceMode2D.Impulse);
+                    NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
+                    PE.ItemLost();
+                    ItemLost();
+                    SoundManager SM = SoundManager.Instance;
+                    SM.SettingPlaySE5();
+                }
+                else if(Throw_up.wasPressedThisFrame && NowHoldItem)
+                {
+                    Debug.Log("Itemを上側に投げました");
+                    Vector2 force = new Vector2(0, 10.0f);
+                    Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
+                    HoldItemRB.AddForce(force, ForceMode2D.Impulse);
+                    NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
+                    PE.ItemLost();
+                    ItemLost();
+                    SoundManager SM = SoundManager.Instance;
+                    SM.SettingPlaySE5();
+                }
+                else if(Throw_Down.wasPressedThisFrame && NowHoldItem)
+                {
+                    Debug.Log("Itemを下側に投げました");
+                    Vector2 force = new Vector2(0, 10.0f);
+                    Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
+                    HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
+                    NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
+                    PE.ItemLost();
+                    ItemLost();
+                    SoundManager SM = SoundManager.Instance;
+                    SM.SettingPlaySE5();
+                }
+
+                if(PE.Bow_Hold_Flag && shot.wasPressedThisFrame && NowHoldItem)
+                {
+                    GameManager GM = GameManager.instance;
+                    if(originSR.flipX)
+                    {
+                        PE.bowSC.LeftShot();
+                        GM.Check("arrow");
+                    }
+                    else if(!originSR.flipX)
+                    {
+                        PE.bowSC.RighitShot();
+                        GM.Check("arrow");
+                    }
+                }
+
+                if(ReSet.wasPressedThisFrame && !ReSetFlag)
+                {
+                    ReSetFlag = true;
+                }
+
+                if(Setting.wasPressedThisFrame && !SettingFlag)
+                {
+                    SettingFlag = true;
+                }
+
+                if(current_GP == null)
+                    return;
             }
         }
     }
@@ -249,15 +242,7 @@ public class PlayerController : MonoBehaviour
         HoldObj = null;
         NowHoldItem = false;
     }
-    public void Inputfalse()
-    {
-        HoldInput = false;
-        ThrowInput = false;
-        ThrowUpInput = false;
-        ThrowDownInput = false;
-        ReSetInput = false;
-        SettingInput = false;
-    }
+
     private void GamePad_connection_Check()
     {
         var controllerNames = Input.GetJoystickNames();
@@ -270,9 +255,6 @@ public class PlayerController : MonoBehaviour
         {
             connect = true;
         }
-
-
-
     }
     public void OnMove(InputValue var)
     {
@@ -282,33 +264,6 @@ public class PlayerController : MonoBehaviour
     {
         CameraInputVal = var.Get<Vector2>();
     }
-
-    public void OnHold(InputValue var)
-    {
-        HoldInput = var.isPressed;
-    }
-
-    public void OnThrow(InputValue var)
-    {
-        ThrowInput = var.isPressed;
-    }
-    public void OnThrowUp(InputValue var)
-    {
-        ThrowUpInput = var.isPressed;
-    }
-    public void OnThrowDown(InputValue var)
-    {
-        ThrowDownInput = var.isPressed;
-    }
-    public void OnReSet(InputValue var)
-    {
-        ReSetInput = var.isPressed;
-    }
-    public void OnSetting(InputValue var)
-    {
-        SettingInput = var.isPressed;
-    }
-
     public Vector2 GetMove()
     {
         return move;

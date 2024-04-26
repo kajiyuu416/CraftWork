@@ -21,7 +21,7 @@ public class HitEfect : MonoBehaviour
             hitFlag = true;
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE();
-            Debug.Log("‘ÎÛŠO‚ÌItem‚É“–‚½‚è‚Ü‚µ‚½");
+            //Debug.Log("‘ÎÛŠO‚ÌItem‚É“–‚½‚è‚Ü‚µ‚½");
         }
 
     }

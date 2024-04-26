@@ -91,7 +91,7 @@ public class Physics2DExtentsion : MonoBehaviour
         {
             CharacterDirection = 0;
         }
-        if(PC.NowMove)
+        if(PC.NowMove &&!PlayerController.ReSetFlag && !PlayerController.SettingFlag)
         {
             RaycastHit2D hitObstacle = Physics2D.Raycast(objctacleRayObject.transform.position, Vector2.right * new Vector2(CharacterDirection, 0f), distance, layerMask);
 
