@@ -18,6 +18,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip UISelectSE;
     [SerializeField] AudioClip IgniteSE;
     [SerializeField] AudioClip extinguish_the_fireSE;
+    [SerializeField] AudioClip arrowSE;
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Slider BgmSlinder;
     [SerializeField] Slider SeSlinder;
@@ -171,5 +172,9 @@ public class SoundManager : MonoBehaviour
     public void SettingPlaySE15()
     {
         SelectSeAudioSource.PlayOneShot(extinguish_the_fireSE);
+    }
+    public void SettingPlaySE16()
+    {
+        SelectSeAudioSource.PlayOneShot(arrowSE);
     }
 }

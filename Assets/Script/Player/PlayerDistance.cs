@@ -11,14 +11,10 @@ public class PlayerDistance : MonoBehaviour
         ChangeMusic1 = false;
         ChangeMusic2 = false;
         ChangeMusic3 = false;
-        SoundManager SM = SoundManager.Instance;
-        SM.StopBGM();
-        SM.Startbgm1();
     }
     void Update()
     {
         Change_Music();
-
     }
     private void Change_Music()
     {

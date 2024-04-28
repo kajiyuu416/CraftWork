@@ -4,16 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ladder
-  - Platform
   - Item
-  - FxTemporaire
   - Ice_axe
   - Crumbling_rock
   - TPRunic
   - CheckPoint
   - supplyArea
   - arrow
+  - quiver
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class HitEfect : MonoBehaviour
 {
@@ -21,7 +19,6 @@ public class HitEfect : MonoBehaviour
             hitFlag = true;
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE();
-            //Debug.Log("ëŒè€äOÇÃItemÇ…ìñÇΩÇËÇ‹ÇµÇΩ");
         }
 
     }

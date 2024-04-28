@@ -77,6 +77,7 @@ public class Physics2DExtentsion : MonoBehaviour
         {
             Bow_Hold_Flag = false;
         }
+
     }
     private void Flying_ray()
     {

@@ -12,14 +12,19 @@ public class ShowText : MonoBehaviour
     [SerializeField] TextMeshProUGUI text5;
     [SerializeField] TextMeshProUGUI text6;
     [SerializeField] TextMeshProUGUI text7;
+    [SerializeField] TextMeshProUGUI text8;
+    [SerializeField] TextMeshProUGUI text9;
     [SerializeField] Physics2DExtentsion PE;
     [SerializeField] PlayerController PC;
-
-    private bool callOne;
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(PE.holdFlag &&!PC.NowHoldItem)
+        Expression_Text();
+    }
+
+    private void Expression_Text()
+    {
+        if(PE.holdFlag && !PC.NowHoldItem)
         {
             text1.text = "アイテムを持ち上げる ・・・ B ボタン";
         }
@@ -29,7 +34,7 @@ public class ShowText : MonoBehaviour
             text3.text = "アイテムを下に投げる　・・・ A ボタン";
             text4.text = "アイテムを上に投げる　・・・ Y ボタン";
         }
-        else 
+        else
         {
             text1.text = "";
         }
@@ -84,6 +89,17 @@ public class ShowText : MonoBehaviour
         else if(!PE.Torch_Hold_Flag)
         {
             text7.text = "";
+        }
+
+        if(PE.Bow_Hold_Flag)
+        {
+            text8.text = "残数ゲージ";
+            text9.text = "射撃　・・・ R1 ボタン";
+        }
+        else
+        {
+            text8.text = "";
+            text9.text = "";
         }
 
     }

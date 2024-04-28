@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log("現在のフロアにある矢の本数:"+tagObjcts.Length);
         if(tagObjcts.Length >10)
         {
-            //Debug.Log("フロアにある本数が10本以上の為、削除します");
+            Debug.Log("フロアにある本数が10本以上の為、削除します");
             Destroy(tagObjcts[0]);
         }
 
