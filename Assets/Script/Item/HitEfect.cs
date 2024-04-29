@@ -1,6 +1,4 @@
 using UnityEngine;
-
-
 public class HitEfect : MonoBehaviour
 {
     public GameObject hitEfect;

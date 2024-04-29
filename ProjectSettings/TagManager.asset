@@ -12,6 +12,8 @@ TagManager:
   - supplyArea
   - arrow
   - quiver
+  - FxTemporaire
+  - Bow
   layers:
   - Default
   - TransparentFX

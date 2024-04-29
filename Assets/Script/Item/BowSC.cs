@@ -1,46 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
-
 public class BowSC : MonoBehaviour
 {
     [SerializeField] GameObject arrow;
-    [SerializeField] Physics2DExtentsion PE;
+    public int aroow_Remaining;
+    private Physics2DExtentsion PE;
     private Image arrow_Remaining_image;
     private Image arrow_bar_image;
-    public int aroow_Remaining;
-
     private SpriteRenderer origin_Sprite;
-    public static BowSC Instance
-    {
-        get; private set;
-    }
+    private GameObject[] BowObj;
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         aroow_Remaining = 30;
-        arrow_Remaining_image = GameObject.Find("arrow_Remaining").GetComponent<Image>();
-        arrow_bar_image = GameObject.Find("arrow_bar").GetComponent<Image>();
         origin_Sprite = GetComponent<SpriteRenderer>();
     }
     void Update()
     {
         rotationChange();
         aroow_Remaining_Check();
-
-        if(PE.Bow_Hold_Flag)
-        {
-            arrow_Remaining_image.fillAmount = aroow_Remaining / 30.0f;
-            arrow_Remaining_image.enabled = true;
-            arrow_bar_image.enabled = true;
-        }
-        else
-        {
-           arrow_Remaining_image.enabled = false;
-           arrow_bar_image.enabled = false;
-        }
-
-
+        Check("Bow");
     }
-
     private void rotationChange()
     {
         Transform origin_transform = this.transform;
@@ -74,6 +54,32 @@ public class BowSC : MonoBehaviour
             Debug.Log("écêîÇ™Ç»Ç¢ÇΩÇﬂÅAî≠éÀÇ≈Ç´Ç‹ÇπÇÒ");
         }
 
+        if(PlayerController.SelectReSet)
+        {
+            transform.position = PlayerController.CP;
+            aroow_Remaining = 30;
+        }
+
+        if(PE == null)
+        {
+            PE = GameObject.Find("Player").GetComponent<Physics2DExtentsion>();
+            arrow_Remaining_image = GameObject.Find("arrow_Remaining").GetComponent<Image>();
+            arrow_bar_image = GameObject.Find("arrow_bar").GetComponent<Image>();
+        }
+
+        if(PE.Bow_Hold_Flag)
+        {
+            arrow_Remaining_image.fillAmount = aroow_Remaining / 30.0f;
+            arrow_Remaining_image.enabled = true;
+            arrow_bar_image.enabled = true;
+        }
+        else
+        {
+            arrow_Remaining_image.enabled = false;
+            arrow_bar_image.enabled = false;
+        }
+
+
     }
     public void RighitShot()
     {
@@ -101,9 +107,17 @@ public class BowSC : MonoBehaviour
             SM.SettingPlaySE16();
         }
     }
+    private void Check(string tagname)
+    {
+        BowObj = GameObject.FindGameObjectsWithTag(tagname);
+        if(BowObj.Length > 1)
+        {
+            Destroy(BowObj[0]);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("quiver"))
+        if(collision.CompareTag("quiver") && aroow_Remaining < 30)
         {
             Destroy(collision.gameObject);
             aroow_Remaining = aroow_Remaining +10;

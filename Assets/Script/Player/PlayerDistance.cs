@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class PlayerDistance : MonoBehaviour
 {
     private bool ChangeMusic1;

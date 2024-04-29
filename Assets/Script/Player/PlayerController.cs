@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         get; private set;
     }
+
     private bool connect;
     private float side = 1f;
     private Rigidbody2D rigid;
