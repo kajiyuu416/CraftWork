@@ -14,6 +14,7 @@ TagManager:
   - quiver
   - FxTemporaire
   - Bow
+  - Enemy
   layers:
   - Default
   - TransparentFX
