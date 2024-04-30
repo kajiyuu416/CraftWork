@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class arrowSC : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private void OnTriggerEnter2D(Collider2D collision)
+    public EdgeCollider2D EdgeCol;
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.CompareTag("Enemy"))
+        if(collision.gameObject.tag == ("Enemy"))
         {
             Destroy(gameObject);
         }

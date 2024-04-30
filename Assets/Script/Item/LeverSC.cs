@@ -17,22 +17,55 @@ public class LeverSC : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player")&& LeverOff)
+        if(selectNumber == SelectNum.one || selectNumber == SelectNum.two)
         {
-            Lever_On();
-        }
-        else if(collision.CompareTag("Player")&& LeverOn)
-        {
-            Lever_Off();
-        }
+            if(collision.CompareTag("Player") && LeverOff)
+            {
+                Lever_On();
+            }
+            else if(collision.CompareTag("Player") && LeverOn)
+            {
+                Lever_Off();
+            }
 
-        if(collision.CompareTag("arrow") && LeverOff)
-        {
-            Lever_On();
+            if(collision.CompareTag("arrow") && LeverOff)
+            {
+                Lever_On();
+            }
+            else if(collision.CompareTag("arrow") && LeverOn)
+            {
+                Lever_Off();
+            }
         }
-        else if(collision.CompareTag("arrow") && LeverOn)
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(selectNumber == SelectNum.tree)
         {
-            Lever_Off();
+            if(collision.CompareTag("Player") && LeverOff)
+            {
+                Lever_On();
+            }
+
+            if(collision.CompareTag("arrow") && LeverOff)
+            {
+                Lever_On();
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(selectNumber == SelectNum.tree)
+        {
+            if(collision.CompareTag("Player") && LeverOn)
+            {
+                Lever_Off();
+            }
+
+            if(collision.CompareTag("arrow") && LeverOn)
+            {
+                Lever_Off();
+            }
         }
     }
     private void Update()
@@ -41,7 +74,7 @@ public class LeverSC : MonoBehaviour
     }
     private void obj_migration()
     {
-        if(selectNumber == SelectNum.one)
+        if(selectNumber == SelectNum.one || selectNumber == SelectNum.tree)
         {
             if(LeverOn)
             {
