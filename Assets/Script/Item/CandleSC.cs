@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CandleSC : Charade
 {
-    bool collOne;
+    private bool ChangeTag;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Item"))
@@ -13,7 +13,7 @@ public class CandleSC : Charade
             if(targetObjSprite == hitObjSprite && !HitFlag)
             {
                 HitFlag = true;
-                collOne = true;
+                ChangeTag = true;
                 GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(-90f, 0f, 0f));
                 SetTag("supplyArea");
             }
@@ -25,9 +25,9 @@ public class CandleSC : Charade
     }
     private void Update()
     {
-        if(HitFlag&&!collOne)
+        if(HitFlag&&!ChangeTag)
         {
-            collOne = true;
+            ChangeTag = true;
             GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(-90f, 0f, 0f));
             SetTag("supplyArea");
         }

@@ -895,9 +895,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7528463563904151038, guid: db0b170590c17a946974e4edca7ae860,
         type: 3}
+      propertyPath: BomSE
+      value: 
+      objectReference: {fileID: 8300000, guid: ab0fb7d002f560d44924af28df65b320, type: 3}
+    - target: {fileID: 7528463563904151038, guid: db0b170590c17a946974e4edca7ae860,
+        type: 3}
       propertyPath: arrowSE
       value: 
       objectReference: {fileID: 8300000, guid: d5c3c2097d97f9341bb98cc5b1945c74, type: 3}
+    - target: {fileID: 7528463563904151038, guid: db0b170590c17a946974e4edca7ae860,
+        type: 3}
+      propertyPath: Ignite1SE
+      value: 
+      objectReference: {fileID: 8300000, guid: a9a57093eebff0948829a483bc557c8a, type: 3}
+    - target: {fileID: 7528463563904151038, guid: db0b170590c17a946974e4edca7ae860,
+        type: 3}
+      propertyPath: Ignite2SE
+      value: 
+      objectReference: {fileID: 8300000, guid: 87c4920bef7015c4c9810a6c195b95bd, type: 3}
     - target: {fileID: 7528463563904151039, guid: db0b170590c17a946974e4edca7ae860,
         type: 3}
       propertyPath: m_Name
@@ -2137,6 +2152,12 @@ PrefabInstance:
       propertyPath: boxCol
       value: 
       objectReference: {fileID: 535898715}
+    - target: {fileID: 2008313519605151709, guid: d0284775b5b280b499af7dd4b023027f,
+        type: 3}
+      propertyPath: BowSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8f908a0041a1aee4c8b02d9449ebd224,
+        type: 3}
     - target: {fileID: 2008313519605151709, guid: d0284775b5b280b499af7dd4b023027f,
         type: 3}
       propertyPath: HoldtoObj

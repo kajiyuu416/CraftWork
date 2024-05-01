@@ -8,7 +8,7 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] SpriteRenderer SpriteRenderer;
     [SerializeField] float migration_width;
     [SerializeField] float moveSpeed;
-    [SerializeField] int ememy_HitPoint;
+    public int ememy_HitPoint;
     private Color red;
     private Color bleu;
     private Color green;
@@ -35,20 +35,16 @@ public class EnemyMove : MonoBehaviour
         SelectMove();
     }
 
-    //プレイヤー接触時処理
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Player"))
-        {
-            GameManager.GameReset();
-        }
-    }
-    //弓矢接触時処理
+    //弓矢接触時処理,プレイヤー接触時処理
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == ("arrow"))
         {
             ememy_HitPoint = ememy_HitPoint - 1;
+        }
+        if(collision.gameObject.tag == ("Player"))
+        {
+            GameManager.GameReset();
         }
     }
     //エネミーの体力に応じての処理
@@ -82,6 +78,7 @@ public class EnemyMove : MonoBehaviour
         Instantiate(deathEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
+
 
     //インスペクターで指定したselectNumberの動作を実行
     private void SelectMove()

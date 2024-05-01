@@ -72,7 +72,6 @@ public class TorchSC : MonoBehaviour
         if(collision.CompareTag("supplyArea"))
         {
             ignition();
-         
         }
     }
 
