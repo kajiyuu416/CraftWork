@@ -17,6 +17,7 @@ TagManager:
   - Enemy
   - Bom
   - bedrock
+  - Door
   layers:
   - Default
   - TransparentFX

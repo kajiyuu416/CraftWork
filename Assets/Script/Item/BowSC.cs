@@ -9,6 +9,7 @@ public class BowSC : MonoBehaviour
     private Image arrow_bar_image;
     private SpriteRenderer origin_Sprite;
     private GameObject[] BowObj;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
