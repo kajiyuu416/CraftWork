@@ -7,7 +7,7 @@ public class headDamage : MonoBehaviour
         if(collision.gameObject.tag == ("arrow"))
         {
             be.Enemy_Damage2();
-            be.ememy_HitPoint = be.ememy_HitPoint - 10;
+            be.ememy_HitPoint = be.ememy_HitPoint - 6;
             Debug.Log("head");
         }
     }

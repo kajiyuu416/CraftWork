@@ -79,8 +79,7 @@ public class BomSC : MonoBehaviour
         if(ignitionFlag)
         {
             countdownSecond -= Time.deltaTime;
-            boxCol2.enabled = false;
-            
+            boxCol2.enabled = false;   
         }
     }
 }
