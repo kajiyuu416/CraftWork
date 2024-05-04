@@ -94,55 +94,59 @@ public class BossEnemySC : MonoBehaviour
     //10秒毎にランダムで特定のアクションを実施
     private void RandomAction()
     {
-        int rnd = Random.Range(5, 7);
+        int rnd = Random.Range(1, 6);
         var sumons_pos1 = transform.position + new Vector3(3, 0, 0);
         var sumons_pos2 = transform.position + new Vector3(-3, 0, 0);
         var sumons_pos3 = transform.position + new Vector3(0, 3, 0);
         var sumons_pos4 = transform.position + new Vector3(0, -3, 0);
-        var speed = 10;
         var sumons_pos = transform.rotation;
         sumons_pos = Quaternion.Euler(90, 0, 0);
 
-        if(rnd == 1 || rnd == 2 && First_form)
+        if(rnd == 1)
         {
-            Crouch();
-            Instantiate(summon_Obj1, sumons_pos1, sumons_pos);
-            Instantiate(summon_Obj1, sumons_pos2, sumons_pos);
+            if(First_form)
+            {
+                Crouch();
+                Instantiate(summon_Obj1, sumons_pos1, sumons_pos);
+                Instantiate(summon_Obj1, sumons_pos2, sumons_pos);
+                Debug.Log("aaa");
+            }
+            else if(Second_form || Thirdd_form)
+            {
+                Crouch();
+                Instantiate(summon_Obj1, sumons_pos1, sumons_pos);
+                Instantiate(summon_Obj2, sumons_pos2, sumons_pos);
+                Instantiate(summon_Obj1, sumons_pos3, sumons_pos);
+                Instantiate(summon_Obj2, sumons_pos4, sumons_pos);
+                Debug.Log("bbb");
+            }
         }
-        else if(rnd == 1 || rnd == 2 && Second_form || Thirdd_form)
+        else if(rnd == 2)
         {
-            Crouch();
-            Instantiate(summon_Obj1, sumons_pos1, sumons_pos);
-            Instantiate(summon_Obj2, sumons_pos2, sumons_pos);
-            Instantiate(summon_Obj1, sumons_pos3, sumons_pos);
-            Instantiate(summon_Obj2, sumons_pos4, sumons_pos);
-        }
+            if(First_form)
+            {
+                Crouch();
+                Instantiate(summon_Obj2, sumons_pos3, sumons_pos);
+                Instantiate(summon_Obj2, sumons_pos4, sumons_pos);
+                Debug.Log("ccc");
+            }
+            else if(Second_form || Thirdd_form)
+            {
+                Crouch();
+                Instantiate(summon_Obj2, sumons_pos1, sumons_pos);
+                Instantiate(summon_Obj1, sumons_pos2, sumons_pos);
+                Instantiate(summon_Obj2, sumons_pos3, sumons_pos);
+                Instantiate(summon_Obj1, sumons_pos4, sumons_pos);
+                Debug.Log("ddd");
+            }
 
-        if(rnd == 3 || rnd == 4)
-        {
-            Crouch();
-            Instantiate(summon_Obj2, sumons_pos3, sumons_pos);
-            Instantiate(summon_Obj2, sumons_pos4, sumons_pos);
         }
-        else if(rnd == 3 || rnd == 4 && Second_form || Thirdd_form)
+        else if(rnd == 3 || rnd == 4)
         {
-            Crouch();
-            Instantiate(summon_Obj2, sumons_pos1, sumons_pos);
-            Instantiate(summon_Obj1, sumons_pos2, sumons_pos);
-            Instantiate(summon_Obj2, sumons_pos3, sumons_pos);
-            Instantiate(summon_Obj1, sumons_pos4, sumons_pos);
+            throw_Bom();
+            Debug.Log("eee");
         }
-
-        if(rnd == 5 || rnd == 6)
-        {
-            ActionCount = 10.0f;
-            Debug.Log("アクション3を行います");
-            Vector3 force = new Vector2(100,0);
-            Instantiate(summon_Obj3,transform.position,transform.rotation);
-            //Vector2.MoveTowards(transform.position, new Vector2(Player.transform.position.x, Player.transform.position.y), speed * Time.deltaTime);
-        }
-
-        if(rnd == 7)
+        else if(rnd == 5)
         {
             ActionCount = 10.0f;
             Debug.Log("アクション4を行います");
@@ -192,7 +196,7 @@ public class BossEnemySC : MonoBehaviour
         animator.SetFloat("Speed",transform.position.magnitude);
     }
 
-    public void Enemy_Damage1()
+public void Enemy_Damage1()
     {
         Instantiate(damageEffect1, transform.position, transform.rotation);
     }
@@ -202,21 +206,31 @@ public class BossEnemySC : MonoBehaviour
     }
     public void Enemy_Destroy()
     {
+        var sumons_pos = transform.rotation;
+        sumons_pos = Quaternion.Euler(-90, 0, 0);
         Combat_state = false;
-        Instantiate(deathEffect, transform.position, transform.rotation);
+        Instantiate(deathEffect, transform.position,sumons_pos);
         Destroy(gameObject);
     }
     private void Crouch()
     {
         is_crouch = true;
         NonAction = true;
-        Invoke("stand_up", 3.0f);
+        Invoke("Stand_up", 3.0f);
         animator.SetTrigger("Crouch");
     }
-    private void stand_up()
+    private void Stand_up()
     {
         is_crouch = false;
         NonAction = false;
+        ActionCount = 10.0f;
+    }
+    private void throw_Bom()
+    {
+        var Bom = Instantiate(summon_Obj3);
+        Bom.transform.position = transform.position;
+        Vector2 vec = Player.transform.position - transform.position;
+        Bom.GetComponent<Rigidbody2D>().velocity = vec * 2.0f;
         ActionCount = 10.0f;
     }
 }

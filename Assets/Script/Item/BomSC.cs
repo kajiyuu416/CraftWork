@@ -9,14 +9,18 @@ public class BomSC : MonoBehaviour
     [SerializeField] BoxCollider2D boxCol1;
     [SerializeField] BoxCollider2D boxCol2;
     [SerializeField] CapsuleCollider2D capsuleCol;
-    [SerializeField] Rigidbody2D rigid;
     [SerializeField] float countdownSecond = 5;
-    private bool ignitionFlag;
+    public bool ignitionFlag;
+    public bool First_ignitionFlag;
     private void FixedUpdate()
     {
         Ignition();
 
-        if(countdownSecond < 0)
+        if(countdownSecond <= 4.8f)
+        {
+            gameObject.layer = 3;
+        }
+        if(countdownSecond <= 0.0f)
         {
             Explosion();
         }
@@ -42,7 +46,7 @@ public class BomSC : MonoBehaviour
         if(!ignitionFlag)
         {
             Instantiate(ignitionEffect, transform.position, transform.rotation);
-            StartCoroutine(explosion_Count());
+            First_ignitionFlag = true;
             ignitionFlag = true;
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE17();
@@ -79,7 +83,13 @@ public class BomSC : MonoBehaviour
         if(ignitionFlag)
         {
             countdownSecond -= Time.deltaTime;
-            boxCol2.enabled = false;   
+            boxCol2.enabled = false;
+            if(First_ignitionFlag)
+            {
+               First_ignitionFlag = false;
+               StartCoroutine(explosion_Count());
+            }
         }
+
     }
 }
