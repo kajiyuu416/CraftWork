@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
 public class ShowText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI text1;
@@ -16,12 +13,12 @@ public class ShowText : MonoBehaviour
     [SerializeField] TextMeshProUGUI text9;
     [SerializeField] Physics2DExtentsion PE;
     [SerializeField] PlayerController PC;
-    // Update is called once per frame
+
+    //フラグに応じてテキスト表示
     private void Update()
     {
         Expression_Text();
     }
-
     private void Expression_Text()
     {
         if(PE.holdFlag && !PC.NowHoldItem)

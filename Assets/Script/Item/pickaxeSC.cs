@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-
 public class pickaxeSC : MonoBehaviour
 {
     public int Use_Pickaxe_Count = 5;
@@ -25,6 +24,22 @@ public class pickaxeSC : MonoBehaviour
     }
 
     private void Update()
+    {
+        Use_Pickaxe();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Crumbling_rock"))
+        {
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+    }
+    public void addCount()
+    {
+        Use_Pickaxe_Count--;
+    }
+    //Pickaxeが使用されるごとにカウントを減少させる
+    public void Use_Pickaxe()
     {
         if(Use_Pickaxe_Count == 0)
         {
@@ -70,18 +85,5 @@ public class pickaxeSC : MonoBehaviour
             Destroy(gameObject);
             Pc.ItemLost();
         }
-
-    }
-    //Todo;; オブジェクトの当たり判定を対象のオブジェクトと接触してから一定時間判定を消し、カウントのダブルカウントを防ぐ
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Crumbling_rock"))
-        {
-            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
-        }
-    }
-    public void addCount()
-    {
-        Use_Pickaxe_Count--;
     }
 }

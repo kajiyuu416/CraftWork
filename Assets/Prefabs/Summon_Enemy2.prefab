@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathEffect: {fileID: 100006, guid: 2a474af3f4c27be4e9bdce39cfe4315d, type: 3}
   damageEffect: {fileID: 100004, guid: fb7b0526ade434043b350a180d741cf3, type: 3}
+  DropItem: {fileID: 93891954340972641, guid: de8be092bc150d443a14ac9b9f695295, type: 3}
   SpriteRenderer: {fileID: 1597606303830622960}
   migration_width: 3
   moveSpeed: 2

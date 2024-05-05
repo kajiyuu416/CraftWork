@@ -9,11 +9,8 @@ public class SwitchGimmick : MonoBehaviour
     [SerializeField] BoxCollider2D targetBoxCol3;
     public bool SGFlag;
 
-    private void Awake()
-    {
-        
-    }
-    void Update()
+    //インスペクターで指定したレバーのON、OFFをチェック
+    private void Update()
     {
         if(lever1SC.LeverOn&&lever2SC.LeverOff &&lever3SC.LeverOn && !SGFlag)
         {
@@ -28,7 +25,6 @@ public class SwitchGimmick : MonoBehaviour
             Invoke("SoundUnpause", 4.0f);
         }
     }
-
     public void SoundUnpause()
     {
         SoundManager SM = SoundManager.Instance;

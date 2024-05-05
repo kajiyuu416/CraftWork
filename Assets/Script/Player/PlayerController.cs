@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         GamePad_connection_Check();
         PlayerHoldItem();
     }
+    //Playerの動き制御、アイテム保持の有無をチェック
     private void PlayerMove()
     {
         if(moveInputVal.x < 0 || moveInputVal.y < 0)
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
         {
             NowMove = false;
         }
-
+        //Reset画面、BGM、SEセッティング画面ではプレイヤーの移動を制御
         if(ReSetFlag || SettingFlag)
         {
             rigid.constraints = RigidbodyConstraints2D.FreezePosition;
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
            if(Mathf.Abs(lookat.x) > 0.02)
            side = Mathf.Sign(lookat.x);
            side = Mathf.Sign(lookat.x);
-
+        //保持しているアイテムをPlayerの座標へ移動、スケール、向きの変更
         if(HoldObj == PE.HoldtoObj)
         {
             if(NowHoldItem)
@@ -115,6 +116,7 @@ public class PlayerController : MonoBehaviour
         }
         HoldObj = PE.HoldtoObj;
     }
+    //Playerがアイテム保持のアクション制御
     private void PlayerHoldItem()
     {
         if(!ReSetFlag && !SettingFlag)
@@ -130,18 +132,18 @@ public class PlayerController : MonoBehaviour
                 var ReSet = current_GP.selectButton;
                 var Setting = current_GP.startButton;
 
+                //アイテムを持ち上げる
                 if(PE.holdFlag && hold.wasPressedThisFrame && !NowHoldItem)
                 {
-                    Debug.Log("Itemを持ち上げました");
                     NowHoldItem = true;
                     NowHoldobj = HoldObj;
                     PE.boxCol.enabled = false;
                     SoundManager SM = SoundManager.Instance;
                     SM.SettingPlaySE3();
                 }
+                //アイテムを下す
                 else if(PE.holdFlag && hold.wasPressedThisFrame && NowHoldItem)
                 {
-                    Debug.Log("Itemを置きました");
                     PE.boxCol.enabled = true;
                     NowHoldobj.transform.position = transform.position;
                     NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
@@ -149,10 +151,9 @@ public class PlayerController : MonoBehaviour
                     SoundManager SM = SoundManager.Instance;
                     SM.SettingPlaySE4();
                 }
-
+                //アイテムを左側に投げる
                 if(Throw_left_right.wasPressedThisFrame && NowHoldItem && originSR.flipX)
                 {
-                    Debug.Log("Itemを左側に投げました");
                     Vector3 force = new Vector2(10.0f, 0);
                     Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                     HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
@@ -162,9 +163,9 @@ public class PlayerController : MonoBehaviour
                     SoundManager SM = SoundManager.Instance;
                     SM.SettingPlaySE5();
                 }
+                //アイテムを右側に投げる
                 else if(Throw_left_right.wasPressedThisFrame && NowHoldItem && !originSR.flipX)
                 {
-                    Debug.Log("Itemを右側に投げました");
                     Vector2 force = new Vector2(10.0f, 0);
                     Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                     HoldItemRB.AddForce(force, ForceMode2D.Impulse);
@@ -174,9 +175,9 @@ public class PlayerController : MonoBehaviour
                     SoundManager SM = SoundManager.Instance;
                     SM.SettingPlaySE5();
                 }
+                //アイテムを上側に投げる
                 else if(Throw_up.wasPressedThisFrame && NowHoldItem)
                 {
-                    Debug.Log("Itemを上側に投げました");
                     Vector2 force = new Vector2(0, 10.0f);
                     Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                     HoldItemRB.AddForce(force, ForceMode2D.Impulse);
@@ -186,9 +187,9 @@ public class PlayerController : MonoBehaviour
                     SoundManager SM = SoundManager.Instance;
                     SM.SettingPlaySE5();
                 }
+                //アイテムを下側に投げる
                 else if(Throw_Down.wasPressedThisFrame && NowHoldItem)
                 {
-                    Debug.Log("Itemを下側に投げました");
                     Vector2 force = new Vector2(0, 10.0f);
                     Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                     HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
@@ -198,7 +199,7 @@ public class PlayerController : MonoBehaviour
                     SoundManager SM = SoundManager.Instance;
                     SM.SettingPlaySE5();
                 }
-
+                //弓を所持している場合射撃ができる処理
                 if(PE.Bow_Hold_Flag && shot.wasPressedThisFrame && NowHoldItem)
                 {
                     GameManager GM = GameManager.instance;
@@ -213,12 +214,10 @@ public class PlayerController : MonoBehaviour
                         GM.Check("arrow");
                     }
                 }
-
                 if(ReSet.wasPressedThisFrame && !ReSetFlag)
                 {
                     ReSetFlag = true;
                 }
-
                 if(Setting.wasPressedThisFrame && !SettingFlag)
                 {
                     SettingFlag = true;
@@ -229,21 +228,22 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    //チェックポイント通過時の更新処理
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("CheckPoint"))
         {
             CP = transform.position;
-            Debug.Log(CP);
         }
     }
+    //Playerがアイテムを投げる又は置いた時、取得した情報のリセット
     public void ItemLost()
     {
         NowHoldobj = null;
         HoldObj = null;
         NowHoldItem = false;
     }
-
+    //コントローラーが接続されているがのチェック
     private void GamePad_connection_Check()
     {
         var controllerNames = Input.GetJoystickNames();

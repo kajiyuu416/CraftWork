@@ -31,11 +31,12 @@ public class Physics2DExtentsion : MonoBehaviour
     {
         CharacterDirection = 0f;
     }
-     void Update()
+    private void Update()
     {
         ItemHold();
         Flying_ray();
     }
+    //Playerがアイテムを投げる又は置いた時、取得した情報のリセット
     public void ItemLost()
     {
         boxCol.enabled = true;
@@ -43,6 +44,7 @@ public class Physics2DExtentsion : MonoBehaviour
         HoldtoObj = null;
         ItemSprite = null;
     }
+    //Playerが特定のアイテムを保持しているかチェックし、該当の場合フラグを返す処理
     private void ItemHold()
     {
         if(holdFlag)
@@ -79,6 +81,7 @@ public class Physics2DExtentsion : MonoBehaviour
         }
 
     }
+    //Playerが移動したときRayを飛ばしRayがアイテムと重なっていた場合、該当アイテムの情報を取得し保持できる状態にする処理
     private void Flying_ray()
     {
         if(MI.x < 0)

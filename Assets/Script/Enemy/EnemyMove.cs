@@ -6,6 +6,7 @@ public class EnemyMove : MonoBehaviour
 {
     [SerializeField] GameObject deathEffect;
     [SerializeField] GameObject damageEffect;
+    [SerializeField] GameObject DropItem;
     [SerializeField] SpriteRenderer SpriteRenderer;
     [SerializeField] float migration_width;
     [SerializeField] float moveSpeed;
@@ -76,6 +77,11 @@ public class EnemyMove : MonoBehaviour
         {
             Enemy_Destroy();
         }
+
+        if(BossEnemySC.BossEnemyDeath)
+        {
+            Enemy_Destroy();
+        }
     }
     private void Enemy_Color()
     {
@@ -89,8 +95,14 @@ public class EnemyMove : MonoBehaviour
     }
     private void Enemy_Destroy()
     {
+        int rnd = Random.Range(1, 9);
+        if(rnd == 8)
+        {
+            Instantiate(DropItem, transform.position, transform.rotation);
+        }
         Instantiate(deathEffect, transform.position, transform.rotation);
         Destroy(gameObject);
+
     }
 
 

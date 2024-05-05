@@ -16,7 +16,6 @@ public class TorchSC : MonoBehaviour
     {
         get; private set;
     }
-    // Start is called before the first frame update
     private void Awake()
     {
         if(Instance != null)
@@ -30,25 +29,11 @@ public class TorchSC : MonoBehaviour
         Origin_Sprite = GetComponent<SpriteRenderer>();
         Origin_Sprite.sprite = torch_Off_Sprite;
     }
-
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        countdownSecond -= Time.deltaTime;
-        var span = new TimeSpan(0, 0, (int) countdownSecond);
-
-        if(countdownSecond <= 20.0f &&!torch_off)
-        { 
-            torch_off = true;
-            burnFlag = false;
-            StartCoroutine(Torch_light_lose());
-        }
-
-        if(countdownSecond <= 0)
-        {
-            countdownSecond = 0;
-        }
-       
+        CountDown();
     }
+    //Playerが特定の座標にいる場合トーチをPlayerの座標に移動させる処理
     private void Update()
     {
         if(PlayerController.SelectReSet)
@@ -62,11 +47,11 @@ public class TorchSC : MonoBehaviour
             DestroyFlag = true;
             PlayerController Pc = PlayerController.Instance;
             Pc.ItemLost();
-            Debug.Log("torch_Destroy");
             Destroy(gameObject);
         }
 
     }
+    //特定のエリアに当たると強さが一定の値まで上がる処理、トーチのライトの強さが徐々に小さくなる処理
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("supplyArea"))
@@ -74,7 +59,6 @@ public class TorchSC : MonoBehaviour
             ignition();
         }
     }
-
     public IEnumerator Torch_light_lose()
     {
         var min_range = 0;
@@ -107,6 +91,23 @@ public class TorchSC : MonoBehaviour
         Origin_Sprite.sprite = torch_On_Sprite;
         SoundManager SM = SoundManager.Instance;
         SM.SettingPlaySE14();
-
     }
+    private void CountDown()
+    {
+        countdownSecond -= Time.deltaTime;
+        var span = new TimeSpan(0, 0, (int) countdownSecond);
+
+        if(countdownSecond <= 20.0f && !torch_off)
+        {
+            torch_off = true;
+            burnFlag = false;
+            StartCoroutine(Torch_light_lose());
+        }
+
+        if(countdownSecond <= 0)
+        {
+            countdownSecond = 0;
+        }
+    }
+
 }

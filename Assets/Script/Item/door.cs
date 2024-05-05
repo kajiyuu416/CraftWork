@@ -31,7 +31,6 @@ public class door : Charade
                 SM.SettingPlaySE6();
                 SM.SettingPlaySE7();
                 Invoke("SoundUnpause", 5.0f);
-                Debug.Log("‘ÎÛ‚ÌItem‚ÆÚG‚µ‚Ü‚µ‚½");
             }
 
         }

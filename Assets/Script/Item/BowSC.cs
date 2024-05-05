@@ -22,6 +22,7 @@ public class BowSC : MonoBehaviour
         aroow_Remaining_Check();
         Check("Bow");
     }
+    //Playe‚ÌŒü‚«‚É‰‚¶‚Ä‹|‚ÌŠp“xAŒü‚«‚ğ•ÏX
     private void rotationChange()
     {
         Transform origin_transform = this.transform;
@@ -38,6 +39,7 @@ public class BowSC : MonoBehaviour
             origin_transform.localEulerAngles = localAngle;
         }
     }
+    //‹|‚Ìc”ŠÇ—‚Ìˆ—
     private void aroow_Remaining_Check()
     {
         if(aroow_Remaining > 30)
@@ -48,11 +50,6 @@ public class BowSC : MonoBehaviour
         if(aroow_Remaining < 0)
         {
             aroow_Remaining = 0;
-        }
-
-        if(aroow_Remaining == 0)
-        {
-            Debug.Log("c”‚ª‚È‚¢‚½‚ßA”­Ë‚Å‚«‚Ü‚¹‚ñ");
         }
 
         if(PlayerController.SelectReSet)
@@ -82,6 +79,7 @@ public class BowSC : MonoBehaviour
 
 
     }
+    //”­Ëˆ—
     public void RighitShot()
     {
         if(aroow_Remaining > 0)
@@ -108,6 +106,7 @@ public class BowSC : MonoBehaviour
             SM.SettingPlaySE16();
         }
     }
+    //ƒtƒƒA‚É‹|–î‚Ì”‚ª10–{ˆÈã‚É‚È‚é‚ÆÅ‰‚Ì‹|–î‚ğíœ‚·‚éˆ—(ˆ—•‰‰×ŒyŒ¸‚Ì‚½‚ß)
     private void Check(string tagname)
     {
         BowObj = GameObject.FindGameObjectsWithTag(tagname);
@@ -116,6 +115,7 @@ public class BowSC : MonoBehaviour
             Destroy(BowObj[0]);
         }
     }
+    //‹|–î•â[ˆ—
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("quiver") && aroow_Remaining < 30)

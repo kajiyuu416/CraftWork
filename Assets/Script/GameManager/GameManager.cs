@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject ReSetButton;
@@ -20,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     private bool ReSetUIexpression;
     private bool SettingUIexpression;
+    public bool GameClearFlag;
     private string beforeScene;
     Image blackScreen;
     public static GameManager instance
@@ -49,6 +49,11 @@ public class GameManager : MonoBehaviour
     {
         SettingGame();
     }
+    private void FixedUpdate()
+    {
+        GameClear();
+    }
+    //リセット又はBGM、SEセッティングUI表示
     private void SettingGame()
     {
         if(PlayerController.ReSetFlag && ReSetUIexpression && !PlayerController.SettingFlag)
@@ -82,10 +87,10 @@ public class GameManager : MonoBehaviour
             AudioUIobj.SetActive(false);
         }
     }
+    //フロアに弓矢の数が10本以上になると最初の弓矢を削除する処理(処理負荷軽減のため)
     public void Check(string tagname)
     {
         tagObjcts = GameObject.FindGameObjectsWithTag(tagname);
-        //Debug.Log("現在のフロアにある矢の本数:"+tagObjcts.Length);
         if(tagObjcts.Length >10)
         {
             Debug.Log("フロアにある本数が10本以上の為、削除します");
@@ -93,6 +98,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
     public static void GameReset()
     {
         Scene loadScene = SceneManager.GetActiveScene();
@@ -101,6 +107,14 @@ public class GameManager : MonoBehaviour
         PlayerController PC = PlayerController.Instance;
         PC.ItemLost();
         instance.SelectCl();
+    }
+    private void GameClear()
+    {
+        if(BossEnemySC.BossEnemyDeath && !GameClearFlag)
+        {
+            GameClearFlag = true;
+            instance.StartCoroutine(instance.LoadScene("MainScene"));
+        }
     }
     public static void SettingAudio()
     {
@@ -137,7 +151,7 @@ public class GameManager : MonoBehaviour
         var color = blackScreen.color;
         while(color.a <= 1)
         {
-            color += new Color(0, 0, 0, 0.05f);
+            color += new Color(0, 0, 0, 0.01f);
             blackScreen.color = color;
 
             yield return null;
@@ -196,8 +210,6 @@ public class GameManager : MonoBehaviour
             SM.StopBGM();
             StartCoroutine(FadeIn());
         }
-
-        //遷移後のシーン名を「１つ前のシーン名」として保持
         beforeScene = nextScene.name;
     }
 }

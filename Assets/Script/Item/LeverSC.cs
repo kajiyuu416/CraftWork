@@ -15,6 +15,8 @@ public class LeverSC : MonoBehaviour
     {
         originSprite = GetComponent<SpriteRenderer>();
     }
+
+    //インスペクターでナンバーを決めナンバーのよって動作が変更する
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(selectNumber == SelectNum.one || selectNumber == SelectNum.two)

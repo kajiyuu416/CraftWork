@@ -1,10 +1,9 @@
 using UnityEngine;
-
 public class movedoor : MonoBehaviour
 {
     public Vector3 targetPos;
     [SerializeField] Charade charade;
-    void Update()
+    private void Update()
     {
         if(charade.HitFlag)
         {

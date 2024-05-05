@@ -21,6 +21,10 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip extinguish_the_fireSE;
     [SerializeField] AudioClip arrowSE;
     [SerializeField] AudioClip BomSE;
+    [SerializeField] AudioClip SummonSE;
+    [SerializeField] AudioClip GravitySE;
+    [SerializeField] AudioClip crushingSE;
+
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Slider BgmSlinder;
     [SerializeField] Slider SeSlinder;
@@ -29,6 +33,7 @@ public class SoundManager : MonoBehaviour
     AudioSource bgm2AudioSource;
     AudioSource bgm3AudioSource;
     AudioSource bgm4AudioSource;
+    AudioSource bgm5AudioSource;
     AudioSource SelectSeAudioSource;
 
     GameObject bgmObj;
@@ -58,6 +63,7 @@ public class SoundManager : MonoBehaviour
         bgm2AudioSource = bgmObj.transform.GetChild(1).gameObject.GetComponent<AudioSource>();
         bgm3AudioSource = bgmObj.transform.GetChild(2).gameObject.GetComponent<AudioSource>();
         bgm4AudioSource = bgmObj.transform.GetChild(3).gameObject.GetComponent<AudioSource>();
+        bgm5AudioSource = bgmObj.transform.GetChild(4).gameObject.GetComponent<AudioSource>();
         SelectSeAudioSource = SeObj.transform.GetChild(0).gameObject.GetComponent<AudioSource>();
 
         SetBGMVolume(BgmSlinder.value);
@@ -80,6 +86,7 @@ public class SoundManager : MonoBehaviour
         bgm2AudioSource.Stop();
         bgm3AudioSource.Stop();
         bgm4AudioSource.Stop();
+        bgm5AudioSource.Stop();
     }
     public void SoundPause()
     {
@@ -87,6 +94,8 @@ public class SoundManager : MonoBehaviour
         bgm2AudioSource.Pause();
         bgm3AudioSource.Pause();
         bgm4AudioSource.Pause();
+        bgm5AudioSource.Pause();
+
     }
     public void SoundUnPause()
     {
@@ -94,6 +103,7 @@ public class SoundManager : MonoBehaviour
         bgm2AudioSource.UnPause();
         bgm3AudioSource.UnPause();
         bgm4AudioSource.UnPause();
+        bgm5AudioSource.UnPause();
     }
     public void StopSE()
     {
@@ -114,6 +124,10 @@ public class SoundManager : MonoBehaviour
     public void Startbgm4()
     {
         bgm4AudioSource.Play();
+    }
+    public void Startbgm5()
+    {
+        bgm5AudioSource.Play();
     }
     public void SettingPlaySE()
     {
@@ -186,5 +200,17 @@ public class SoundManager : MonoBehaviour
     public void SettingPlaySE18()
     {
         SelectSeAudioSource.PlayOneShot(BomSE);
+    }    
+    public void SettingPlaySE19()
+    {
+        SelectSeAudioSource.PlayOneShot(SummonSE);
+    }   
+    public void SettingPlaySE20()
+    {
+        SelectSeAudioSource.PlayOneShot(GravitySE);
+    }   
+    public void SettingPlaySE21()
+    {
+        SelectSeAudioSource.PlayOneShot(crushingSE);
     }
 }

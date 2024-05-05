@@ -9,18 +9,14 @@ public class CameraController : MonoBehaviour
     public float camera_speed = 5f;
     private Vector3 target_offset = Vector3.zero;
     private Vector2 RightInput;
-
     private Camera cam;
     private Vector3 cur_pos;
     private GameObject lock_target = null;
-
     private Vector3 shake_vector = Vector3.zero;
     private float shake_timer = 0f;
     private float shake_intensity = 1f;
-
     private static CameraController _instance;
 
-    // Start is called before the first frame update
     void Awake()
     {
         _instance = this;
@@ -43,19 +39,13 @@ public class CameraController : MonoBehaviour
 
         if (cam_target != null)
         {
-            //Find target
             Vector3 target_pos = cam_target.transform.position + target_offset;
-
-            //Check if need to move
             Vector3 diff = target_pos - transform.position;
             if (diff.magnitude > 0.1f)
             {
-                //Move camera
                 transform.position = Vector3.SmoothDamp(transform.position, target_pos, ref cur_pos, 1f / camera_speed, Mathf.Infinity, Time.deltaTime);
             }
         }
-
-        //Shake FX
         if (shake_timer > 0f)
         {
             shake_timer -= Time.deltaTime;

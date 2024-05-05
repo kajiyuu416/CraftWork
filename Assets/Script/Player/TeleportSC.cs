@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TeleportSC : MonoBehaviour
 {
+
     [SerializeField] Transform TeleportPos;
     private Transform targetPos;
     private bool hitFlag =false;
@@ -19,7 +20,6 @@ public class TeleportSC : MonoBehaviour
 
         }
     }
-
     public void UNhitFlag()
     {
         hitFlag = false;

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
-
 public class clearCheck4 : MonoBehaviour
 {
     [SerializeField] Charade charade1;
@@ -23,7 +22,7 @@ public class clearCheck4 : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera camera2;
     public static bool clealFlag = false;
     private static bool FilstCleal;
-    void Update()
+    private void Update()
     {
         if(!charade1.HitFlag&& !charade4.HitFlag && !charade6.HitFlag && !charade8.HitFlag && !charade9.HitFlag && !charade10.HitFlag && !charade12.HitFlag)
         {

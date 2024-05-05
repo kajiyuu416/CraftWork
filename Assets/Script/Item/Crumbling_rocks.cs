@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Crumbling_rocks : Charade
 {
+    //特定のアイテムと接触したら非表示になる
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Ice_axe"))

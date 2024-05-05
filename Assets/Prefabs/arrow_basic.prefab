@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1075138519657597327}
   - component: {fileID: -9067780190201378629}
   - component: {fileID: 2040705072445573708}
-  - component: {fileID: 2177886984383658301}
+  - component: {fileID: 5323562076482133950}
   m_Layer: 3
   m_Name: arrow_basic
   m_TagString: arrow
@@ -134,7 +134,7 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &2177886984383658301
+--- !u!114 &5323562076482133950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
