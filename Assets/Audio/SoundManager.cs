@@ -24,7 +24,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip SummonSE;
     [SerializeField] AudioClip GravitySE;
     [SerializeField] AudioClip crushingSE;
-
+    [SerializeField] AudioClip GameClearSE;
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Slider BgmSlinder;
     [SerializeField] Slider SeSlinder;
@@ -212,5 +212,9 @@ public class SoundManager : MonoBehaviour
     public void SettingPlaySE21()
     {
         SelectSeAudioSource.PlayOneShot(crushingSE);
+    }
+    public void SettingPlaySE22()
+    {
+        SelectSeAudioSource.PlayOneShot(GameClearSE);
     }
 }

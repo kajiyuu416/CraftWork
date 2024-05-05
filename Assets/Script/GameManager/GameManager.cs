@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] Canvas AudioUI;
     [SerializeField] GameObject AudioUIobj;
     [SerializeField] GameObject ResetUIobj;
-
     GameObject []tagObjcts;
 
+    private  static bool GameStartFlag;
+    public static bool GameClearFlag;
+    public static int minute;
+    public  static float seconds;
     private bool ReSetUIexpression;
     private bool SettingUIexpression;
-    public bool GameClearFlag;
     private string beforeScene;
     Image blackScreen;
     public static GameManager instance
@@ -86,6 +88,15 @@ public class GameManager : MonoBehaviour
             SettingUIexpression = true;
             AudioUIobj.SetActive(false);
         }
+        if(GameStartFlag)
+        {
+            seconds += Time.deltaTime;
+            if(seconds >= 60f)
+            {
+                minute++;
+                seconds = seconds - 60;
+            }
+        }
     }
     //フロアに弓矢の数が10本以上になると最初の弓矢を削除する処理(処理負荷軽減のため)
     public void Check(string tagname)
@@ -96,7 +107,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("フロアにある本数が10本以上の為、削除します");
             Destroy(tagObjcts[0]);
         }
-
     }
 
     public static void GameReset()
@@ -113,7 +123,10 @@ public class GameManager : MonoBehaviour
         if(BossEnemySC.BossEnemyDeath && !GameClearFlag)
         {
             GameClearFlag = true;
-            instance.StartCoroutine(instance.LoadScene("MainScene"));
+            GameStartFlag = false;
+            PlayerController PC = PlayerController.Instance;
+            PC.ItemLost();
+            instance.StartCoroutine(instance.LoadScene("ClearScene"));
         }
     }
     public static void SettingAudio()
@@ -132,6 +145,7 @@ public class GameManager : MonoBehaviour
     public static void GameStart()
     {
         instance.StartCoroutine(instance.LoadScene("MainScene"));
+        GameStartFlag = true;
         SoundManager SM = SoundManager.Instance;
         SM.SettingPlaySE12();
     }

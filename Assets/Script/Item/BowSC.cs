@@ -76,8 +76,10 @@ public class BowSC : MonoBehaviour
             arrow_Remaining_image.enabled = false;
             arrow_bar_image.enabled = false;
         }
-
-
+        if(GameManager.GameClearFlag)
+        {
+            Destroy(gameObject);
+        }
     }
     //”­Ëˆ—
     public void RighitShot()
