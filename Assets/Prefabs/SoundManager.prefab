@@ -3658,6 +3658,7 @@ MonoBehaviour:
   GravitySE: {fileID: 8300000, guid: 3f47c4d7d929b51449c0f2caf788e883, type: 3}
   crushingSE: {fileID: 8300000, guid: f35e6d6e56335c7409364f0f3122653a, type: 3}
   GameClearSE: {fileID: 8300000, guid: b63ea934e8bcf1643a57dfb8ec258208, type: 3}
+  LegacyItemGetSE: {fileID: 8300000, guid: 020e7ce9027e9a244aa4dea8af4eccc4, type: 3}
   audioMixer: {fileID: 24100000, guid: df0e2badb8d7d7d43b43f917b8596569, type: 2}
   BgmSlinder: {fileID: 7528463562922820769}
   SeSlinder: {fileID: 7528463563625992256}

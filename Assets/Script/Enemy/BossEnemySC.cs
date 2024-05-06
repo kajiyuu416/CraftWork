@@ -200,11 +200,9 @@ public void Enemy_Damage1()
     }
     public void Enemy_Destroy()
     {
-        var summons_pos = transform.rotation;
-        summons_pos = Quaternion.Euler(-90, 0, 0);
         Combat_state = false;
         BossEnemyDeath = true;
-        Instantiate(deathEffect, transform.position,summons_pos);
+        Instantiate(deathEffect, transform.position,Quaternion.Euler(-90, 0, 0));
         Destroy(gameObject);
         SoundManager SM = SoundManager.Instance;
         SM.StopBGM();
@@ -237,9 +235,7 @@ public void Enemy_Damage1()
     }
     private void Gravity_Hole()
     {
-        var summons_pos = transform.rotation;
-        summons_pos = Quaternion.Euler(180, 0, 0);
-        Instantiate(summon_Obj4, Player.transform.position, summons_pos);
+        Instantiate(summon_Obj4, Player.transform.position,Quaternion.Euler(180, 0, 0));
         SoundManager SM = SoundManager.Instance;
         SM.SettingPlaySE20();
         ActionCount = 10.0f;
