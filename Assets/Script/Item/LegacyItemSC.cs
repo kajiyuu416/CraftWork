@@ -9,9 +9,11 @@ public class LegacyItemSC : MonoBehaviour
     public bool ItemGetFlag;
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        var transPos = transform.position + new Vector3(0, 0, -0.3f);
+
         if(collision.CompareTag("Player"))
         {
-            GameObject geneEfe = Instantiate(generationEfect, transform.position, Quaternion.Euler(-90f, 0f, 0f));
+            GameObject geneEfe = Instantiate(generationEfect, transPos, Quaternion.Euler(-90f, 0f, 0f));
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE23();
             ItemGetFlag = true;
