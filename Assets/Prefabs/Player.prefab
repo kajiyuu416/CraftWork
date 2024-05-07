@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &519420032
 Transform:
   m_ObjectHideFlags: 0
@@ -272,12 +272,11 @@ MonoBehaviour:
   NowHoldobj: {fileID: 0}
   HoldObj: {fileID: 0}
   NowHoldItem: 0
-  NowMoove: 0
+  NowMove: 0
   move_accel: 10
   move_deccel: 20
   move_max: 3
   moveInputVal: {x: 0, y: 0}
-  CameraInputVal: {x: 0, y: 0}
 --- !u!114 &2008313519605151709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +293,8 @@ MonoBehaviour:
   distance: 5
   PickaxeSprite: {fileID: 21300000, guid: b54b94da5cee5c046bf327246ac181e6, type: 3}
   TorchSprite: {fileID: 21300000, guid: 574a4985b31d65c45bfd94065e1b21cf, type: 3}
+  BowSprite: {fileID: 0}
+  bowSC: {fileID: 0}
   objctacleRayObject: {fileID: 3257383910531076838}
   HoldtoObj: {fileID: 0}
   boxCol: {fileID: 0}
@@ -303,6 +304,7 @@ MonoBehaviour:
   holdFlag: 0
   Pickaxe_Hold_Flag: 0
   Torch_Hold_Flag: 0
+  Bow_Hold_Flag: 0
 --- !u!114 &3257383911545365506
 MonoBehaviour:
   m_ObjectHideFlags: 0
