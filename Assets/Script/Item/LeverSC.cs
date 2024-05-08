@@ -15,6 +15,10 @@ public class LeverSC : MonoBehaviour
     {
         originSprite = GetComponent<SpriteRenderer>();
     }
+    private void Update()
+    {
+        obj_migration();
+    }
 
     //インスペクターでナンバーを決めナンバーのよって動作が変更する
     private void OnTriggerEnter2D(Collider2D collision)
@@ -69,10 +73,6 @@ public class LeverSC : MonoBehaviour
                 Lever_Off();
             }
         }
-    }
-    private void Update()
-    {
-        obj_migration();
     }
     private void obj_migration()
     {

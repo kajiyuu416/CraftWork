@@ -11,11 +11,10 @@ public class Synthesize : MonoBehaviour
     [SerializeField] Sprite hitObjSprite;
     public bool SynthesizeFlag = false;
     private SpriteRenderer hitObjSpriteRenderer;
-
     //接触したアイテムのスプライトを取り、ターゲットと同じであれば設定したアイテムを場に生成する処理
-    void Update()
+    private void Update()
     {
-        generat();
+        Generate();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,7 +24,7 @@ public class Synthesize : MonoBehaviour
             hitObjSprite = hitObjSpriteRenderer.sprite;
         }
     }
-    private void generat()
+    private void Generate()
     {
         if(targetObjSprite == hitObjSprite && !SynthesizeFlag)
         {

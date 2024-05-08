@@ -27,15 +27,13 @@ public class PlayerDistance : MonoBehaviour
             SoundManager SM = SoundManager.Instance;
             SM.StopBGM();
             SM.Startbgm1();
-            Debug.Log("music1");
         }
         else if(posi.x > 500 && posi.x < 1400 && !ChangeMusic2)
         {
-            SoundManager SM = SoundManager.Instance;
             ChangeMusic2 = true;
+            SoundManager SM = SoundManager.Instance;
             SM.StopBGM();
             SM.Startbgm3();
-            Debug.Log("music2");
         }
         else if(posi.x > 1400 && !ChangeMusic3)
         {
@@ -43,7 +41,6 @@ public class PlayerDistance : MonoBehaviour
             SoundManager SM = SoundManager.Instance;
             SM.StopBGM();
             SM.Startbgm4();
-            Debug.Log("music3");
         }
         else if(posi.x > 1707 && !ChangeMusic4)
         {
@@ -51,7 +48,6 @@ public class PlayerDistance : MonoBehaviour
             SoundManager SM = SoundManager.Instance;
             SM.StopBGM();
             SM.Startbgm5();
-            Debug.Log("music4");
         }
     }
 

@@ -184,7 +184,8 @@ public class BossEnemySC : MonoBehaviour
 
         if(!NonAction)
         {
-          transform.position = Vector2.MoveTowards(transform.position, new Vector2(Player.transform.position.x, Player.transform.position.y), moveSpeed * Time.deltaTime);
+          transform.position = Vector2.MoveTowards
+                (transform.position, new Vector2(Player.transform.position.x, Player.transform.position.y), moveSpeed * Time.deltaTime);
         }
    
         animator.SetFloat("Speed",transform.position.magnitude);

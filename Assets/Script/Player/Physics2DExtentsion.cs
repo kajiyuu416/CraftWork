@@ -33,7 +33,7 @@ public class Physics2DExtentsion : MonoBehaviour
     }
     private void Update()
     {
-        ItemHold();
+        Hold_Item_Check();
         Flying_ray();
     }
     //Playerがアイテムを投げる又は置いた時、取得した情報のリセット
@@ -45,7 +45,7 @@ public class Physics2DExtentsion : MonoBehaviour
         ItemSprite = null;
     }
     //Playerが特定のアイテムを保持しているかチェックし、該当の場合フラグを返す処理
-    private void ItemHold()
+    private void Hold_Item_Check()
     {
         if(holdFlag)
         {
@@ -81,6 +81,7 @@ public class Physics2DExtentsion : MonoBehaviour
         }
 
     }
+
     //Playerが移動したときRayを飛ばしRayがアイテムと重なっていた場合、該当アイテムの情報を取得し保持できる状態にする処理
     private void Flying_ray()
     {
@@ -107,8 +108,7 @@ public class Physics2DExtentsion : MonoBehaviour
                 boxCol = hitObstacle.collider.GetComponent<BoxCollider2D>();
                 Sprite = hitObstacle.collider.GetComponent<SpriteRenderer>();
                 ItemSprite = Sprite.sprite;
-                Debug.DrawRay(objctacleRayObject.transform.position, Vector2.right * hitObstacle.distance * new Vector2(CharacterDirection, 0f), Color.red);
-                Debug.Log("Itemを拾うことができます");
+
                 if(Bow_Hold_Flag)
                 {
                     bowSC = hitObstacle.collider.GetComponent<BowSC>();
@@ -122,8 +122,6 @@ public class Physics2DExtentsion : MonoBehaviour
             {
                 holdFlag = false;
                 ItemSprite = null;
-                Debug.DrawRay(objctacleRayObject.transform.position, Vector2.right * hitObstacle.distance * new Vector2(CharacterDirection, 0f), Color.green);
-                Debug.Log("拾うItemが存在しません");
             }
         }
     }

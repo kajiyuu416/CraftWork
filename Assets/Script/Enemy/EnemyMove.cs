@@ -11,14 +11,11 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] float migration_width;
     [SerializeField] float moveSpeed;
     public int ememy_HitPoint;
-    private Color red;
-    private Color bleu;
-    private Color green;
     private Rigidbody2D enemy_rigid;
     private Vector3 StartPos;
     public enum SelectNum
     {
-      zero,one, two, tree, four, five
+      zero,one, two, tree
     }
     public SelectNum selectNumber;
 
@@ -26,7 +23,6 @@ public class EnemyMove : MonoBehaviour
     {
         enemy_rigid = GetComponent<Rigidbody2D>();
         StartPos = transform.position;
-        Enemy_Color();
     }
     private void Update()
     {
@@ -63,15 +59,15 @@ public class EnemyMove : MonoBehaviour
     {
         if(ememy_HitPoint == 3)
         {
-            SpriteRenderer.color = green;
+            SpriteRenderer.color = Color.green;
         }
         else if(ememy_HitPoint == 2)
         {
-            SpriteRenderer.color = bleu;
+            SpriteRenderer.color = Color.blue;
         }
         else if(ememy_HitPoint == 1)
         {
-            SpriteRenderer.color = red;
+            SpriteRenderer.color = Color.red;
         }
         else if(ememy_HitPoint <= 0)
         {
@@ -82,12 +78,6 @@ public class EnemyMove : MonoBehaviour
         {
             Enemy_Destroy();
         }
-    }
-    private void Enemy_Color()
-    {
-        red = new Color(255, 0, 0);
-        green = new Color(0, 255, 0);
-        bleu = new Color(0, 0, 255);
     }
     private void Enemy_Damage()
     {

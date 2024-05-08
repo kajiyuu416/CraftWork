@@ -45,7 +45,7 @@ public class SoundManager : MonoBehaviour
         get; private set;
     }
 
-    void Awake()
+    private void Awake()
     {
         if(Instance != null)
         {
@@ -56,7 +56,7 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    private void Start()
     {
         bgmObj = transform.GetChild(0).gameObject;
         SeObj = transform.GetChild(1).gameObject;

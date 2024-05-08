@@ -205,7 +205,6 @@ public class GameManager : MonoBehaviour
     }
     public void OnActiveSceneChanged(Scene prevScene, Scene nextScene)
     {
-        // Scene1Ç©ÇÁScene2Ç÷
         if(beforeScene == "title" && nextScene.name == "MainScene")
         {
             SoundManager SM = SoundManager.Instance;

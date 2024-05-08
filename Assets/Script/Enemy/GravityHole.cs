@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GravityHole : MonoBehaviour
@@ -29,6 +27,5 @@ public class GravityHole : MonoBehaviour
         {
             rigid.AddForce(-vector3 * rigid.mass * 30.0f);
         }
-
     }
 }
