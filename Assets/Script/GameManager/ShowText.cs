@@ -11,7 +11,7 @@ public class ShowText : MonoBehaviour
     [SerializeField] TextMeshProUGUI text7;
     [SerializeField] TextMeshProUGUI text8;
     [SerializeField] TextMeshProUGUI text9;
-    [SerializeField] Physics2DExtentsion PE;
+    private Physics2DExtentsion PE;
     [SerializeField] PlayerController PC;
 
     //フラグに応じてテキスト表示
@@ -19,9 +19,18 @@ public class ShowText : MonoBehaviour
     {
         Expression_Text();
     }
+    private void Awake()
+    {
+        PE = FindObjectOfType<Physics2DExtentsion>();
+    }
     private void Expression_Text()
     {
-        if(PE.holdFlag && !PC.NowHoldItem)
+        bool isholdFlag = PE.Duplicate_Hold_Flag;
+        bool ispickaxe = PE.Duplicate_Pickaxe_Hold_Flag;
+        bool istorch = PE.Duplicate_Torch_Hold_Flag;
+        bool isbow = PE.Duplicate_Bow_Hold_Flag;
+
+        if(isholdFlag && !PC.NowHoldItem)
         {
             text1.text = "アイテムを持ち上げる ・・・ B ボタン";
         }
@@ -52,18 +61,18 @@ public class ShowText : MonoBehaviour
             text4.text = "";
         }
 
-        if(PE.Pickaxe_Hold_Flag)
+        if(ispickaxe)
         {
             pickaxeSC picSC = pickaxeSC.Instance;
             text6.text = picSC.Use_Pickaxe_Count.ToString();
             text5.text = "ピッケルの耐久値・・・";
         }
-        else if(!PE.Pickaxe_Hold_Flag)
+        else if(!ispickaxe)
         {
             text5.text = "";
             text6.text = "";
         }
-        if(PE.Torch_Hold_Flag)
+        if(istorch)
         {
             TorchSC torchSC = TorchSC.Instance;
             if(torchSC.TorchLight.range < 10.0f)
@@ -83,12 +92,12 @@ public class ShowText : MonoBehaviour
 
 
         }
-        else if(!PE.Torch_Hold_Flag)
+        else if(!istorch)
         {
             text7.text = "";
         }
 
-        if(PE.Bow_Hold_Flag)
+        if(isbow)
         {
             text8.text = "残数ゲージ";
             text9.text = "射撃　・・・ R1 ボタン";

@@ -97,9 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57ea9b888af8404d91596919a02795e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PC: {fileID: 3257383911545365618}
   target: {fileID: 3256217435581560744}
-  camera_speed: 5
 --- !u!1 &3256217435581560744
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,15 +265,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3258965364714069842}
-  PE: {fileID: 2008313519605151709}
   originSR: {fileID: 3442971892394584582}
   NowHoldobj: {fileID: 0}
   HoldObj: {fileID: 0}
   NowHoldItem: 0
   NowMove: 0
-  move_accel: 10
-  move_deccel: 20
-  move_max: 3
   moveInputVal: {x: 0, y: 0}
 --- !u!114 &2008313519605151709
 MonoBehaviour:
@@ -290,11 +284,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PC: {fileID: 3257383911545365618}
-  distance: 5
-  PickaxeSprite: {fileID: 21300000, guid: b54b94da5cee5c046bf327246ac181e6, type: 3}
-  TorchSprite: {fileID: 21300000, guid: 574a4985b31d65c45bfd94065e1b21cf, type: 3}
-  BowSprite: {fileID: 0}
-  bowSC: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: b54b94da5cee5c046bf327246ac181e6, type: 3}
+  - {fileID: 21300000, guid: 68e1f3d1470827b49b3b3347af0e4f6d, type: 3}
+  - {fileID: 21300000, guid: 8f908a0041a1aee4c8b02d9449ebd224, type: 3}
   objctacleRayObject: {fileID: 3257383910531076838}
   HoldtoObj: {fileID: 0}
   boxCol: {fileID: 0}
@@ -302,9 +295,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   holdFlag: 0
-  Pickaxe_Hold_Flag: 0
-  Torch_Hold_Flag: 0
-  Bow_Hold_Flag: 0
+  bowSC: {fileID: 0}
+  distance: 5
 --- !u!114 &3257383911545365506
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,18 +6,14 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Transform target;
-    [SerializeField] Physics2DExtentsion PE;
+    private Physics2DExtentsion PE;
     public SpriteRenderer originSR;
     public GameObject NowHoldobj;
     public GameObject HoldObj;
     public bool NowHoldItem = false;
-    public bool NowMove;
     public static bool SelectReSet;
     public static bool ReSetFlag;
     public static bool SettingFlag;
-    public float move_accel = 1f;
-    public float move_deccel = 1f;
-    public float move_max = 1f;
     public Vector2 moveInputVal;
     public static Vector2 CameraInputVal;
     public static Vector3 CP = new Vector3();
@@ -25,13 +21,16 @@ public class PlayerController : MonoBehaviour
     {
         get; private set;
     }
-
     private bool connect;
+    private const float move_accel = 10.0f;
+    private const float move_deccel = 20.0f;
+    private const float move_max = 5.0f;
     private float side = 1f;
     private Rigidbody2D rigid;
     private Vector2 lookat = Vector2.zero;
     private Vector2 holdItem = Vector2.zero;
     private Vector2 holdItemScale = new Vector2(0.4f, 0.4f);
+    private Vector2 DefaultItemScale = new Vector2(0.5f, 0.5f);
     private Vector2 move;
 
     private void Awake()
@@ -46,6 +45,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = CP;
         }
+        PE = FindObjectOfType<Physics2DExtentsion>();
         rigid = GetComponent<Rigidbody2D>();
     }
     public void Update()
@@ -57,18 +57,6 @@ public class PlayerController : MonoBehaviour
     //Playerの動き制御、アイテム保持の有無をチェック
     private void PlayerMove()
     {
-        if(moveInputVal.x < 0 || moveInputVal.y < 0)
-        {
-            NowMove = true;
-        }
-        else if(moveInputVal.x > 0 || moveInputVal.y > 0)
-        {
-            NowMove = true;
-        }
-        else
-        {
-            NowMove = false;
-        }
         //Reset画面、BGM、SEセッティング画面ではプレイヤーの移動を制御
         if(ReSetFlag || SettingFlag)
         {
@@ -93,6 +81,7 @@ public class PlayerController : MonoBehaviour
            if(Mathf.Abs(lookat.x) > 0.02)
            side = Mathf.Sign(lookat.x);
            side = Mathf.Sign(lookat.x);
+
         //保持しているアイテムをPlayerの座標へ移動、スケール、向きの変更
         if(HoldObj == PE.HoldtoObj)
         {
@@ -131,6 +120,7 @@ public class PlayerController : MonoBehaviour
                 var Throw_Down = current_GP.buttonSouth;
                 var ReSet = current_GP.selectButton;
                 var Setting = current_GP.startButton;
+                bool isbow = PE.Duplicate_Bow_Hold_Flag;
 
                 //アイテムを持ち上げる
                 if(PE.holdFlag && hold.wasPressedThisFrame && !NowHoldItem)
@@ -146,7 +136,7 @@ public class PlayerController : MonoBehaviour
                 {
                     PE.boxCol.enabled = true;
                     NowHoldobj.transform.position = transform.position;
-                    NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
+                    NowHoldobj.transform.localScale = DefaultItemScale;
                     ItemLost();
                     SoundManager SM = SoundManager.Instance;
                     SM.SettingPlaySE4();
@@ -157,11 +147,8 @@ public class PlayerController : MonoBehaviour
                     Vector3 force = new Vector2(10.0f, 0);
                     Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                     HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
-                    NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-                    PE.ItemLost();
-                    ItemLost();
-                    SoundManager SM = SoundManager.Instance;
-                    SM.SettingPlaySE5();
+                    Itemthrow();
+
                 }
                 //アイテムを右側に投げる
                 else if(Throw_left_right.wasPressedThisFrame && NowHoldItem && !originSR.flipX)
@@ -169,11 +156,7 @@ public class PlayerController : MonoBehaviour
                     Vector2 force = new Vector2(10.0f, 0);
                     Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                     HoldItemRB.AddForce(force, ForceMode2D.Impulse);
-                    NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-                    PE.ItemLost();
-                    ItemLost();
-                    SoundManager SM = SoundManager.Instance;
-                    SM.SettingPlaySE5();
+                    Itemthrow();
                 }
                 //アイテムを上側に投げる
                 else if(Throw_up.wasPressedThisFrame && NowHoldItem)
@@ -181,11 +164,7 @@ public class PlayerController : MonoBehaviour
                     Vector2 force = new Vector2(0, 10.0f);
                     Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                     HoldItemRB.AddForce(force, ForceMode2D.Impulse);
-                    NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-                    PE.ItemLost();
-                    ItemLost();
-                    SoundManager SM = SoundManager.Instance;
-                    SM.SettingPlaySE5();
+                    Itemthrow();
                 }
                 //アイテムを下側に投げる
                 else if(Throw_Down.wasPressedThisFrame && NowHoldItem)
@@ -193,14 +172,10 @@ public class PlayerController : MonoBehaviour
                     Vector2 force = new Vector2(0, 10.0f);
                     Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
                     HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
-                    NowHoldobj.transform.localScale = new Vector2(0.5f, 0.5f);
-                    PE.ItemLost();
-                    ItemLost();
-                    SoundManager SM = SoundManager.Instance;
-                    SM.SettingPlaySE5();
+                    Itemthrow();
                 }
                 //弓を所持している場合射撃ができる処理
-                if(PE.Bow_Hold_Flag && shot.wasPressedThisFrame && NowHoldItem)
+                if(isbow && shot.wasPressedThisFrame && NowHoldItem)
                 {
                     GameManager GM = GameManager.instance;
                     if(originSR.flipX)
@@ -242,6 +217,13 @@ public class PlayerController : MonoBehaviour
         NowHoldobj = null;
         HoldObj = null;
         NowHoldItem = false;
+    }
+    private void Itemthrow()
+    {
+        NowHoldobj.transform.localScale = DefaultItemScale;
+        PE.ItemLost();
+        ItemLost();
+        SoundManager.Instance.SettingPlaySE5();
     }
     //コントローラーが接続されているがのチェック
     private void GamePad_connection_Check()

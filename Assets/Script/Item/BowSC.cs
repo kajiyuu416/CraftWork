@@ -4,17 +4,19 @@ public class BowSC : MonoBehaviour
 {
     [SerializeField] GameObject arrow;
     public int aroow_Remaining;
-    private Physics2DExtentsion PE;
+    public Physics2DExtentsion PE;
     private Image arrow_Remaining_image;
     private Image arrow_bar_image;
     private SpriteRenderer origin_Sprite;
     private GameObject[] BowObj;
+    private const int maxa_roow = 30;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        aroow_Remaining = 30;
+        aroow_Remaining = maxa_roow;
         origin_Sprite = GetComponent<SpriteRenderer>();
+        PE = FindObjectOfType<Physics2DExtentsion>();
     }
     void Update()
     {
@@ -42,9 +44,11 @@ public class BowSC : MonoBehaviour
     //‹|‚ÌŽc”ŠÇ—‚Ìˆ—
     private void aroow_Remaining_Check()
     {
-        if(aroow_Remaining > 30)
+        bool isbow = PE.Duplicate_Bow_Hold_Flag;
+
+        if(aroow_Remaining > maxa_roow)
         {
-            aroow_Remaining = 30;
+            aroow_Remaining = maxa_roow;
         }
 
         if(aroow_Remaining < 0)
@@ -55,17 +59,22 @@ public class BowSC : MonoBehaviour
         if(PlayerController.SelectReSet)
         {
             transform.position = PlayerController.CP;
-            aroow_Remaining = 30;
+            aroow_Remaining = maxa_roow;
         }
 
         if(PE == null)
         {
-            PE = GameObject.Find("Player").GetComponent<Physics2DExtentsion>();
+            PE = FindObjectOfType<Physics2DExtentsion>();
+        }
+
+        if(PE!= null)
+        {
             arrow_Remaining_image = GameObject.Find("arrow_Remaining").GetComponent<Image>();
             arrow_bar_image = GameObject.Find("arrow_bar").GetComponent<Image>();
         }
 
-        if(PE.Bow_Hold_Flag)
+
+        if(isbow)
         {
             arrow_Remaining_image.fillAmount = aroow_Remaining / 30.0f;
             arrow_Remaining_image.enabled = true;

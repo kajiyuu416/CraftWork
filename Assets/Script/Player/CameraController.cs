@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] PlayerController PC;
     public GameObject target;
-    public float camera_speed = 5f;
-    private Vector3 target_offset = Vector3.zero;
-    private Vector2 RightInput;
-    private Camera cam;
-    private Vector3 cur_pos;
     private GameObject lock_target = null;
-    private Vector3 shake_vector = Vector3.zero;
+    private const  float camera_speed = 5f;
     private float shake_timer = 0f;
     private float shake_intensity = 1f;
+    private Vector3 cur_pos;
+    private Vector3 target_offset = Vector3.zero;
+    private Vector3 shake_vector = Vector3.zero;
+    private Vector2 RightInput;
+    private Camera cam;
     private static CameraController _instance;
 
     void Awake()

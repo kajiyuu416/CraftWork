@@ -661,7 +661,6 @@ MonoBehaviour:
   text7: {fileID: 637001729}
   text8: {fileID: 1199684021}
   text9: {fileID: 755249323}
-  PE: {fileID: 1537897186}
   PC: {fileID: 1537897187}
 --- !u!4 &282075400
 Transform:
@@ -2863,18 +2862,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1530185165}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1537897186 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2008313519605151709, guid: d0284775b5b280b499af7dd4b023027f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1989882780}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19a6b94385ba6a448b92cea4d2d0c05a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1537897187 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3257383911545365618, guid: d0284775b5b280b499af7dd4b023027f,
@@ -3726,6 +3713,29 @@ PrefabInstance:
       propertyPath: objctacleRayObject
       value: 
       objectReference: {fileID: 1558935248}
+    - target: {fileID: 2008313519605151709, guid: d0284775b5b280b499af7dd4b023027f,
+        type: 3}
+      propertyPath: sprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2008313519605151709, guid: d0284775b5b280b499af7dd4b023027f,
+        type: 3}
+      propertyPath: sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: b54b94da5cee5c046bf327246ac181e6,
+        type: 3}
+    - target: {fileID: 2008313519605151709, guid: d0284775b5b280b499af7dd4b023027f,
+        type: 3}
+      propertyPath: sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 68e1f3d1470827b49b3b3347af0e4f6d,
+        type: 3}
+    - target: {fileID: 2008313519605151709, guid: d0284775b5b280b499af7dd4b023027f,
+        type: 3}
+      propertyPath: sprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8f908a0041a1aee4c8b02d9449ebd224,
+        type: 3}
     - target: {fileID: 3253198503354806412, guid: d0284775b5b280b499af7dd4b023027f,
         type: 3}
       propertyPath: m_RootOrder
