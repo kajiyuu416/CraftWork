@@ -8,8 +8,7 @@ public class GameClearSC : MonoBehaviour
     [SerializeField] TextMeshProUGUI text2;
     [SerializeField] TextMeshProUGUI text3;
     [SerializeField] TextMeshProUGUI text4;
-    [SerializeField] Image[] legacyItems; 
-
+    [SerializeField] Image[] legacyItemImages;
     private Color defaultColor = new Color(255, 255, 255, 255);
     private void Start()
     {
@@ -24,14 +23,15 @@ public class GameClearSC : MonoBehaviour
 
     public void GetCheck()
     {
-
         foreach(var FL in LegacyItemGetCheckSC.getLIFlagList)
         {
-            Debug.Log(FL);
-            //foreach(var lI in legacyItems)
-            //{
-            //    lI.color = defaultColor;
-            //}
+            if(FL)
+            {
+                foreach(var lII in legacyItemImages)
+                {
+                    lII.color = defaultColor;
+                }
+            }
         }
     }
 

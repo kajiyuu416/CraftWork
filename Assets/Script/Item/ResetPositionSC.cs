@@ -11,9 +11,9 @@ public class ResetPositionSC : MonoBehaviour
         OriginPosition = transform.position;
     }
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(PlayerController.SelectReSet)
+        if(GameManager.SelectReSet)
         {
             transform.position = OriginPosition;
         }

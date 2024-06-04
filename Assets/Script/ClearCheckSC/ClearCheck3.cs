@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class ClearCheck3 : MonoBehaviour
+public class clearCheck3 : MonoBehaviour
 {
     public string tagname;
     private bool ClearFlag = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if(collision.CompareTag(tagname) && !ClearFlag)
         {
             ClearFlag = true;

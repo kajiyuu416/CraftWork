@@ -19,7 +19,7 @@ public class Crumbling_rocks : Charade
                 boxCollider2D.enabled = false;
                 HitFlag = true;
                 pickaxeSC pickaxe = pickaxeSC.Instance;
-                pickaxe.addCount();
+                pickaxe.AddCount();
                 SoundManager SM = SoundManager.Instance;
                 SM.SettingPlaySE11();
             }
@@ -27,7 +27,7 @@ public class Crumbling_rocks : Charade
     }
     private void Update()
     {
-        if(PlayerController.SelectReSet && HitFlag)
+        if(GameManager.SelectReSet && HitFlag)
         {
             meshRenderer.enabled = true;
             boxCollider2D.enabled = true;

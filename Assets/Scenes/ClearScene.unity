@@ -827,7 +827,7 @@ MonoBehaviour:
   text2: {fileID: 2059460999}
   text3: {fileID: 1115797987}
   text4: {fileID: 1843027485}
-  legacyItems:
+  legacyItemImages:
   - {fileID: 1129228258}
   - {fileID: 165636509}
   - {fileID: 58607307}

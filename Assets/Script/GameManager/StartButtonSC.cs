@@ -18,7 +18,7 @@ public class StartButtonSC : MonoBehaviour
     }
     void Update()
     {
-        if(!PlayerController.SettingFlag)
+        if(!GameManager.SettingFlag)
         {
             if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
             {
@@ -27,7 +27,7 @@ public class StartButtonSC : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
-        if(PlayerController.SettingFlag)
+        if(GameManager.SettingFlag)
         {
             NowMenuFlag = true;
             collOne = true;

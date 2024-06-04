@@ -12,12 +12,12 @@ public class Physics2DExtentsion : MonoBehaviour
     public LayerMask layerMask;
     public bool holdFlag;
     public BowSC bowSC;
-    private  bool Pickaxe_Hold_Flag;
+    private bool Pickaxe_Hold_Flag;
     private bool Torch_Hold_Flag;
     private bool Bow_Hold_Flag;
     private SpriteRenderer Sprite;
     private Sprite ItemSprite;
-    public float distance = 5.0f;
+    private float distance = 1.0f;
     private float CharacterDirection;
 
     private void Start()
@@ -40,11 +40,6 @@ public class Physics2DExtentsion : MonoBehaviour
     //Playerが特定のアイテムを保持しているかチェックし、該当の場合フラグを返す処理
     private void Hold_Item_Check()
     {
-        if(PC.moveInputVal !=Vector2.zero)
-        {
-            PlayerController.SelectReSet = false;
-        }
-
         if(ItemSprite == sprites[0] && !Pickaxe_Hold_Flag)
         {
             Pickaxe_Hold_Flag = true;
@@ -89,7 +84,8 @@ public class Physics2DExtentsion : MonoBehaviour
         {
             CharacterDirection = 0;
         }
-        if(PC.moveInputVal !=Vector2.zero&&!PlayerController.ReSetFlag && !PlayerController.SettingFlag)
+
+        if(PC.moveInputVal !=Vector2.zero&&!GameManager.ReSetFlag && !GameManager.SettingFlag)
         {
             RaycastHit2D hitObstacle = Physics2D.Raycast(objctacleRayObject.transform.position, Vector2.right * new Vector2(CharacterDirection, 0f), distance, layerMask);
             if(hitObstacle.collider != null)

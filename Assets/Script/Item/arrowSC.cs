@@ -10,5 +10,13 @@ public class arrowSC : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Update()
+    {
+        if(GameManager.SelectReSet)
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
 }

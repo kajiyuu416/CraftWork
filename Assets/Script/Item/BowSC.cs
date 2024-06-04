@@ -11,6 +11,8 @@ public class BowSC : MonoBehaviour
     private GameObject[] BowObj;
     private const int maxa_roow = 30;
 
+    private BoxCollider2D[] cols;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -56,7 +58,7 @@ public class BowSC : MonoBehaviour
             aroow_Remaining = 0;
         }
 
-        if(PlayerController.SelectReSet)
+        if(GameManager.SelectReSet)
         {
             transform.position = PlayerController.CP;
             aroow_Remaining = maxa_roow;
@@ -129,9 +131,12 @@ public class BowSC : MonoBehaviour
     //ã|ñÓï‚è[èàóù
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("quiver") && aroow_Remaining < 30)
+        if(collision.CompareTag("quiver") && aroow_Remaining < maxa_roow)
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            cols = collision.gameObject.GetComponents<BoxCollider2D>();
+            cols[0].enabled = false;
+            cols[1].enabled = false;
             aroow_Remaining = aroow_Remaining +10;
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE2();

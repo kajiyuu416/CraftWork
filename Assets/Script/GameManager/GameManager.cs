@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject ReSetButton;
@@ -18,6 +20,9 @@ public class GameManager : MonoBehaviour
 
     private  static bool GameStartFlag;
     public static bool GameClearFlag;
+    public static bool SelectReSet;
+    public static bool ReSetFlag;
+    public static bool SettingFlag;
     public static int minute;
     public  static float seconds;
     private bool ReSetUIexpression;
@@ -58,7 +63,11 @@ public class GameManager : MonoBehaviour
     //リセット又はBGM、SEセッティングUI表示
     private void SettingGame()
     {
-        if(PlayerController.ReSetFlag && ReSetUIexpression && !PlayerController.SettingFlag)
+
+        var current_GP = Gamepad.current;
+        var ReSet = current_GP.selectButton;
+        var Setting = current_GP.startButton;
+        if(ReSetFlag && ReSetUIexpression && !SettingFlag)
         {
             ResetUIobj.SetActive(true);
             ReSetUI.enabled = true;
@@ -66,14 +75,14 @@ public class GameManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(ReSetButton);
         }
 
-        if(!PlayerController.ReSetFlag && ReSetUIexpression)
+        if(!ReSetFlag && ReSetUIexpression)
         {
             ReSetUIexpression = true;
             ReSetUI.enabled = false;
             ResetUIobj.SetActive(false);
         }
 
-        if(PlayerController.SettingFlag && SettingUIexpression && !PlayerController.ReSetFlag)
+        if(SettingFlag && SettingUIexpression && !ReSetFlag)
         {
             AudioUIobj.SetActive(true);
             SettingUI.enabled = true;
@@ -81,7 +90,7 @@ public class GameManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(SettingButton);
         }
 
-        if(!PlayerController.SettingFlag && SettingUIexpression)
+        if(!SettingFlag && SettingUIexpression)
         {
 
             SettingUI.enabled = false;
@@ -97,6 +106,15 @@ public class GameManager : MonoBehaviour
                 seconds = seconds - 60;
             }
         }
+
+        if(ReSet.wasPressedThisFrame && !ReSetFlag)
+        {
+            ReSetFlag = true;
+        }
+        if(Setting.wasPressedThisFrame && !SettingFlag)
+        {
+            SettingFlag = true;
+        }
     }
     //フロアに弓矢の数が10本以上になると最初の弓矢を削除する処理(処理負荷軽減のため)
     public void Check(string tagname)
@@ -111,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     public static void GameReset()
     {
-        PlayerController.SelectReSet = true;
+        SelectReSet = true;
         PlayerController PC = PlayerController.Instance;
         PC.ItemLost();
         instance.SelectCl();
@@ -186,8 +204,8 @@ public class GameManager : MonoBehaviour
     }
     public void SelectCl()
     {
-        PlayerController.ReSetFlag = false;
-        PlayerController.SettingFlag = false;
+        ReSetFlag = false;
+        SettingFlag = false;
         ReSetUIexpression = true;
         SettingUIexpression = true;
         ReSetUI.enabled = false;

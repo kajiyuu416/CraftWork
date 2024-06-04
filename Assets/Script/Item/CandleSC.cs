@@ -18,10 +18,10 @@ public class CandleSC : Charade
                 HitFlag = true;
                 generationefect = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(-90f, 0f, 0f));
                 SetTag("supplyArea");
+
                 if(clearCheck4 != null&&answer==true)
                 {
                     clearCheck4.ClearCheck();
-
                 }
             }
         }
@@ -32,7 +32,7 @@ public class CandleSC : Charade
     }
     private void Update()
     {
-        if(PlayerController.SelectReSet && HitFlag)
+        if(GameManager.SelectReSet && HitFlag)
         {
             HitFlag = false;
             Destroy(generationefect);

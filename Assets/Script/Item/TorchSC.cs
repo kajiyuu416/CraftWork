@@ -36,7 +36,7 @@ public class TorchSC : MonoBehaviour
     //Playerが特定の座標にいる場合トーチをPlayerの座標に移動させる処理
     private void Update()
     {
-        if(PlayerController.SelectReSet)
+        if(GameManager.SelectReSet)
         {
             transform.position = PlayerController.CP;
             if(!burnFlag)

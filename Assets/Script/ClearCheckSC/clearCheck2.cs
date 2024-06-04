@@ -8,7 +8,6 @@ public class clearCheck2 : MonoBehaviour
     [SerializeField] GameObject teleportObj1;
     [SerializeField] GameObject teleportObj2;
     private bool ClearFlag;
-
     void Update()
     {
         if(charade.HitFlag && !ClearFlag)

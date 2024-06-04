@@ -3,7 +3,7 @@ using UnityEngine.UI;
 public class pickaxeSC : MonoBehaviour
 {
     public int Use_Pickaxe_Count = 5;
-    private BoxCollider2D BoxCollider2D;
+    private const int MaxCount = 5;
     new Rigidbody2D rigidbody2D;
     public static pickaxeSC Instance
     {
@@ -18,18 +18,17 @@ public class pickaxeSC : MonoBehaviour
             return;
      }
      Instance = this;
-     Use_Pickaxe_Count = 5;
-     BoxCollider2D = GetComponent<BoxCollider2D>();
+     Use_Pickaxe_Count = MaxCount;
      rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
         Use_Pickaxe();
-        if(PlayerController.SelectReSet)
+        if(GameManager.SelectReSet)
         {
             transform.position = PlayerController.CP;
-            Use_Pickaxe_Count = 5;
+            Use_Pickaxe_Count = MaxCount;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,7 +38,7 @@ public class pickaxeSC : MonoBehaviour
             rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
         }
     }
-    public void addCount()
+    public void AddCount()
     {
         Use_Pickaxe_Count--;
     }
@@ -51,35 +50,10 @@ public class pickaxeSC : MonoBehaviour
             PlayerController Pc = PlayerController.Instance;
             Destroy(gameObject);
             Pc.ItemLost();
-            Debug.Log(Use_Pickaxe_Count);
         }
-        if(Use_Pickaxe_Count == 1)
+        if(Use_Pickaxe_Count == 1 || Use_Pickaxe_Count == 2 || Use_Pickaxe_Count == 3 || Use_Pickaxe_Count == 4 || Use_Pickaxe_Count == 5)
         {
             rigidbody2D.constraints = RigidbodyConstraints2D.None;
-            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-            Debug.Log(Use_Pickaxe_Count);
-        }
-        if(Use_Pickaxe_Count == 2)
-        {
-            rigidbody2D.constraints = RigidbodyConstraints2D.None;
-            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-            Debug.Log(Use_Pickaxe_Count);
-        }
-        if(Use_Pickaxe_Count == 3)
-        {
-            rigidbody2D.constraints = RigidbodyConstraints2D.None;
-            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-            Debug.Log(Use_Pickaxe_Count);
-        }
-        if(Use_Pickaxe_Count == 4)
-        {
-            rigidbody2D.constraints = RigidbodyConstraints2D.None;
-            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-            Debug.Log(Use_Pickaxe_Count);
-        }
-        if(Use_Pickaxe_Count == 5)
-        {
             rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
             Debug.Log(Use_Pickaxe_Count);
         }

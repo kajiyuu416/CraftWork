@@ -3,8 +3,10 @@ using UnityEngine.Assertions.Must;
 public class LeverSC : MonoBehaviour
 {
     [SerializeField] GameObject targetObj;
+    [SerializeField] clearCheck1 clearCheck1;
     public bool LeverOn = false;
     public bool LeverOff = true;
+    public bool answer;
     private SpriteRenderer originSprite;
     public Vector3 On_Pos;
     public Vector3 Off_Pos;
@@ -25,22 +27,19 @@ public class LeverSC : MonoBehaviour
     {
         if(selectNumber == SelectNum.one || selectNumber == SelectNum.two)
         {
-            if(collision.CompareTag("Player") && LeverOff)
+            if(LeverOff)
             {
-                Lever_On();
+                if(collision.CompareTag("Player") || collision.CompareTag("arrow"))
+                {
+                    Lever_On();
+                }
             }
-            else if(collision.CompareTag("Player") && LeverOn)
+            else if(LeverOn)
             {
-                Lever_Off();
-            }
-
-            if(collision.CompareTag("arrow") && LeverOff)
-            {
-                Lever_On();
-            }
-            else if(collision.CompareTag("arrow") && LeverOn)
-            {
-                Lever_Off();
+                if(collision.CompareTag("Player") || collision.CompareTag("arrow"))
+                {
+                    Lever_Off();
+                }
             }
         }
     }
@@ -48,14 +47,12 @@ public class LeverSC : MonoBehaviour
     {
         if(selectNumber == SelectNum.tree)
         {
-            if(collision.CompareTag("Player") && LeverOff)
+            if(LeverOff)
             {
-                Lever_On();
-            }
-
-            if(collision.CompareTag("arrow") && LeverOff)
-            {
-                Lever_On();
+                if(collision.CompareTag("Player") || collision.CompareTag("arrow"))
+                {
+                    Lever_On();
+                }
             }
         }
     }
@@ -63,14 +60,12 @@ public class LeverSC : MonoBehaviour
     {
         if(selectNumber == SelectNum.tree)
         {
-            if(collision.CompareTag("Player") && LeverOn)
+            if(LeverOn)
             {
-                Lever_Off();
-            }
-
-            if(collision.CompareTag("arrow") && LeverOn)
-            {
-                Lever_Off();
+                if(collision.CompareTag("Player") || collision.CompareTag("arrow"))
+                {
+                    Lever_Off();
+                }
             }
         }
     }
@@ -107,7 +102,7 @@ public class LeverSC : MonoBehaviour
             }
         }
 
-        if(PlayerController.SelectReSet && LeverOn)
+        if(GameManager.SelectReSet && LeverOn)
         {
             Lever_Off();
         }
@@ -119,6 +114,10 @@ public class LeverSC : MonoBehaviour
         originSprite.flipX = true;
         SoundManager SM = SoundManager.Instance;
         SM.SettingPlaySE8();
+        if(clearCheck1 != null && answer)
+        {
+            clearCheck1.LeverCheck();
+        }
     }
     private void Lever_Off()
     {
@@ -127,6 +126,10 @@ public class LeverSC : MonoBehaviour
         originSprite.flipX = false;
         SoundManager SM = SoundManager.Instance;
         SM.SettingPlaySE8();
+        if(clearCheck1 != null &&!answer)
+        {
+            clearCheck1.LeverCheck();
+        }
     }
 
 }

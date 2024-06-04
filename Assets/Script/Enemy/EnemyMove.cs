@@ -15,7 +15,7 @@ public class EnemyMove : MonoBehaviour
     private Vector3 StartPos;
     public enum SelectNum
     {
-      zero,one, two, tree
+        zero, one, two, tree
     }
     public SelectNum selectNumber;
 
@@ -92,7 +92,6 @@ public class EnemyMove : MonoBehaviour
         }
         Instantiate(deathEffect, transform.position, transform.rotation);
         Destroy(gameObject);
-
     }
 
 
@@ -126,7 +125,7 @@ public class EnemyMove : MonoBehaviour
         float PosX = StartPos.x + (Mathf.PingPong(Time.time * moveSpeed, migration_width));
         enemy_rigid.MovePosition(new Vector3(PosX, StartPos.y, StartPos.z));
     }
-        private void Transform_Alldirections()
+    private void Transform_Alldirections()
     {
         float PosX = StartPos.x + (Mathf.PingPong(Time.time * moveSpeed, migration_width));
         float PosY = StartPos.y + Mathf.Sin(Time.time * moveSpeed) * migration_width;

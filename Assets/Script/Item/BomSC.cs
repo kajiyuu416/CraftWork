@@ -9,10 +9,19 @@ public class BomSC : MonoBehaviour
     [SerializeField] BoxCollider2D boxCol1;
     [SerializeField] BoxCollider2D boxCol2;
     [SerializeField] CapsuleCollider2D capsuleCol;
-    [SerializeField] float countdownSecond = 5;
-    public bool ignitionFlag;
-    public bool First_ignitionFlag;
-    private void FixedUpdate()
+    private SpriteRenderer spriteRenderer;
+    private Color defaultColor = new Color(255, 255, 255, 255);
+    private float countdownSecond = 5;
+    private float Maxcount = 5;
+    private bool ignitionFlag;
+    private bool First_ignitionFlag;
+    private bool burnFlag;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    private void Update()
     {
         Ignition();
 
@@ -20,23 +29,38 @@ public class BomSC : MonoBehaviour
         {
             gameObject.layer = 3;
         }
-        if(countdownSecond <= 0.0f)
-        {
-            Explosion();
-        }
         if(countdownSecond < 0.5f)
         {
-          gameObject.layer = 0;
+            gameObject.layer = 0;
+        }
+        if(countdownSecond <= 0.0f &&!burnFlag)
+        {
+            Explosion();
+            StartCoroutine(SetTime());
+            burnFlag = true;
+        }
+
+        if(GameManager.SelectReSet)
+        {
+            countdownSecond = Maxcount;
+            gameObject.layer = 3;
+            spriteRenderer.enabled = true;
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+            burnFlag = false;
+            ignitionFlag = false;
+            First_ignitionFlag = false;
+            boxCol1.enabled = true;
+            boxCol2.enabled = true;
+            capsuleCol.enabled = false;
         }
     }
     //爆発のタイミングが可視化できるように、残り時間に応じでカラーを徐々に変更
     public IEnumerator explosion_Count()
     {
-        SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
         yield return new WaitForSeconds(1f);
-        while(sprite.color.a <= 1)
+        while(spriteRenderer.color.r <= 1)
         {
-            sprite.color -= new Color(0, 0.005f, 0.005f, 0);
+            spriteRenderer.color -= new Color(0, 0.01f, 0.01f, 0);
             yield return null;
         }
     }
@@ -72,10 +96,14 @@ public class BomSC : MonoBehaviour
     private void Explosion()
     {
         Instantiate(explosionEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
+        boxCol1.enabled = false;
+        boxCol2.enabled = false;
         capsuleCol.enabled = true;
+        spriteRenderer.color = defaultColor;
+        spriteRenderer.enabled = false;
         SoundManager SM = SoundManager.Instance;
         SM.SettingPlaySE18();
+
     }
     //爆弾点火時の処理
     private void Ignition()
@@ -91,5 +119,10 @@ public class BomSC : MonoBehaviour
             }
         }
 
+    }
+    private IEnumerator SetTime()
+    {
+        yield return new WaitForSeconds(1.0f);
+        capsuleCol.enabled = false;
     }
 }

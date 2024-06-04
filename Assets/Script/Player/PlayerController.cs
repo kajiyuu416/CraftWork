@@ -11,9 +11,6 @@ public class PlayerController : MonoBehaviour
     public GameObject NowHoldobj;
     public GameObject HoldObj;
     public bool NowHoldItem = false;
-    public static bool SelectReSet;
-    public static bool ReSetFlag;
-    public static bool SettingFlag;
     public Vector2 moveInputVal;
     public static Vector2 CameraInputVal;
     public static Vector3 CP = new Vector3();
@@ -53,20 +50,23 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         GamePad_connection_Check();
         PlayerHoldItem();
-        if(SelectReSet)
+        if(GameManager.SelectReSet)
         {
             transform.position = CP;
+            rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+            GameManager.SelectReSet = false;
+
         }
     }
     //Playerの動き制御、アイテム保持の有無をチェック
     private void PlayerMove()
     {
         //Reset画面、BGM、SEセッティング画面ではプレイヤーの移動を制御
-        if(ReSetFlag || SettingFlag)
+        if(GameManager.ReSetFlag || GameManager.SettingFlag)
         {
             rigid.constraints = RigidbodyConstraints2D.FreezePosition;
         }
-        if(!ReSetFlag && !SettingFlag)
+        if(!GameManager.ReSetFlag && !GameManager.SettingFlag)
         {
             float desiredSpeedX = Mathf.Abs(moveInputVal.x) > 0.1f ? moveInputVal.x * move_max : 0f;
             float accelerationX = Mathf.Abs(moveInputVal.x) > 0.1f ? move_accel : move_deccel;
@@ -79,7 +79,6 @@ public class PlayerController : MonoBehaviour
             rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
         rigid.velocity = move;
-
         if(move.magnitude > 0.1f)
            lookat = move.normalized;
            if(Mathf.Abs(lookat.x) > 0.02)
@@ -112,7 +111,7 @@ public class PlayerController : MonoBehaviour
     //Playerがアイテム保持のアクション制御
     private void PlayerHoldItem()
     {
-        if(!ReSetFlag && !SettingFlag)
+        if(!GameManager.ReSetFlag && !GameManager.SettingFlag)
         {
             if(connect)
             {
@@ -122,8 +121,7 @@ public class PlayerController : MonoBehaviour
                 var Throw_left_right = current_GP.buttonWest;
                 var Throw_up = current_GP.buttonNorth;
                 var Throw_Down = current_GP.buttonSouth;
-                var ReSet = current_GP.selectButton;
-                var Setting = current_GP.startButton;
+
                 bool isbow = PE.Duplicate_Bow_Hold_Flag;
 
                 //アイテムを持ち上げる
@@ -193,15 +191,6 @@ public class PlayerController : MonoBehaviour
                         GM.Check("arrow");
                     }
                 }
-                if(ReSet.wasPressedThisFrame && !ReSetFlag)
-                {
-                    ReSetFlag = true;
-                }
-                if(Setting.wasPressedThisFrame && !SettingFlag)
-                {
-                    SettingFlag = true;
-                }
-
                 if(current_GP == null)
                     return;
             }
