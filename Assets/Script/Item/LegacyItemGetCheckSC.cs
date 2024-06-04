@@ -1,47 +1,46 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+//インスペクターで指定したオブジェクトについているスクリプトのフラグをチェック
 public class LegacyItemGetCheckSC : MonoBehaviour
 {
-    [SerializeField] LegacyItemSC gold_ring;
-    [SerializeField] LegacyItemSC gold_coins;
-    [SerializeField] LegacyItemSC gem_diamond;
-    [SerializeField] LegacyItemSC gold_crown;
-    [SerializeField] LegacyItemSC gold_bars;
-    public static bool GetLI1;
-    public static bool GetLI2;
-    public static bool GetLI3;
-    public static bool GetLI4;
-    public static bool GetLI5;
+    public static List<LegacyItemSC> legacyItems = new List<LegacyItemSC>();
+    public static List<bool> getLIFlagList = new List<bool>();
+
+    private void Awake()
+    {
+        
+    }
     private void Update()
     {
-        GetItemCheck();
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            int i = 0;
+            foreach(var li in legacyItems)
+            {
+
+                //Debug.Log(i +"オブジェクト名"+li);
+                //Debug.Log(i + "フラグ" + getLIFlagList[i]);
+                if(getLIFlagList[i])
+                {
+                    li.gameObject.SetActive(false);
+                }
+                i++;
+            }
+        }
     }
-    //インスペクターで指定したオブジェクトについているスクリプトのフラグをチェック
-    private void GetItemCheck()
+    public  static void GetItemCheck()
     {
-        if(gold_ring.ItemGetFlag || GetLI1)
+        int i = 0;
+        foreach(var li in legacyItems)
         {
-            GetLI1 = true;
-            gold_ring.LegacyItem.SetActive(false);
-        }
-        if(gold_coins.ItemGetFlag || GetLI2)
-        {
-            GetLI2 = true;
-            gold_coins.LegacyItem.SetActive(false);
-        }
-        if(gem_diamond.ItemGetFlag || GetLI3)
-        {
-            GetLI3 = true;
-            gem_diamond.LegacyItem.SetActive(false);
-        }
-        if(gold_crown.ItemGetFlag || GetLI4)
-        {
-            GetLI4 = true;
-            gold_crown.LegacyItem.SetActive(false);
-        }
-        if(gold_bars.ItemGetFlag || GetLI5)
-        {
-            GetLI5 = true;
-            gold_bars.LegacyItem.SetActive(false);
+
+            if(li.ItemGetFlag)
+            {
+                getLIFlagList[i] = true;
+                li.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            i++;
         }
     }
 

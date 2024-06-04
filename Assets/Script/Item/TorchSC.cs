@@ -39,6 +39,10 @@ public class TorchSC : MonoBehaviour
         if(PlayerController.SelectReSet)
         {
             transform.position = PlayerController.CP;
+            if(!burnFlag)
+            {
+                ignition();
+            }
         }
         Vector3 posi = this.transform.localPosition;
 

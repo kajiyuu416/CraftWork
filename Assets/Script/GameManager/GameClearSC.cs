@@ -1,19 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 public class GameClearSC : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI text1;
     [SerializeField] TextMeshProUGUI text2;
     [SerializeField] TextMeshProUGUI text3;
     [SerializeField] TextMeshProUGUI text4;
-    [SerializeField] Image gold_ring_Image;
-    [SerializeField] Image gold_coins_Image;
-    [SerializeField] Image gem_diamond_Image;
-    [SerializeField] Image gold_crown_Image;
-    [SerializeField] Image gold_bars_Image;
+    [SerializeField] Image[] legacyItems; 
 
-    Color defaultColor = new Color(255, 255, 255, 255);
+    private Color defaultColor = new Color(255, 255, 255, 255);
     private void Start()
     {
         text1.text = "Game Clear";
@@ -22,26 +19,20 @@ public class GameClearSC : MonoBehaviour
         text4.text = "èWÇﬂÇΩÇ®ïÛ";
         SoundManager SM = SoundManager.Instance;
         SM.SettingPlaySE22();
+        GetCheck();
+    }
 
-        if(LegacyItemGetCheckSC.GetLI1)
+    public void GetCheck()
+    {
+
+        foreach(var FL in LegacyItemGetCheckSC.getLIFlagList)
         {
-            gold_ring_Image.color = defaultColor;
-        }
-        if(LegacyItemGetCheckSC.GetLI2)
-        {
-            gold_coins_Image.color = defaultColor;
-        }
-        if(LegacyItemGetCheckSC.GetLI3)
-        {
-            gem_diamond_Image.color = defaultColor;
-        }
-        if(LegacyItemGetCheckSC.GetLI4)
-        {
-            gold_crown_Image.color = defaultColor;
-        }
-        if(LegacyItemGetCheckSC.GetLI5)
-        {
-            gold_bars_Image.color = defaultColor;
+            Debug.Log(FL);
+            //foreach(var lI in legacyItems)
+            //{
+            //    lI.color = defaultColor;
+            //}
         }
     }
+
 }

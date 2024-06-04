@@ -827,11 +827,12 @@ MonoBehaviour:
   text2: {fileID: 2059460999}
   text3: {fileID: 1115797987}
   text4: {fileID: 1843027485}
-  gold_ring_Image: {fileID: 1129228258}
-  gold_coins_Image: {fileID: 165636509}
-  gem_diamond_Image: {fileID: 58607307}
-  gold_crown_Image: {fileID: 677025751}
-  gold_bars_Image: {fileID: 505238099}
+  legacyItems:
+  - {fileID: 1129228258}
+  - {fileID: 165636509}
+  - {fileID: 58607307}
+  - {fileID: 677025751}
+  - {fileID: 505238099}
 --- !u!114 &1610746627
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -106,6 +106,11 @@ public class LeverSC : MonoBehaviour
                 objectTransform.transform.eulerAngles = Vector3.Lerp(objectTransform.eulerAngles, Off_Pos, speed * Time.deltaTime);
             }
         }
+
+        if(PlayerController.SelectReSet && LeverOn)
+        {
+            Lever_Off();
+        }
     }
     private void Lever_On()
     {

@@ -10,15 +10,13 @@ public class ClearCheck3 : MonoBehaviour
         if(collision.CompareTag(tagname) && !ClearFlag)
         {
             ClearFlag = true;
-            SoundManager SM = SoundManager.Instance;
-            SM.SoundPause();
-            SM.SettingPlaySE7();
+            SoundManager.Instance.SoundPause();
+            SoundManager.Instance.SettingPlaySE7();
             Invoke("SoundUnpause", 3.5f);
         }
     }
     public void SoundUnpause()
     {
-        SoundManager SM = SoundManager.Instance;
-        SM.SoundUnPause();
+        SoundManager.Instance.SoundUnPause();
     }
 }

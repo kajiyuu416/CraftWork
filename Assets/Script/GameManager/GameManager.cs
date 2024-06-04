@@ -111,8 +111,6 @@ public class GameManager : MonoBehaviour
 
     public static void GameReset()
     {
-        Scene loadScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(loadScene.name);
         PlayerController.SelectReSet = true;
         PlayerController PC = PlayerController.Instance;
         PC.ItemLost();

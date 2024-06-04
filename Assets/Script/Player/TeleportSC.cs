@@ -15,8 +15,7 @@ public class TeleportSC : MonoBehaviour
             targetPos.transform.position = TeleportPos.position;
             hitFlag = true;
             Invoke("UNhitFlag", 2.0f);
-            SoundManager SM = SoundManager.Instance;
-            SM.SettingPlaySE10();
+            SoundManager.Instance.SettingPlaySE10();
 
         }
     }

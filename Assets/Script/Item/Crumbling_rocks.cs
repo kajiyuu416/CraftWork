@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Crumbling_rocks : Charade
 {
+    [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] BoxCollider2D boxCollider2D;
     //特定のアイテムと接触したら非表示になる
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,7 +15,8 @@ public class Crumbling_rocks : Charade
             if(targetObjSprite == hitObjSprite && !HitFlag)
             {
                 GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(0f, 0f, 0f));
-                this.gameObject.SetActive(false);
+                meshRenderer.enabled = false;
+                boxCollider2D.enabled = false;
                 HitFlag = true;
                 pickaxeSC pickaxe = pickaxeSC.Instance;
                 pickaxe.addCount();
@@ -22,4 +25,15 @@ public class Crumbling_rocks : Charade
             }
         }
     }
+    private void Update()
+    {
+        if(PlayerController.SelectReSet && HitFlag)
+        {
+            meshRenderer.enabled = true;
+            boxCollider2D.enabled = true;
+            HitFlag = false;
+        }
+    }
+
+
 }

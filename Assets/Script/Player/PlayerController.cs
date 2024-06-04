@@ -53,6 +53,10 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         GamePad_connection_Check();
         PlayerHoldItem();
+        if(SelectReSet)
+        {
+            transform.position = CP;
+        }
     }
     //Playerの動き制御、アイテム保持の有無をチェック
     private void PlayerMove()

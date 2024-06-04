@@ -5,8 +5,13 @@ using UnityEngine;
 public class LegacyItemSC : MonoBehaviour
 {
     [SerializeField] GameObject generationEfect;
-    public GameObject LegacyItem; 
     public bool ItemGetFlag;
+
+    private void Awake()
+    {
+        LegacyItemGetCheckSC.legacyItems.Add(this);
+        LegacyItemGetCheckSC.getLIFlagList.Add(false);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var transPos = transform.position + new Vector3(0, 0, -0.3f);
@@ -17,6 +22,7 @@ public class LegacyItemSC : MonoBehaviour
             SoundManager SM = SoundManager.Instance;
             SM.SettingPlaySE23();
             ItemGetFlag = true;
+            LegacyItemGetCheckSC.GetItemCheck();
         }
     }
 }

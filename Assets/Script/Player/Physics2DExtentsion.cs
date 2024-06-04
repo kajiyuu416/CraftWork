@@ -40,7 +40,7 @@ public class Physics2DExtentsion : MonoBehaviour
     //Playerが特定のアイテムを保持しているかチェックし、該当の場合フラグを返す処理
     private void Hold_Item_Check()
     {
-        if(holdFlag)
+        if(PC.moveInputVal !=Vector2.zero)
         {
             PlayerController.SelectReSet = false;
         }

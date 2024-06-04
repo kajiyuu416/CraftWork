@@ -26,6 +26,11 @@ public class pickaxeSC : MonoBehaviour
     private void Update()
     {
         Use_Pickaxe();
+        if(PlayerController.SelectReSet)
+        {
+            transform.position = PlayerController.CP;
+            Use_Pickaxe_Count = 5;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

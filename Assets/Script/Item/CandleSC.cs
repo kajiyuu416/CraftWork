@@ -1,8 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CandleSC : Charade
 {
-    private bool ChangeTag;
+    [SerializeField] clearCheck4 clearCheck4;
+    private GameObject generationefect;
+    public bool answer;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Item"))
@@ -13,9 +16,13 @@ public class CandleSC : Charade
             if(targetObjSprite == hitObjSprite && !HitFlag)
             {
                 HitFlag = true;
-                ChangeTag = true;
-                GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(-90f, 0f, 0f));
+                generationefect = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(-90f, 0f, 0f));
                 SetTag("supplyArea");
+                if(clearCheck4 != null&&answer==true)
+                {
+                    clearCheck4.ClearCheck();
+
+                }
             }
         }
     }
@@ -25,11 +32,11 @@ public class CandleSC : Charade
     }
     private void Update()
     {
-        if(HitFlag&&!ChangeTag)
+        if(PlayerController.SelectReSet && HitFlag)
         {
-            ChangeTag = true;
-            GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(-90f, 0f, 0f));
-            SetTag("supplyArea");
+            HitFlag = false;
+            Destroy(generationefect);
+            SetTag("Untagged");
         }
     }
 

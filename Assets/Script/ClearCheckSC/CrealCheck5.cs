@@ -31,7 +31,7 @@ public class CrealCheck5 : MonoBehaviour
             Debug.Log("aaa");
         }
     }
-    void Update()
+    private void Update()
     {
         if(LeverOn)
         {
