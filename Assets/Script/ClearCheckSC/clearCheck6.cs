@@ -4,7 +4,6 @@ public class clearCheck6 : MonoBehaviour
     public Vector3 targetPos;
     [SerializeField] Charade charade;
     private Vector3 origin;
-
     private void Awake()
     {
         origin = transform.position;

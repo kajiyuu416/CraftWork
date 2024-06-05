@@ -55,7 +55,6 @@ public class pickaxeSC : MonoBehaviour
         {
             rigidbody2D.constraints = RigidbodyConstraints2D.None;
             rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-            Debug.Log(Use_Pickaxe_Count);
         }
         else if(Use_Pickaxe_Count < 0)
         {

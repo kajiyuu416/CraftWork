@@ -17,6 +17,4 @@ public class arrowSC : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
 }

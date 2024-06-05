@@ -127,13 +127,18 @@ MonoBehaviour:
   damageEffect1: {fileID: 100004, guid: ce9110b3ce9cff546b1ae452f4cbb167, type: 3}
   damageEffect2: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7,
     type: 3}
-  head: {fileID: 1907763925423328344}
-  body: {fileID: 1907763926413252148}
+  summon_Obj1: {fileID: 0}
+  summon_Obj2: {fileID: 0}
+  summon_Obj3: {fileID: 0}
+  summon_Obj4: {fileID: 0}
+  meshRenderer: {fileID: 0}
+  boxCollider2D: {fileID: 0}
   BossEnemy_bar_image: {fileID: 0}
   BossEnemy_Remaining_image: {fileID: 0}
-  moveSpeed: 1
+  text: {fileID: 0}
+  sprite: {fileID: 0}
   ememy_HitPoint: 500
-  Combat_state: 0
+  ActionCount: 10
 --- !u!1 &1907763925423328350
 GameObject:
   m_ObjectHideFlags: 0

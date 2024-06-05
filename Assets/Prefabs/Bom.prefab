@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7221672503026547695}
   m_Layer: 3
   m_Name: Bom
-  m_TagString: CloneBom
+  m_TagString: Bom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

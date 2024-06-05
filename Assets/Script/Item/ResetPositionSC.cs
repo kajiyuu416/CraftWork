@@ -5,12 +5,12 @@ using UnityEngine;
 public class ResetPositionSC : MonoBehaviour
 {
     private Vector3 OriginPosition;
-
+//ゲーム開始時初期位置の記録
     private void Awake()
     {
         OriginPosition = transform.position;
     }
-    // Update is called once per frame
+    //リセットフラグが返ったときにオブジェクトの位置を初期位置に戻す
     private void Update()
     {
         if(GameManager.SelectReSet)

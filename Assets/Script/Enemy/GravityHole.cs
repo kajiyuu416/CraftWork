@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class GravityHole : MonoBehaviour
 {
-    public float DestroyCount = 8.0f;
-
-
+    private float DestroyCount = 8.0f;
+    //カウントが0又はリセットフラグが返ったときに削除
     private void Update()
     {
         DestroyCount -= Time.deltaTime;
@@ -18,6 +17,7 @@ public class GravityHole : MonoBehaviour
             GameManager.CloneEnemyDestroy();
         }
     }
+    //プレイヤーがコライダー内に触れている間、中心にプレイヤーが移動するよう力を加える
     private void OnTriggerStay2D(Collider2D collision)
     {
         Rigidbody2D rigid = collision.gameObject.GetComponent<Rigidbody2D>();

@@ -6,7 +6,7 @@ public class ResetItemSC : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] BoxCollider2D[] boxCollider2D;
-
+    //ゲーム開始時取得
     private void Awake()
     {
         if(spriteRenderer == null || boxCollider2D == null)
@@ -15,6 +15,7 @@ public class ResetItemSC : MonoBehaviour
             boxCollider2D = GetComponents<BoxCollider2D>();
         }
     }
+    //リセットフラグが返ったときスプライトとコライダーの表示を行う
     private void Update()
     {
         if(GameManager.SelectReSet)

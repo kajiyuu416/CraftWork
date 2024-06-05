@@ -19,7 +19,6 @@ public class Physics2DExtentsion : MonoBehaviour
     private Sprite ItemSprite;
     private float distance = 1.0f;
     private float CharacterDirection;
-
     private void Start()
     {
         CharacterDirection = 0f;

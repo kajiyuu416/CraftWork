@@ -7,7 +7,7 @@ public class clearCheck1 : MonoBehaviour
     [SerializeField] List<BoxCollider2D> targetBoxCols = new List<BoxCollider2D>();
     public bool clearFlag;
 
-    //インスペクターで指定したレバーのON、OFFをチェック
+    //リストに登録したレバーが正解状態（on.off）をチェック
     public void LeverCheck()
     {
         clearFlag = true;
@@ -16,8 +16,7 @@ public class clearCheck1 : MonoBehaviour
             if(li.LeverOn != li.answer)
             {
                 clearFlag = false;
-            }
-            
+            }   
         }
         if(clearFlag)
         {
@@ -39,7 +38,6 @@ public class clearCheck1 : MonoBehaviour
             LeverCheck();
         }
     }
-
     public void SoundUnpause()
     {
         SoundManager SM = SoundManager.Instance;

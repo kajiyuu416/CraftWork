@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Enemy_summonSC : MonoBehaviour
 {
+    //ボスエネミーの行動で使用
+    //エネミーを2秒後に生成
     [SerializeField] GameObject appearance_Efect;
     [SerializeField] GameObject summons_Enemy;
     private void Start()

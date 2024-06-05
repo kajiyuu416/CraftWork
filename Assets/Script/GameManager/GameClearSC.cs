@@ -16,22 +16,20 @@ public class GameClearSC : MonoBehaviour
         text2.text = "クリアタイム :";
         text3.text = GameManager.minute.ToString("00") + ":" + ((int) GameManager.seconds).ToString("00");
         text4.text = "集めたお宝";
-        SoundManager SM = SoundManager.Instance;
-        SM.SettingPlaySE22();
+        SoundManager.Instance.SettingPlaySE22();
         GetCheck();
     }
-
     public void GetCheck()
     {
-        foreach(var FL in LegacyItemGetCheckSC.getLIFlagList)
+        int i = 0;
+        foreach(var li in LegacyItemGetCheckSC.getLIFlagList)
         {
-            if(FL)
+            if(LegacyItemGetCheckSC.getLIFlagList[i])
             {
-                foreach(var lII in legacyItemImages)
-                {
-                    lII.color = defaultColor;
-                }
+                legacyItemImages[i].color = defaultColor;
             }
+            i++;
+
         }
     }
 

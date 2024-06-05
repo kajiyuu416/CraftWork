@@ -1,14 +1,13 @@
 using UnityEngine;
-
 public class clearCheck3 : MonoBehaviour
 {
     public string tagname;
-    private bool ClearFlag = false;
+    private bool clearFlag = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag(tagname) && !ClearFlag)
+        if(collision.CompareTag(tagname) && !clearFlag)
         {
-            ClearFlag = true;
+            clearFlag = true;
             SoundManager.Instance.SoundPause();
             SoundManager.Instance.SettingPlaySE7();
             Invoke("SoundUnpause", 3.5f);

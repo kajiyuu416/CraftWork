@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
             SettingUIexpression = true;
             AudioUIobj.SetActive(false);
         }
+        //ゲーム開始時からカウント開始
         if(GameStartFlag)
         {
             seconds += Time.deltaTime;
@@ -123,11 +124,10 @@ public class GameManager : MonoBehaviour
         tagObjcts = GameObject.FindGameObjectsWithTag(tagname);
         if(tagObjcts.Length >10)
         {
-            Debug.Log("フロアにある本数が10本以上の為、削除します");
             Destroy(tagObjcts[0]);
         }
     }
-
+    //リセットフラグを返す関数
     public static void GameReset()
     {
         SelectReSet = true;
@@ -135,9 +135,10 @@ public class GameManager : MonoBehaviour
         PC.ItemLost();
         instance.SelectCl();
     }
+    //ゲームクリアフラグを返し、クリアシーンへの切り替え
     private void GameClear()
     {
-        if(BossEnemySC.BossEnemyDeath && !GameClearFlag)
+        if(BossEnemySC.bossEnemyDeath && !GameClearFlag)
         {
             GameClearFlag = true;
             GameStartFlag = false;
@@ -197,12 +198,14 @@ public class GameManager : MonoBehaviour
 
         while(color.a >= 0)
         {
-            color -= new Color(0, 0, 0, 0.05f);
+            color -= new Color(0, 0, 0, 0.01f);
             blackScreen.color = color;
 
             yield return null;
         }
     }
+    //ボスエネミーが生成した、クローンエネミー、クローンボムの削除
+    //タグで判定を行いリセットフラグが返ったときに、シーンから対象のオブジェクトの削除を行う
     public static void CloneEnemyDestroy()
     {
         GameObject[] cloneEnemys = GameObject.FindGameObjectsWithTag(cloneEnemy_objctTag);
@@ -237,6 +240,7 @@ public class GameManager : MonoBehaviour
         ReSetUI.enabled = false;
         SettingUI.enabled = false;
     }
+    //シーンによってBGMの切り替え
     public void OnActiveSceneChanged(Scene prevScene, Scene nextScene)
     {
         if(beforeScene == "title" && nextScene.name == "MainScene")
