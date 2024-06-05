@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7221672503026547695}
   m_Layer: 3
   m_Name: Bom
-  m_TagString: Bom
+  m_TagString: CloneBom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,9 +197,7 @@ MonoBehaviour:
   boxCol1: {fileID: 645925201540446281}
   boxCol2: {fileID: 645925201540446295}
   capsuleCol: {fileID: 645925201540446283}
-  countdownSecond: 5
   ignitionFlag: 0
-  First_ignitionFlag: 0
 --- !u!114 &7221672503026547695
 MonoBehaviour:
   m_ObjectHideFlags: 0

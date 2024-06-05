@@ -16,6 +16,13 @@ public class Enemy_summonSC : MonoBehaviour
         Instantiate(summons_Enemy, transform.position,sumons_pos);
         Destroy(gameObject);
     }
+    private void Update()
+    {
+        if(GameManager.SelectReSet)
+        {
+            GameManager.CloneEnemyDestroy();
+        }
+    }
 
 
 }

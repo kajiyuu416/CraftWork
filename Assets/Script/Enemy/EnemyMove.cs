@@ -27,6 +27,11 @@ public class EnemyMove : MonoBehaviour
     private void Update()
     {
         EnemyHealth();
+
+        if(GameManager.SelectReSet)
+        {
+            GameManager.CloneEnemyDestroy();
+        }
     }
     private void FixedUpdate()
     {
@@ -48,7 +53,7 @@ public class EnemyMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Bom"))
+        if(other.CompareTag("Bom") || other.CompareTag("CloneBom"))
         {
             ememy_HitPoint = ememy_HitPoint - 10;
             Enemy_Damage();

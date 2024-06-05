@@ -9,7 +9,6 @@ public class bodyDamage : MonoBehaviour
         {
             be.Enemy_Damage1();
             be.ememy_HitPoint = be.ememy_HitPoint - 3;
-            Debug.Log("body");
         }
     }
 }

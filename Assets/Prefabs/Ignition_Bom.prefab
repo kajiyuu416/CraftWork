@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 645925201540446294}
   m_Layer: 10
   m_Name: Ignition_Bom
-  m_TagString: Bom
+  m_TagString: CloneBom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7b06eb4c1d514ff46883ccec52a5009f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -196,6 +196,4 @@ MonoBehaviour:
   boxCol1: {fileID: 645925201540446281}
   boxCol2: {fileID: 645925201540446295}
   capsuleCol: {fileID: 645925201540446283}
-  countdownSecond: 5
   ignitionFlag: 1
-  First_ignitionFlag: 1

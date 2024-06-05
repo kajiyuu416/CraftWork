@@ -9,8 +9,11 @@ public class ResetItemSC : MonoBehaviour
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        boxCollider2D = GetComponents<BoxCollider2D>();
+        if(spriteRenderer == null || boxCollider2D == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            boxCollider2D = GetComponents<BoxCollider2D>();
+        }
     }
     private void Update()
     {

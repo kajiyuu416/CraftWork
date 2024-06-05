@@ -9411,7 +9411,7 @@ GameObject:
   - component: {fileID: 2011838398395947232}
   m_Layer: 9
   m_Name: Gravity_Hole
-  m_TagString: Enemy
+  m_TagString: CloneEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14144,5 +14144,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edc2bd031d2b47428dd6908c5e565a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 3256217435581560744, guid: d0284775b5b280b499af7dd4b023027f, type: 3}
   DestroyCount: 10

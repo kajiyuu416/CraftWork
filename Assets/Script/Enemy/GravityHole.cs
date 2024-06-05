@@ -4,6 +4,7 @@ public class GravityHole : MonoBehaviour
 {
     public float DestroyCount = 8.0f;
 
+
     private void Update()
     {
         DestroyCount -= Time.deltaTime;
@@ -11,6 +12,10 @@ public class GravityHole : MonoBehaviour
         if(DestroyCount < 0)
         {
             Destroy(gameObject);
+        }
+        if(GameManager.SelectReSet)
+        {
+            GameManager.CloneEnemyDestroy();
         }
     }
     private void OnTriggerStay2D(Collider2D collision)

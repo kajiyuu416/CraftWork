@@ -20,10 +20,16 @@ public class BowSC : MonoBehaviour
         origin_Sprite = GetComponent<SpriteRenderer>();
         PE = FindObjectOfType<Physics2DExtentsion>();
     }
-    void Update()
+    private void Update()
     {
         rotationChange();
         aroow_Remaining_Check();
+
+        if(GameManager.SelectReSet)
+        {
+            transform.position = PlayerController.CP;
+            aroow_Remaining = maxa_roow;
+        }
         Check("Bow");
     }
     //Playe‚ÌŒü‚«‚É‰‚¶‚Ä‹|‚ÌŠp“xAŒü‚«‚ğ•ÏX
@@ -56,12 +62,6 @@ public class BowSC : MonoBehaviour
         if(aroow_Remaining < 0)
         {
             aroow_Remaining = 0;
-        }
-
-        if(GameManager.SelectReSet)
-        {
-            transform.position = PlayerController.CP;
-            aroow_Remaining = maxa_roow;
         }
 
         if(PE == null)

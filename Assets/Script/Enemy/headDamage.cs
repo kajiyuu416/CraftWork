@@ -8,7 +8,6 @@ public class headDamage : MonoBehaviour
         {
             be.Enemy_Damage2();
             be.ememy_HitPoint = be.ememy_HitPoint - 6;
-            Debug.Log("head");
         }
     }
 }

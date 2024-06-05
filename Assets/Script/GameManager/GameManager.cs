@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject AudioUIobj;
     [SerializeField] GameObject ResetUIobj;
     GameObject []tagObjcts;
-
     private  static bool GameStartFlag;
     public static bool GameClearFlag;
     public static bool SelectReSet;
@@ -28,6 +27,8 @@ public class GameManager : MonoBehaviour
     private bool ReSetUIexpression;
     private bool SettingUIexpression;
     private string beforeScene;
+    private static string cloneEnemy_objctTag = "CloneEnemy";
+    private static string cloneBom_objctTag = "CloneBom";
     Image blackScreen;
     public static GameManager instance
     {
@@ -52,7 +53,7 @@ public class GameManager : MonoBehaviour
         beforeScene = "title";
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
     }
-    void Update()
+    private void Update()
     {
         SettingGame();
     }
@@ -202,6 +203,23 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
     }
+    public static void CloneEnemyDestroy()
+    {
+        GameObject[] cloneEnemys = GameObject.FindGameObjectsWithTag(cloneEnemy_objctTag);
+        foreach(GameObject cloneEs in cloneEnemys)
+        {
+            Destroy(cloneEs);
+        }
+    }
+    public static void CloneBomDestroy()
+    {
+        GameObject[] cloneBoms = GameObject.FindGameObjectsWithTag(cloneBom_objctTag);
+        foreach(GameObject cloneBs in cloneBoms)
+        {
+            Destroy(cloneBs);
+        }
+    }
+
     public void SelectCl()
     {
         ReSetFlag = false;

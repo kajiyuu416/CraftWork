@@ -14,30 +14,33 @@ public class BossEnemySC : MonoBehaviour
     [SerializeField] GameObject summon_Obj2;
     [SerializeField] GameObject summon_Obj3;
     [SerializeField] GameObject summon_Obj4;
-    [SerializeField] GameObject gameObj;
+    [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] BoxCollider2D boxCollider2D;
     [SerializeField] Image BossEnemy_bar_image;
     [SerializeField] Image BossEnemy_Remaining_image;
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] SpriteRenderer sprite;
-    [SerializeField] float moveSpeed;
     public int ememy_HitPoint;
-    public float ActionCount;
+    private float moveSpeed;
+    public float ActionCount  = 10.0f;
     public static bool BossEnemyDeath = false;
+    private bool Combat_state;
+    private bool NonAction;
+    private bool nonsumonEnemys;
+    private bool is_crouch = false;
     private CapsuleCollider2D head;
     private BoxCollider2D body;
     private Animator animator;
-    private bool Combat_state;
-    private bool NonAction;
-    private bool is_crouch = false;
-    private bool First_form = false;
-    private bool Second_form = false;
-    private bool Thirdd_form = false;
+    private Vector3 OriginPosition;
+    private const int MaxHP = 500;
+    private const float MaxActionCount = 10.0f;
 
     private void Awake()
     {
         body = GetComponentInChildren<BoxCollider2D>();
         head = GetComponentInChildren<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
+        OriginPosition = transform.position;
     }
     //  ボム接触時処理,プレイヤー接触時処理
     private void OnCollisionEnter2D(Collision2D collision)
@@ -49,7 +52,7 @@ public class BossEnemySC : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Bom"))
+        if(other.CompareTag("Bom") || other.CompareTag("CloneBom"))
         {
             ememy_HitPoint = ememy_HitPoint - 25;
             Enemy_Damage1();
@@ -64,6 +67,14 @@ public class BossEnemySC : MonoBehaviour
             RandomAction();
         }
         animator.SetBool("Crouching", is_crouch);
+
+        if(GameManager.SelectReSet)
+        {
+            transform.position = OriginPosition;
+            ememy_HitPoint = MaxHP;
+            ActionCount = MaxActionCount;
+            moveSpeed = 1.5f;
+        }
     }
     //エネミーの体力に応じての処理
     private void EnemyHealth()
@@ -71,20 +82,14 @@ public class BossEnemySC : MonoBehaviour
         if(ememy_HitPoint <= 500 && ememy_HitPoint > 400)
         {
             moveSpeed = 1.5f;
-            First_form = true;
         }
         else if(ememy_HitPoint <= 400 && ememy_HitPoint > 250)
         {
             moveSpeed = 2.0f;
-            Second_form = true;
-            First_form = false;
         }
         else if(ememy_HitPoint <= 250 && ememy_HitPoint > 0)
         {
             moveSpeed = 2.5f;
-            Thirdd_form = true;
-            Second_form = false;
-            First_form = false;
         }
         else if(ememy_HitPoint <= 0)
         {
@@ -103,39 +108,63 @@ public class BossEnemySC : MonoBehaviour
         var summons_pos = transform.rotation;
         summons_pos = Quaternion.Euler(90, 0, 0);
 
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("CloneEnemy");
+        if(enemyObjects.Length > 8)
+        {
+            Debug.Log("10体以上いるよ");
+            nonsumonEnemys = true;
+        }
+        else if(enemyObjects.Length < 8)
+        {
+            Debug.Log("10体以下");
+            nonsumonEnemys = false;
+        }
         if(rnd == 1)
         {
-            if(First_form)
+            if(ememy_HitPoint <= 500 && ememy_HitPoint > 350 && !nonsumonEnemys)
             {
+                Debug.Log("体力が350以上でa行動");
                 Crouch();
                 Instantiate(summon_Obj1, summons_pos1, summons_pos);
                 Instantiate(summon_Obj1, summons_pos2, summons_pos);
-             
             }
-            else if(Second_form || Thirdd_form)
+            else if(ememy_HitPoint <= 350 && ememy_HitPoint > 0 && !nonsumonEnemys)
             {
+                Debug.Log("体力が350以下でa行動");
                 Crouch();
                 Instantiate(summon_Obj1, summons_pos1, summons_pos);
                 Instantiate(summon_Obj2, summons_pos2, summons_pos);
                 Instantiate(summon_Obj1, summons_pos3, summons_pos);
                 Instantiate(summon_Obj2, summons_pos4, summons_pos);
             }
+            else
+            {
+                RandomAction();
+                Debug.Log("aの行動ができなかった為、再抽選を行います");
+            }
         }
         else if(rnd == 2)
         {
-            if(First_form)
+            if(ememy_HitPoint <= 500 && ememy_HitPoint > 350 && !nonsumonEnemys)
             {
+                Debug.Log("体力が350以上でｂ行動");
                 Crouch();
                 Instantiate(summon_Obj2, summons_pos3, summons_pos);
                 Instantiate(summon_Obj2, summons_pos4, summons_pos);
             }
-            else if(Second_form || Thirdd_form)
+            else if(ememy_HitPoint <= 350 && ememy_HitPoint > 0 && !nonsumonEnemys)
             {
+                Debug.Log("体力が350以下でｂ行動");
                 Crouch();
                 Instantiate(summon_Obj2, summons_pos1, summons_pos);
                 Instantiate(summon_Obj1, summons_pos2, summons_pos);
                 Instantiate(summon_Obj2, summons_pos3, summons_pos);
                 Instantiate(summon_Obj1, summons_pos4, summons_pos);
+            }
+            else
+            {
+                RandomAction();
+                Debug.Log("bの行動ができなかった為、再抽選を行います");
             }
 
         }
@@ -158,12 +187,15 @@ public class BossEnemySC : MonoBehaviour
             BossEnemy_Remaining_image.fillAmount = ememy_HitPoint / 500.0f;
             text.text = ememy_HitPoint.ToString();
             ActionCount -=Time.deltaTime;
-            gameObj.SetActive(true);
+            meshRenderer.enabled = true;
+            boxCollider2D.enabled = true;
         }
         else if(!Combat_state)
         {
             BossEnemy_bar_image.enabled = false;
             BossEnemy_Remaining_image.enabled = false;
+            meshRenderer.enabled = false;
+            boxCollider2D.enabled = false;
             text.text = "";
         }
         if(Vector2.Distance(transform.position, Player.transform.position) > 18.0f)

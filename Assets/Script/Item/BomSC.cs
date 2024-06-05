@@ -10,10 +10,11 @@ public class BomSC : MonoBehaviour
     [SerializeField] BoxCollider2D boxCol2;
     [SerializeField] CapsuleCollider2D capsuleCol;
     private SpriteRenderer spriteRenderer;
-    private Color defaultColor = new Color(255, 255, 255, 255);
+    private Color defaultColor = new Color(255f, 255f, 255f, 255f);
+    private Color ResetColor = new Color(1f, 1f, 1f, 1f);
     private float countdownSecond = 5;
     private float Maxcount = 5;
-    private bool ignitionFlag;
+    public bool ignitionFlag;
     private bool First_ignitionFlag;
     private bool burnFlag;
 
@@ -45,13 +46,14 @@ public class BomSC : MonoBehaviour
             countdownSecond = Maxcount;
             gameObject.layer = 3;
             spriteRenderer.enabled = true;
-            spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+            spriteRenderer.color = ResetColor;
             burnFlag = false;
             ignitionFlag = false;
             First_ignitionFlag = false;
             boxCol1.enabled = true;
             boxCol2.enabled = true;
             capsuleCol.enabled = false;
+            GameManager.CloneBomDestroy();
         }
     }
     //爆発のタイミングが可視化できるように、残り時間に応じでカラーを徐々に変更
@@ -60,7 +62,7 @@ public class BomSC : MonoBehaviour
         yield return new WaitForSeconds(1f);
         while(spriteRenderer.color.r <= 1)
         {
-            spriteRenderer.color -= new Color(0, 0.01f, 0.01f, 0);
+            spriteRenderer.color -= new Color(0, 0.005f, 0.005f, 0);
             yield return null;
         }
     }
@@ -79,7 +81,12 @@ public class BomSC : MonoBehaviour
     //爆発時の他オブジェクトへ処理
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Untagged")|| (collision.CompareTag("Item")) || (collision.CompareTag("arrow")))
+        if(collision.CompareTag("Untagged"))
+        {
+            collision.GetComponent<MeshRenderer>().enabled = false;
+            collision.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        if(collision.CompareTag("arrow"))
         {
             Destroy(collision.gameObject);
         }
@@ -101,6 +108,7 @@ public class BomSC : MonoBehaviour
         capsuleCol.enabled = true;
         spriteRenderer.color = defaultColor;
         spriteRenderer.enabled = false;
+        GameManager.CloneBomDestroy();
         SoundManager SM = SoundManager.Instance;
         SM.SettingPlaySE18();
 
@@ -118,7 +126,6 @@ public class BomSC : MonoBehaviour
                StartCoroutine(explosion_Count());
             }
         }
-
     }
     private IEnumerator SetTime()
     {

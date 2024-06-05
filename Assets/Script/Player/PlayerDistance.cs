@@ -14,9 +14,17 @@ public class PlayerDistance : MonoBehaviour
         ChangeMusic3 = false;
         ChangeMusic4 = false;
     }
-    void Update()
+    private void Update()
     {
         Change_Music();
+        
+        if(GameManager.SelectReSet)
+        {
+            ChangeMusic1 = false;
+            ChangeMusic2 = false;
+            ChangeMusic3 = false;
+            ChangeMusic4 = false;
+        }
     }
     private void Change_Music()
     {
@@ -35,7 +43,7 @@ public class PlayerDistance : MonoBehaviour
             SM.StopBGM();
             SM.Startbgm3();
         }
-        else if(posi.x > 1400 && !ChangeMusic3)
+        else if(posi.x > 1400 && posi.x < 1707 && !ChangeMusic3)
         {
             ChangeMusic3 = true;
             SoundManager SM = SoundManager.Instance;

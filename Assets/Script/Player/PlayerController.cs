@@ -54,8 +54,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = CP;
             rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
-            GameManager.SelectReSet = false;
 
+            if(moveInputVal != Vector2.zero)
+            {
+                GameManager.SelectReSet = false;
+            }
         }
     }
     //Playerの動き制御、アイテム保持の有無をチェック

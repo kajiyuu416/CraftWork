@@ -18,6 +18,8 @@ TagManager:
   - Bom
   - bedrock
   - Door
+  - CloneEnemy
+  - CloneBom
   layers:
   - Default
   - TransparentFX
