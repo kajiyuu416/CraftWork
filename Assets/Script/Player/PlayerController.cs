@@ -150,34 +150,25 @@ public class PlayerController : MonoBehaviour
                 if(Throw_left_right.wasPressedThisFrame && NowHoldItem && originSR.flipX)
                 {
                     Vector3 force = new Vector2(10.0f, 0);
-                    Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
-                    HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
-                    Itemthrow();
-
+                    ThrowItem(-force);
                 }
                 //アイテムを右側に投げる
                 else if(Throw_left_right.wasPressedThisFrame && NowHoldItem && !originSR.flipX)
                 {
                     Vector2 force = new Vector2(10.0f, 0);
-                    Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
-                    HoldItemRB.AddForce(force, ForceMode2D.Impulse);
-                    Itemthrow();
+                    ThrowItem(force);
                 }
                 //アイテムを上側に投げる
                 else if(Throw_up.wasPressedThisFrame && NowHoldItem)
                 {
                     Vector2 force = new Vector2(0, 10.0f);
-                    Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
-                    HoldItemRB.AddForce(force, ForceMode2D.Impulse);
-                    Itemthrow();
+                    ThrowItem(force);
                 }
                 //アイテムを下側に投げる
                 else if(Throw_Down.wasPressedThisFrame && NowHoldItem)
                 {
                     Vector2 force = new Vector2(0, 10.0f);
-                    Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
-                    HoldItemRB.AddForce(-force, ForceMode2D.Impulse);
-                    Itemthrow();
+                    ThrowItem(-force);
                 }
                 //弓を所持している場合射撃ができる処理
                 if(isbow && shot.wasPressedThisFrame && NowHoldItem)
@@ -207,19 +198,23 @@ public class PlayerController : MonoBehaviour
             CP = transform.position;
         }
     }
+    //保持しているアイテムを投げるとき
+    //アイテムに力を加える。スケールの変更、プレイヤーのアイテム保持情報のリセット
+    private void ThrowItem(Vector2 force)
+    {
+        Rigidbody2D HoldItemRB = NowHoldobj.GetComponent<Rigidbody2D>();
+        HoldItemRB.AddForce(force, ForceMode2D.Impulse);
+        NowHoldobj.transform.localScale = DefaultItemScale;
+        PE.ItemLost();
+        ItemLost();
+        SoundManager.Instance.SettingPlaySE5();
+    }
     //Playerがアイテムを投げる又は置いた時、取得した情報のリセット
     public void ItemLost()
     {
         NowHoldobj = null;
         HoldObj = null;
         NowHoldItem = false;
-    }
-    private void Itemthrow()
-    {
-        NowHoldobj.transform.localScale = DefaultItemScale;
-        PE.ItemLost();
-        ItemLost();
-        SoundManager.Instance.SettingPlaySE5();
     }
     //コントローラーが接続されているがのチェック
     private void GamePad_connection_Check()
