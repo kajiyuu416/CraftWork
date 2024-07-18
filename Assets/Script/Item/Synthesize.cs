@@ -31,7 +31,7 @@ public class Synthesize : MonoBehaviour
             SynthesizeFlag = true;
             GameObject geneObj = Instantiate(generationObj, transform.position, Quaternion.Euler(0f, 0f, 0f));
             GameObject geneEfe = Instantiate(generationEfect, HE.generationPosition, Quaternion.Euler(0f, 0f, 0f));
-            Destroy(OrijinObj);
+            Destroy(gameObject);
             Destroy(TargetObj);
             PlayerController pc = PlayerController.Instance;
             pc.ItemLost();
